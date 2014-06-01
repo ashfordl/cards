@@ -75,9 +75,9 @@ namespace CardsLibrary
         #region Comparison
         public bool GreaterThan(Card c) //Returns true if the card this meathod is run on is greater. If they are equal it will say the card it is run on is greater still
         {
-            //Return that this card is greater if they are equal
+            //Return that this card is lower if they are equal
             if (this == c)
-                return true;
+                return false;
 
             //If they have different suits
             if (this.SuitVal != c.SuitVal)
@@ -99,9 +99,9 @@ namespace CardsLibrary
                 //If card c is an ace and this is not
                 if (this.Value != Value.Ace && c.Value == Value.Ace)
                     return false;
-                //If they are both aces, return true that this is greater
+                //If they are both aces, return false that its lower
                 if (this.Value == Value.Ace && c.Value == Value.Ace)
-                    return true;
+                    return false;
             }
 
             //Which has the better number value is returned
@@ -110,7 +110,7 @@ namespace CardsLibrary
             else if ((int)this.Value < (int)c.Value)
                 return false;
             else //If the cards have an equal suit value (but not the same suit) and a equal face value
-                return true;
+                return false;
         }
 
         public static Card HighestCardFromArray(IEnumerable<Card> cards)
