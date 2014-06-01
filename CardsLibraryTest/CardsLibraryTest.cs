@@ -10,7 +10,7 @@ namespace CardsLibraryTest
     public class CardsLibraryTest
     {
         [TestMethod]
-        public void CreateCardTest()  //Tests both constructors with parameters
+        public void CreateCardTest()  //Tests both constructors with paramiters
         {
             // arrange
             int val = 1;
@@ -19,7 +19,7 @@ namespace CardsLibraryTest
             var expectedS = CardsLibrary.Suit.Clubs;
             var expectedV = CardsLibrary.Value.Ace;
             // act
-            CardsLibrary.Card c = new CardsLibrary.Card((CardsLibrary.Value)val, (CardsLibrary.Suit) suit);
+            CardsLibrary.Card c = new CardsLibrary.Card((CardsLibrary.Value)val, (CardsLibrary.Suit)suit);
             CardsLibrary.Card d = new CardsLibrary.Card(val, suit);
             var actualS1 = c.Suit;
             var actualV1 = c.Value;
@@ -41,9 +41,9 @@ namespace CardsLibraryTest
             var expectedSH = CardsLibrary.Suit.Hearts;    //H = Hearts
             var expectedVH = CardsLibrary.Value.King;
             var expectedSS = CardsLibrary.Suit.Spades;    //S = Spades
-            var expectedVS = CardsLibrary.Value.King; 
+            var expectedVS = CardsLibrary.Value.King;
             var expectedSD = CardsLibrary.Suit.Diamonds;  //D = Diamonds
-            var expectedVD = CardsLibrary.Value.King; 
+            var expectedVD = CardsLibrary.Value.King;
             var expectedSC = CardsLibrary.Suit.Clubs;     //C = Clubs
             var expectedVC = CardsLibrary.Value.King;
 
@@ -54,9 +54,9 @@ namespace CardsLibraryTest
             var actualSH = Deck[51].Suit;  //H = Hearts
             var actualVH = Deck[51].Value;
             var actualSS = Deck[38].Suit;  //S = Spades
-            var actualVS = Deck[38].Value; 
+            var actualVS = Deck[38].Value;
             var actualSD = Deck[25].Suit;  //D = Diamonds
-            var actualVD = Deck[25].Value; 
+            var actualVD = Deck[25].Value;
             var actualSC = Deck[12].Suit;  //C = Clubs
             var actualVC = Deck[12].Value;
 
@@ -169,7 +169,7 @@ namespace CardsLibraryTest
         }
 
         [TestMethod]
-        public void GreatestCardTest()  //Tests the Picking the greatest card (includes the settings testing)
+        public void BestCardTest()  //Tests the Picking the greatest card (includes the settings testing)
         {
             // arrange
             List<CardsLibrary.Card> cardsList = new List<CardsLibrary.Card>();
@@ -185,7 +185,7 @@ namespace CardsLibraryTest
 
             // act
             CardsLibrary.Card actual = CardsLibrary.Card.HighestCardFromArray(Cards);
-            
+
             // assert
             Assert.AreEqual(cardsList[2], actual);
             #endregion
@@ -306,6 +306,146 @@ namespace CardsLibraryTest
 
             // assert
             Assert.AreEqual(cardsList[1], actual);
+            #endregion
+        }
+        [TestMethod]
+        public void WorstCardTest()  //Tests the Picking the greatest card (includes the settings testing)
+        {
+            // arrange
+            List<CardsLibrary.Card> cardsList = new List<CardsLibrary.Card>();
+            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Ace, CardsLibrary.Suit.Spades));
+            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Ace, CardsLibrary.Suit.Diamonds));
+            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.King, CardsLibrary.Suit.Diamonds));
+            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Seven, CardsLibrary.Suit.Clubs));
+            CardsLibrary.Card[] Cards = cardsList.ToArray();
+
+            #region Test 1
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.Settings.AceHigh = false;
+
+            // act
+            CardsLibrary.Card actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[1], actual);
+            #endregion
+
+            #region Test 2
+            // arrange 2
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.Settings.AceHigh = true;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[3], actual);
+            #endregion
+
+            #region Test 3
+            // arrange 3
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Spades);
+            CardsLibrary.Settings.AceHigh = false;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[1], actual);
+            #endregion
+
+            #region Test 4
+            // arrange 4
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Spades);
+            CardsLibrary.Settings.AceHigh = true;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[3], actual);
+            #endregion
+
+            #region Test 5
+            // arrange 5
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Diamonds);
+            CardsLibrary.Settings.AceHigh = false;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[0], actual);
+            #endregion
+
+            #region Test 6
+            // arrange 6
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Diamonds);
+            CardsLibrary.Settings.AceHigh = true;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[3], actual);
+            #endregion
+
+            #region Test 7
+            // arrange 7
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Clubs);
+            CardsLibrary.Settings.AceHigh = false;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[1], actual);
+            #endregion
+
+            #region Test 8
+            // arrange 8
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Clubs);
+            CardsLibrary.Settings.AceHigh = true;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[2], actual);
+            #endregion
+
+            #region Test 9
+            // arrange 9
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Hearts);
+            CardsLibrary.SuitOrder.SetPlayed(CardsLibrary.Suit.Diamonds);
+            CardsLibrary.Settings.AceHigh = false;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[0], actual);
+            #endregion
+
+            #region Test 10
+            // arrange 10
+            CardsLibrary.SuitOrder.Reset();
+            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Hearts);
+            CardsLibrary.SuitOrder.SetPlayed(CardsLibrary.Suit.Diamonds);
+            CardsLibrary.Settings.AceHigh = true;
+
+            // act
+            actual = CardsLibrary.Card.LowestCardFromArray(Cards);
+
+            // assert
+            Assert.AreEqual(cardsList[3], actual);
             #endregion
         }
 

@@ -8,8 +8,10 @@ namespace CardsLibrary
 {
     public static class Settings
     {
+        //Is the ace high or not
         public static bool AceHigh { get; set; }
 
+        //The order values of all the suits
         public static int ClubsOrder { get; set; }
         public static int DiamondsOrder { get; set; }
         public static int SpadesOrder { get; set; }
