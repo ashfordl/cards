@@ -7,7 +7,7 @@ namespace CardsLibrary
 {
     public class Card
     {
-        #region properties
+        #region Properties
         public Value Value { get; set; } //The face value of the card i.e. ace, seven, king etc.
         public Suit Suit { get; set; } //The suit value of the card i.e. Spades etc.
 
@@ -112,34 +112,28 @@ namespace CardsLibrary
 
         }
 
-        public static Card HighestCardFromArray(Card[] cards)
+        public static Card HighestCardFromArray(IEnumerable<Card> cards)
         {
-            int bestCard = 0;
+            Card highest = cards.First();
 
-            //Compairs two cards at a time seeing which is best
-            for (int i = 1; i < cards.Count(); i++)
-            {
-                Card Better = BestofTwo(cards[bestCard], cards[i]);
+            // Compares current highest against all cards in the collection
+            foreach (Card c in cards)
+                if (BestofTwo(highest, c) == c)
+                    highest = c;
 
-                if (Better == cards[i])
-                    bestCard = i;
-            }
-            return cards[bestCard];
+            return highest;
         }
 
-        public static Card LowestCardFromArray(Card[] cards)
+        public static Card LowestCardFromArray(IEnumerable<Card> cards)
         {
-            int worstCard = 0;
+            Card lowest = cards.First();
 
-            //Compairs two cards at a time seeing which is the worst
-            for (int i = 1; i < cards.Count(); i++)
-            {
-                Card Better = BestofTwo(cards[worstCard], cards[i]);
+            // Compares current lowest against all cards in the collection
+            foreach (Card c in cards)
+                if (BestofTwo(lowest, c) == lowest)
+                    lowest = c;
 
-                if (Better != cards[i])
-                    worstCard = i;
-            }
-            return cards[worstCard];
+            return lowest;
         }
         #endregion
 

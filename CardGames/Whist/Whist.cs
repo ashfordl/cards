@@ -37,8 +37,6 @@ namespace CardGames.Whist
             }
         }
 
-
-
         protected List<Player> OrderPlayers()
         {
             if (round == 1)
