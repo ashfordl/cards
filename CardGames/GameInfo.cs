@@ -13,6 +13,5 @@ namespace CardGames
 
         public List<Card> CardsInPlay { get; set; }
 
-        public Settings Settings { get; set; }
     }
 }

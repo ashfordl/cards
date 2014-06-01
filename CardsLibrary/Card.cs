@@ -119,7 +119,7 @@ namespace CardsLibrary
 
             // Compares current highest against all cards in the collection
             foreach (Card c in cards)
-                if (c.GreaterThan(highest))
+                if (c > highest)
                     highest = c;
 
             return highest;
@@ -136,7 +136,7 @@ namespace CardsLibrary
 
             // Compares current lowest against all cards in the collection
             foreach (Card c in cards)
-                if (c.LessThan(lowest))
+                if (c <= lowest)
                     lowest = c;
 
             return lowest;
