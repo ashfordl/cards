@@ -119,7 +119,7 @@ namespace CardsLibrary
 
             // Compares current highest against all cards in the collection
             foreach (Card c in cards)
-                if (!highest.GreaterThan(c))
+                if (c.GreaterThan(highest))
                     highest = c;
 
             return highest;
@@ -136,7 +136,7 @@ namespace CardsLibrary
 
             // Compares current lowest against all cards in the collection
             foreach (Card c in cards)
-                if (!lowest.LessThan(c))
+                if (c.LessThan(lowest))
                     lowest = c;
 
             return lowest;
@@ -188,38 +188,24 @@ namespace CardsLibrary
 
         public static bool operator <(Card c1, Card c2)
         {
-            //If the cards values are equal return false
-            if (c1 == c2)
-                return false;
-
-            if (c1.SuitVal == c2.SuitVal && c1.Value == c2.Value)
-                return false;
-
             //Otherwise return the result of the less than meathod
             return c1.LessThan(c2);
         }
 
         public static bool operator >(Card c1, Card c2)
         {
-            //If the cards values are equal return false
-            if (c1 == c2)
-                return false;
-
-            if (c1.SuitVal == c2.SuitVal && c1.Value == c2.Value)
-                return false;
-
             //Otherwise return the value of the greater than meathod
             return c1.GreaterThan(c2);
         }
 
         public static bool operator <=(Card c1, Card c2)
         {
-            return c1.LessThan(c2);
+            return c1.LessThan(c2) || c1 == c2;
         }
 
         public static bool operator >=(Card c1, Card c2)
         {
-            return c1.GreaterThan(c2);
+            return c1.GreaterThan(c2) || c1 == c2;
         }
 
         #endregion
