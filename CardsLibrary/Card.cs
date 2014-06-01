@@ -73,43 +73,44 @@ namespace CardsLibrary
         #endregion
 
         #region Comparison
-        public static Card BestofTwo(Card a, Card b)
+        public bool GreaterThan(Card c) //Returns true if the card this meathod is run on is greater. If they are equal it will say the card it is run on is greater still
         {
-            //Return the first card if they are equal
-            if (a == b)
-                return a;
+            //Return that this card is greater if they are equal
+            if (this == c)
+                return true;
 
-            //Return the one with the higher suit value if they are different
-            if (a.SuitVal != b.SuitVal)
+            //If they have different suits
+            if (this.SuitVal != c.SuitVal)
             {
-                if (a.SuitVal > b.SuitVal)
-                    return a;
+                //If this cards suit is greater, return true
+                if (this.SuitVal > c.SuitVal)
+                    return true;
+                //If the other cards suit is greater, return false
                 else
-                    return b;
+                    return false;
             }
 
             //If the suit values are the same and ace is high
             if (Settings.AceHigh)
             {
-                //If a is an ace and b is not
-                if (a.Value == Value.Ace && b.Value != Value.Ace)
-                    return a;
-                //If b is an ace and a is not
-                if (a.Value != Value.Ace && b.Value == Value.Ace)
-                    return b;
-                //If they are both aces, return the first played card
-                if (a.Value == Value.Ace && b.Value == Value.Ace)
-                    return a;
+                //If this card is an ace and card c is not
+                if (this.Value == Value.Ace && c.Value != Value.Ace)
+                    return true;
+                //If card c is an ace and this is not
+                if (this.Value != Value.Ace && c.Value == Value.Ace)
+                    return false;
+                //If they are both aces, return true that this is greater
+                if (this.Value == Value.Ace && c.Value == Value.Ace)
+                    return true;
             }
 
             //Which has the better number value is returned
-            if ((int)a.Value > (int)b.Value)
-                return a;
-            else if ((int)a.Value < (int)b.Value)
-                return b;
+            if ((int)this.Value > (int)c.Value)
+                return true;
+            else if ((int)this.Value < (int)c.Value)
+                return false;
             else //If the cards have an equal suit value (but not the same suit) and a equal face value
-                return a;
-
+                return true;
         }
 
         public static Card HighestCardFromArray(IEnumerable<Card> cards)
@@ -118,10 +119,15 @@ namespace CardsLibrary
 
             // Compares current highest against all cards in the collection
             foreach (Card c in cards)
-                if (BestofTwo(highest, c) == c)
+                if (!highest.GreaterThan(c))
                     highest = c;
 
             return highest;
+        }
+
+        public bool LessThan(Card c) //Returns true if the card this meathod is run on is lower. If they are equal it will say the card it is run on is greater still
+        {
+            return (this.GreaterThan(c) || this.Equals(c)) ? false : true;
         }
 
         public static Card LowestCardFromArray(IEnumerable<Card> cards)
@@ -130,7 +136,7 @@ namespace CardsLibrary
 
             // Compares current lowest against all cards in the collection
             foreach (Card c in cards)
-                if (BestofTwo(lowest, c) == lowest)
+                if (!lowest.LessThan(c))
                     lowest = c;
 
             return lowest;
@@ -179,6 +185,43 @@ namespace CardsLibrary
             //Otherwise return true
             return true;
         }
+
+        public static bool operator <(Card c1, Card c2)
+        {
+            //If the cards values are equal return false
+            if (c1 == c2)
+                return false;
+
+            if (c1.SuitVal == c2.SuitVal && c1.Value == c2.Value)
+                return false;
+
+            //Otherwise return the result of the less than meathod
+            return c1.LessThan(c2);
+        }
+
+        public static bool operator >(Card c1, Card c2)
+        {
+            //If the cards values are equal return false
+            if (c1 == c2)
+                return false;
+
+            if (c1.SuitVal == c2.SuitVal && c1.Value == c2.Value)
+                return false;
+
+            //Otherwise return the value of the greater than meathod
+            return c1.GreaterThan(c2);
+        }
+
+        public static bool operator <=(Card c1, Card c2)
+        {
+            return c1.LessThan(c2);
+        }
+
+        public static bool operator >=(Card c1, Card c2)
+        {
+            return c1.GreaterThan(c2);
+        }
+
         #endregion
     }
 }

@@ -18,7 +18,7 @@ namespace CardGames.Whist
             activePlayers = new List<Player>(players);
         }
 
-        public void Start()
+        public override void Start()
         {
             // Each iteration is a round
             while(activePlayers.Count > 1)

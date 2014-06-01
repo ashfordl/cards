@@ -15,13 +15,13 @@ namespace CardsLibrary
 {
     public static class SuitOrder
     {
-        public static void Reset() //Sets all suit orders to 1
+        public static void Reset() //Sets all suit orders to 2
         {
-            Settings.ClubsOrder = 1;
-            Settings.DiamondsOrder = 1;
-            Settings.SpadesOrder = 1;
-            Settings.HeartsOrder = 1;
-            Settings.NullOrder = 1;
+            Settings.ClubsOrder = 2;
+            Settings.DiamondsOrder = 2;
+            Settings.SpadesOrder = 2;
+            Settings.HeartsOrder = 2;
+            Settings.NullOrder = 2;
         }
 
         public static void SetTrumps(Suit s) //Sets the suit specified to a trump order value

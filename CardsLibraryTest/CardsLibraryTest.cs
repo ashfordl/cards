@@ -189,7 +189,7 @@ namespace CardsLibraryTest
             // assert
             Assert.AreEqual(cardsList[2], actual);
             #endregion
-
+            
             #region Test 2
             // arrange 2
             CardsLibrary.SuitOrder.Reset();
