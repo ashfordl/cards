@@ -209,5 +209,84 @@ namespace CardsLibrary
         }
 
         #endregion
+
+        #region Utilitys
+        public string ShorthandToString()
+        {
+            char s = new char();
+            char v = new char();
+
+            switch (Suit)
+            {
+                case Suit.Clubs:
+                    s = 'C';
+                    break;
+                case Suit.Diamonds:
+                    s = 'D';
+                    break;
+                case Suit.Spades:
+                    s = 'S';
+                    break;
+                case Suit.Hearts:
+                    s = 'H';
+                    break;
+                case Suit.Null:
+                    s = ' ';
+                    break;
+            }
+
+            switch (Value)
+            {
+                case Value.Ace :
+                    v = 'A';
+                    break;
+                case Value.Two:
+                    v = '2';
+                    break;
+                case Value.Three:
+                    v = '3';
+                    break;
+                case Value.Four:
+                    v = '4';
+                    break;
+                case Value.Five:
+                    v = '5';
+                    break;
+                case Value.Six:
+                    v = '6';
+                    break;
+                case Value.Seven:
+                    v = '7';
+                    break;
+                case Value.Eight:
+                    v = '8';
+                    break;
+                case Value.Nine:
+                    v = '9';
+                    break;
+                case Value.Ten:
+                    v = '0';
+                    break;
+                case Value.Jack:
+                    v = 'J';
+                    break;
+                case Value.Queen:
+                    v = 'Q';
+                    break;
+                case Value.King:
+                    v = 'K';
+                    break;
+                case Value.Null:
+                    v = ' ';
+                    break;
+            }
+
+            char[] charArray = new char[] { s, v };
+
+            string String = new string (charArray);
+
+            return String;
+        }
+        #endregion
     }
 }
