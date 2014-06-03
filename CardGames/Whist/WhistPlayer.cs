@@ -9,7 +9,7 @@ namespace CardGames.Whist
 {
     public class ConsolePlayer : Player
     {
-        public List<Card> Hand { get; set; }
+        public List<Card> Hand { get; set; } // The hand of cards
 
         public ConsolePlayer()
         {
@@ -23,12 +23,14 @@ namespace CardGames.Whist
 
         public override Card MakeMove(GameInfo args)
         {
-            while (true)
+            while (true) // Repeat until a card is returned since it may not be a valid input
             {
-                List<int> PlayableIndex = new List<int>();
-                int Playable = 0;
-                bool SetSuit = false;
+                Console.Clear(); // Clear the console 
+                List<int> PlayableIndex = new List<int>(); // A list of index's that are playable
+                int Playable = 0; // How many cards can be played
+                bool SetSuit = false; // If the suit needs to be set via the SuitOrder class
 
+                // Display what trumps are
                 if (Settings.ClubsOrder == 5)
                     Console.WriteLine("Trumps are CLUBS");
                 else if (Settings.DiamondsOrder == 5)
@@ -40,17 +42,20 @@ namespace CardGames.Whist
                 else
                     Console.WriteLine("No trumps");
 
+                // See what cards are playable
                 if (Settings.ClubsOrder == 4)
                 {
-                    for (int i = 0; i < Hand.Count; i++)
+                    for (int i = 0; i < Hand.Count; i++) // Goes through the cards in the hand
                     {
-                        if (Hand[i].Suit == Suit.Clubs)
+                        if (Hand[i].Suit == Suit.Clubs) // If they are the correct suit
                         {
-                            Playable++;
-                            PlayableIndex.Add(i);
+                            Playable++; // Add one to the amount of playable cards
+                            PlayableIndex.Add(i); // Add the index of the playable card
                         }
                     }
-                    Console.WriteLine("Suit laid is CLUBS");
+                    Console.WriteLine("Suit laid is CLUBS"); // Display what the suit that has been laid
+
+                    // The above structor is used in the next three ifs as well
                 }
                 else if (Settings.DiamondsOrder == 4)
                 {
@@ -88,7 +93,7 @@ namespace CardGames.Whist
                     }
                     Console.WriteLine("Suit laid is HEARTS");
                 }
-                else
+                else // If there is no suit laid
                 {
                     for (int i = 0; i < Hand.Count; i++)
                     {
@@ -96,7 +101,7 @@ namespace CardGames.Whist
                         PlayableIndex.Add(i);
                     }
                     Console.WriteLine("No suit laid, play a card to set the suit");
-                    SetSuit = true;
+                    SetSuit = true; // Record the suit needs to be set at the end of the round
                 }
                 if (PlayableIndex.Count == 0) // If no cards can be played in suit, you can play any of your other cards
                 {
@@ -107,75 +112,75 @@ namespace CardGames.Whist
                     }
                 }
 
-                Console.WriteLine();
-                Console.WriteLine("Cards in Play:");
-                foreach (Card c in args.CardsInPlay)
+                Console.WriteLine(); // Skips a line
+                Console.WriteLine("Cards in Play:"); // Show its going to display the cards in play
+                foreach (Card c in args.CardsInPlay) // For every card played (passed in the WhistInfo as a the paramiter "args")
                 {
-                    Console.Write(c.ShorthandToString());
-                    Console.Write(' ');
+                    Console.Write(c.ShorthandToString()); // Write out the shorthand of each card
+                    Console.Write(' '); // Add a space wide gape between each card
                 }
-                Console.WriteLine();
+                Console.WriteLine(); // End the line with the cards displayed
 
-                Console.WriteLine();
-                Console.WriteLine("Your cards:");
-                for (int i = 0; i < Hand.Count; i++)
+                Console.WriteLine(); // Skips a line
+                Console.WriteLine("Your cards:"); // Show its going to display the cards in you hand
+                for (int i = 0; i < Hand.Count; i++) // Itterate through every card
                 {
-                    Console.Write(Hand[i].ShorthandToString());
-                    Console.Write(' ');
+                    Console.Write(Hand[i].ShorthandToString()); // Write out the short hand of the card
+                    Console.Write(' '); // Put a space gap between each card
                 }
-                Console.WriteLine();
+                Console.WriteLine(); // End the line that your cards are in
 
-                int NumToPrint = 1;
-                for (int i = 0; i < Hand.Count; i++)
+                int NumToPrint = 1; // The number that will be printed (what you need to press to select that card above it)
+                for (int i = 0; i < Hand.Count; i++) // Itterate through the cards in your hand
                 {
-                    foreach (int index in PlayableIndex)
+                    foreach (int index in PlayableIndex) // For each index that is playable
                     {
-                        if (index == i)
+                        if (index == i) // If the current index in the hand is one of the index's in the list of playable index's
                         {
-                            Console.Write(NumToPrint);
-                            Console.Write("  ");
-                            NumToPrint++;
+                            Console.Write(NumToPrint); // Print out the number that will need to be pressed to select it
+                            Console.Write("  "); // Add a two space gap so that the next number will be in line correctly
+                            NumToPrint++; // Add one to the numToPrint so that it will show the next number
                         }
                         else
-                            Console.Write("   ");
+                            Console.Write("   "); // Otherwise put a three space gap so that the next number will be in line
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine(); // End the current line
 
-                bool Valid = true;
-                char Input = Console.ReadKey(true).KeyChar;
-                if (!char.IsNumber(Input)) Valid = false;
+                bool Valid = true; // If the button pressed is valid
+                char Input = Console.ReadKey(true).KeyChar; // The char that has been pressed to select a card
+                if (!char.IsNumber(Input)) Valid = false; // If the input is not a number, its not valid
 
                 if (Valid)
                 {
-                    int NumInput = (int)char.GetNumericValue(Input);
-                    NumInput--;
-                    if (NumInput <= Playable && NumInput >= 0)
+                    int NumInput = (int)char.GetNumericValue(Input); // Turns the input from type char to int
+                    NumInput--; // minus one so it gets the correct card in the hand index (as its 0 base as apose to 1)
+                    if (NumInput <= Playable && NumInput >= 0) // If the input is above 0, and below the amount of playable cards
                     {
-                        Card PlayedCard = Hand[PlayableIndex[NumInput]];
+                        Card PlayedCard = Hand[PlayableIndex[NumInput]]; // The Card played is now equal to the selected card
 
-                        Hand.RemoveAt(PlayableIndex[NumInput]);
+                        Hand.RemoveAt(PlayableIndex[NumInput]); // Remove the played card from the hand
 
-                        if (SetSuit)
+                        if (SetSuit) // If the suit needs to be set
                         {
-                            switch (PlayedCard.Suit)
+                            switch (PlayedCard.Suit) 
                             {
                                 case Suit.Clubs:
-                                    SuitOrder.SetPlayed(Suit.Clubs);
+                                    SuitOrder.SetPlayed(Suit.Clubs); // Set suit played to clubs if the card was a club
                                     break;
                                 case Suit.Diamonds:
-                                    SuitOrder.SetPlayed(Suit.Diamonds);
+                                    SuitOrder.SetPlayed(Suit.Diamonds); // Set suit played to diamonds if the card was a diamonds
                                     break;
                                 case Suit.Spades:
-                                    SuitOrder.SetPlayed(Suit.Spades);
+                                    SuitOrder.SetPlayed(Suit.Spades); // Set suit played to spades if the card was a spade
                                     break;
                                 case Suit.Hearts:
-                                    SuitOrder.SetPlayed(Suit.Hearts);
+                                    SuitOrder.SetPlayed(Suit.Hearts); // Set suit played to hearts if the card was a heart
                                     break;
                             }
                         }
 
-                        return PlayedCard;
+                        return PlayedCard; // Return the played card
                     }
                 }
             }
