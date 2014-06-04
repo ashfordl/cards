@@ -149,11 +149,11 @@ namespace CardsLibrary
             //If the obj getting compaired is not a card return false
             if (!(obj is Card))
                 return false;
-            //Otherwise turn it into a card
+            // Otherwise turn it into a card
             Card c = obj as Card;
 
             //If the value is not the same return false
-            if (c.Value != this.Value)
+            if (c.Value != this.Value && (c.Value != Value.Null || this.Value != Value.Null))
                 return false;
             //If the suit is not the same return false
             if (c.Suit != this.Suit)

@@ -11,9 +11,15 @@ namespace CardGames.Whist
     {
         public List<Card> LaidCards { get; set; }
 
-        public WhistInfo(List<Card> laid)
+        public Suit Trumps { get; set; }
+
+        public Suit FirstSuitLaid { get; set; }
+
+        public WhistInfo(List<Card> laid, Suit trumps, Suit first)
         {
             this.LaidCards = laid;
+            this.Trumps = trumps;
+            this.FirstSuitLaid = first;
         }
     }
 }

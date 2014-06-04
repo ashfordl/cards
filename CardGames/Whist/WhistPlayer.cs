@@ -9,8 +9,6 @@ namespace CardGames.Whist
 {
     public class ConsolePlayer : Player
     {
-        public List<Card> Hand { get; set; } // The hand of cards
-
         public ConsolePlayer()
         {
             this.Hand = new List<Card>();
@@ -19,6 +17,54 @@ namespace CardGames.Whist
         public ConsolePlayer(List<Card> cards)
         {
             this.Hand = cards;
+        }
+        
+        public override Card MakeMove(WhistInfo args)
+        {
+            // Prints relevant info, eg trumps and first suit laid
+            PrintGameInfo(args);
+
+            // First evaluates the cards the could be played, then prints the hand with these as selectable
+            List<Card> valids = DetectValidCards(args);
+            PrintHand(valids);
+
+            // Retrieves a card which is returned as the move made
+            return RetrieveInput();
+        }
+
+        protected void PrintGameInfo(WhistInfo args)
+        {
+            Console.WriteLine("Trumps are %s", args.Trumps);
+            Console.WriteLine("Suit laid is %s", args.FirstSuitLaid);
+
+            Console.Write("Cards laid: ");
+            foreach(Card laid in args.LaidCards)
+                Console.Write(laid+"\t");
+            Console.WriteLine();
+        }
+
+        protected List<Card> DetectValidCards(WhistInfo args)
+        {
+            List<Card> valids = new List<Card>();
+
+            bool b = Hand.
+
+            foreach (Card c in Hand)
+            { 
+                
+            }
+
+            return valids;
+        }
+
+        protected void PrintHand(IEnumerable<Card> valids)
+        {
+
+        }
+
+        protected Card RetrieveInput()
+        {
+
         }
 
         public override Card MakeMove(GameInfo args)

@@ -10,5 +10,7 @@ namespace CardGames
     public abstract class Player
     {
         public abstract Card MakeMove(GameInfo args);
+
+        public List<Card> Hand { get; set; }
     }
 }
