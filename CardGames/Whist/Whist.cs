@@ -10,12 +10,13 @@ namespace CardGames.Whist
     public class Whist : Game
     {
         protected int round = 1;
-        protected List<Player> activePlayers;
+        protected List<Player<WhistInfo>> activePlayers;
+        protected List<Player<WhistInfo>> players = new List<Player<WhistInfo>>();
 
         public Whist()
         {
             MaxPlayers = 7;
-            activePlayers = new List<Player>(players);
+            activePlayers = new List<Player<WhistInfo>>(players);
         }
 
         public override void Start()
@@ -25,10 +26,13 @@ namespace CardGames.Whist
             {
                 List<Card> cards = new List<Card>();
 
-                List<Player> plays = OrderPlayers();
-                foreach(Player player in plays)
+                Suit trumps = Suit.Null;
+                Suit first = Suit.Null;
+
+                List<Player<WhistInfo>> plays = OrderPlayers();
+                foreach(Player<WhistInfo> player in plays)
                 {
-                    WhistInfo roundInfo = new WhistInfo(cards);
+                    WhistInfo roundInfo = new WhistInfo(cards, trumps, first);
                     Card card = player.MakeMove(roundInfo);
                     cards.Add(card);
                 }
@@ -37,7 +41,7 @@ namespace CardGames.Whist
             }
         }
 
-        protected List<Player> OrderPlayers()
+        protected List<Player<WhistInfo>> OrderPlayers()
         {
             if (round == 1)
                 return activePlayers;
@@ -48,7 +52,7 @@ namespace CardGames.Whist
                 if (activePlayers.Contains(players[playerOffset]))
                 { 
                     int firstInd = activePlayers.IndexOf(players[playerOffset]);
-                    List<Player> ordered = activePlayers.GetRange(firstInd, activePlayers.Count - firstInd);
+                    List<Player<WhistInfo>> ordered = activePlayers.GetRange(firstInd, activePlayers.Count - firstInd);
                     ordered.AddRange(activePlayers.GetRange(0, firstInd));
                     return ordered;
                 }

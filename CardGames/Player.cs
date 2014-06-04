@@ -7,9 +7,9 @@ using CardsLibrary;
 
 namespace CardGames
 {
-    public abstract class Player
+    public abstract class Player<I> where I : GameInfo
     {
-        public abstract Card MakeMove(GameInfo args);
+        public abstract Card MakeMove(I args);
 
         public List<Card> Hand { get; set; }
     }

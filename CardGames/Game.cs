@@ -10,9 +10,9 @@ namespace CardGames
     public abstract class Game
     {
         public int MaxPlayers { get; protected set; }
-        protected List<Player> players = new List<Player>();
+        protected abstract List<Player<GameInfo>> players = new List<Player<GameInfo>>();
 
-        public void AddPlayer(Player p)
+        public void AddPlayer(Player<GameInfo> p)
         {
             if (MaxPlayers <= 0)
                 players.Add(p);

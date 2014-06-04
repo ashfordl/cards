@@ -73,6 +73,7 @@ namespace CardsLibrary
         #endregion
 
         #region Comparison
+
         public bool GreaterThan(Card c) //Returns true if the card this meathod is run on is greater. If they are equal it will say the card it is run on is greater still
         {
             //Return that this card is lower if they are equal
@@ -141,9 +142,7 @@ namespace CardsLibrary
 
             return lowest;
         }
-        #endregion
 
-        #region Operator_Overloads
         public override bool Equals(object obj)
         {
             // If the obj is not a card return false
@@ -154,7 +153,7 @@ namespace CardsLibrary
             Card c = obj as Card;
 
             // If either suit is null, compare values
-            if(this.Suit == Suit.Null || c.Suit == Suit.Null)
+            if (this.Suit == Suit.Null || c.Suit == Suit.Null)
                 return (this.Value == c.Value);
 
             // If either value is null, compare suits
@@ -164,7 +163,10 @@ namespace CardsLibrary
             // Neither suit nor either value is null, so compare both suit and value
             return (this.Value == c.Value) && (this.Suit == c.Suit);
         }
+        #endregion
 
+        #region Operator_Overloads
+        
         public static bool operator ==(Card c1, Card c2)
         {
             return c1.Equals(c2);
@@ -177,13 +179,11 @@ namespace CardsLibrary
 
         public static bool operator <(Card c1, Card c2)
         {
-            //Otherwise return the result of the less than meathod
             return c1.LessThan(c2);
         }
 
         public static bool operator >(Card c1, Card c2)
         {
-            //Otherwise return the value of the greater than meathod
             return c1.GreaterThan(c2);
         }
 

@@ -7,7 +7,7 @@ using CardsLibrary;
 
 namespace CardGames.Whist
 {
-    class WhistInfo : GameInfo
+    public class WhistInfo : GameInfo
     {
         public List<Card> LaidCards { get; set; }
 
