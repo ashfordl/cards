@@ -146,44 +146,33 @@ namespace CardsLibrary
         #region Operator_Overloads
         public override bool Equals(object obj)
         {
-            //If the obj getting compaired is not a card return false
+            // If the obj is not a card return false
             if (!(obj is Card))
                 return false;
-            // Otherwise turn it into a card
+
+            // obj must be a Card
             Card c = obj as Card;
 
-            //If the value is not the same return false
-            if (c.Value != this.Value && (c.Value != Value.Null || this.Value != Value.Null))
-                return false;
-            //If the suit is not the same return false
-            if (c.Suit != this.Suit)
-                return false;
+            // If either suit is null, compare values
+            if(this.Suit == Suit.Null || c.Suit == Suit.Null)
+                return (this.Value == c.Value);
 
-            //Otherwise return true
-            return true;
+            // If either value is null, compare suits
+            if (this.Value == Value.Null || c.Value == Value.Null)
+                return (this.Suit == c.Suit);
+
+            // Neither suit nor either value is null, so compare both suit and value
+            return (this.Value == c.Value) && (this.Suit == c.Suit);
         }
 
         public static bool operator ==(Card c1, Card c2)
         {
-            //If the values are not the same, return false
-            if (c1.Value != c2.Value)
-                return false;
-            //If the suits are not the same, return false
-            if (c1.Suit != c2.Suit)
-                return false;
-
-            //Otherwise return true
-            return true;
+            return c1.Equals(c2);
         }
 
         public static bool operator !=(Card c1, Card c2)
         {
-            //If the values and suits are the same return false
-            if (c1.Value == c2.Value && c1.Suit == c2.Suit)
-                return false;
-
-            //Otherwise return true
-            return true;
+            return !c1.Equals(c2);
         }
 
         public static bool operator <(Card c1, Card c2)
@@ -210,82 +199,82 @@ namespace CardsLibrary
 
         #endregion
 
-        #region Utilitys
-        public string ShorthandToString()
+        #region Utilities
+        public string ToShortString()
         {
-            char s = new char();
-            char v = new char();
+            string str = "";
 
             switch (Suit)
             {
                 case Suit.Clubs:
-                    s = 'C';
+                    str += 'C';
                     break;
                 case Suit.Diamonds:
-                    s = 'D';
+                    str += 'D';
                     break;
                 case Suit.Spades:
-                    s = 'S';
+                    str += 'S';
                     break;
                 case Suit.Hearts:
-                    s = 'H';
+                    str += 'H';
                     break;
                 case Suit.Null:
-                    s = ' ';
+                    str += '-';
                     break;
             }
 
             switch (Value)
             {
                 case Value.Ace :
-                    v = 'A';
+                    str += 'A';
                     break;
                 case Value.Two:
-                    v = '2';
+                    str += '2';
                     break;
                 case Value.Three:
-                    v = '3';
+                    str += '3';
                     break;
                 case Value.Four:
-                    v = '4';
+                    str += '4';
                     break;
                 case Value.Five:
-                    v = '5';
+                    str += '5';
                     break;
                 case Value.Six:
-                    v = '6';
+                    str += '6';
                     break;
                 case Value.Seven:
-                    v = '7';
+                    str += '7';
                     break;
                 case Value.Eight:
-                    v = '8';
+                    str += '8';
                     break;
                 case Value.Nine:
-                    v = '9';
+                    str += '9';
                     break;
                 case Value.Ten:
-                    v = '0';
+                    str += '0';
                     break;
                 case Value.Jack:
-                    v = 'J';
+                    str += 'J';
                     break;
                 case Value.Queen:
-                    v = 'Q';
+                    str += 'Q';
                     break;
                 case Value.King:
-                    v = 'K';
+                    str += 'K';
                     break;
                 case Value.Null:
-                    v = ' ';
+                    str += '-';
                     break;
             }
+            
+            return str;
+        }
 
-            char[] charArray = new char[] { s, v };
-
-            string String = new string (charArray);
-
-            return String;
+        public override string ToString()
+        {
+            return String.Format("%s of %s", this.Value.ToString(), this.Suit.ToString());
         }
         #endregion
     }
