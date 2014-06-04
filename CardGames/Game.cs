@@ -10,7 +10,7 @@ namespace CardGames
     public abstract class Game
     {
         public int MaxPlayers { get; protected set; }
-        protected abstract List<Player<GameInfo>> players = new List<Player<GameInfo>>();
+        protected List<Player<GameInfo>> players { get; set; }
 
         public void AddPlayer(Player<GameInfo> p)
         {

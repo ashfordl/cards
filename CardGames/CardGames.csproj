@@ -47,6 +47,7 @@
     <Compile Include="Whist\WhistInfo.cs" />
     <Compile Include="Whist\Whist.cs" />
     <Compile Include="Whist\ConsolePlayer.cs" />
+    <Compile Include="Whist\WhistPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CardsLibrary\CardsLibrary.csproj">

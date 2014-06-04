@@ -7,7 +7,7 @@ using CardsLibrary;
 
 namespace CardGames.Whist
 {
-    public class ConsolePlayer<I> : Player<I> where I : WhistInfo
+    public class ConsolePlayer : WhistPlayer
     {
         public ConsolePlayer()
         {
@@ -19,7 +19,7 @@ namespace CardGames.Whist
             this.Hand = cards;
         }
         
-        public override Card MakeMove(I args)
+        public override Card MakeMove(WhistInfo args)
         {
             // Prints relevant info, eg trumps and first suit laid
             PrintGameInfo(args);
@@ -29,7 +29,7 @@ namespace CardGames.Whist
             PrintHand(valids);
 
             // Retrieves a card which is returned as the move made
-            return RetrieveInput();
+            return RetrieveInput(valids);
         }
 
         protected void PrintGameInfo(WhistInfo args)
@@ -41,20 +41,6 @@ namespace CardGames.Whist
             foreach(Card laid in args.LaidCards)
                 Console.Write(laid+"\t");
             Console.WriteLine();
-        }
-
-        protected List<Card> DetectValidCards(WhistInfo args)
-        {
-            List<Card> valids = new List<Card>();
-
-           // bool b = Hand.
-
-            foreach (Card c in Hand)
-            { 
-                
-            }
-
-            return valids;
         }
 
         protected void PrintHand(List<Card> valids)
@@ -70,7 +56,44 @@ namespace CardGames.Whist
             Console.WriteLine();    // Reset to new line
         }
 
-        protected void PrintHand(IEnumerable<Card> valids)
+        protected void PrintInputError()
+        {
+            Console.WriteLine("Error: Your input was invalid. Please try again.");
+        }
+
+        protected Card RetrieveInput(List<Card> valids)
+        {
+            do
+            {
+                // Read the next character entered and reset to new line
+                string s = Console.ReadLine();
+
+                // Test if s is a valid number
+                int i;
+                try
+                {
+                    i = Int32.Parse(s.ToString());
+                }
+                catch
+                {
+                    PrintInputError();
+                    continue;
+                }
+
+                // Test if i is too large or less than 0
+                if (i > (valids.Count - 1) || i < 0)
+                {
+                    PrintInputError();
+                    continue;
+                }
+
+                // This will return only if the input is valid
+                return valids.ElementAt(i);
+            } while (true);
+        }
+
+#region George_Can_Code
+        /*protected void PrintHand(IEnumerable<Card> valids)
         {
             Console.WriteLine("Your cards:"); // Show its going to display the cards in you hand
             for (int i = 0; i < Hand.Count; i++) // Itterate through every card
@@ -97,14 +120,9 @@ namespace CardGames.Whist
                 }
             }
             Console.WriteLine(); // End the current line
-        }
+        }*/
 
-        protected Card RetrieveInput()
-        {
-
-        }
-        /*
-        public override Card MakeMove(GameInfo args)
+        /*public override Card MakeMove(GameInfo args)
         {
             while (true) // Repeat until a card is returned since it may not be a valid input
             {
@@ -268,5 +286,6 @@ namespace CardGames.Whist
                 }
             }
         }*/
+#endregion
     }
 }
