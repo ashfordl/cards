@@ -23,6 +23,26 @@ namespace CardsLibrary
             }
         }
 
+        public bool isRed //If the card is a red card
+        {
+            get
+            {
+                if (Suit == Suit.Hearts || Suit == Suit.Diamonds)
+                    return true;
+                else return false;
+            }
+        }
+
+        public bool isBlack //If the card is a blakc card
+        {
+            get
+            {
+                if (Suit == Suit.Clubs || Suit == Suit.Spades)
+                    return true;
+                else return false;
+            }
+        }
+
         public int SuitVal //Returns the value of the suit of the card according to the suit order
         {
             get

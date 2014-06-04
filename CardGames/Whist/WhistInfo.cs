@@ -11,9 +11,9 @@ namespace CardGames.Whist
     {
         public List<Card> LaidCards { get; set; }
 
-        public Suit Trumps { get; set; }
+        public Suit Trumps { get; set; } // SuitOrder
 
-        public Suit FirstSuitLaid { get; set; }
+        public Suit FirstSuitLaid { get; set; } // SuitOrder
 
         public WhistInfo(List<Card> laid, Suit trumps, Suit first)
         {
