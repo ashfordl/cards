@@ -7,7 +7,9 @@ using CardsLibrary;
 
 namespace CardGames
 {
-    public abstract class Game<TPlayer> where TPlayer : Player<GameInfo>
+    public abstract class Game<TPlayer, TInfo> 
+        where TInfo : GameInfo 
+        where TPlayer : Player<TInfo>
     {
         public int MaxPlayers { get; protected set; }
         protected virtual List<TPlayer> players { get; set; }

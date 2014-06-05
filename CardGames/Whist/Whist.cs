@@ -7,7 +7,7 @@ using CardsLibrary;
 
 namespace CardGames.Whist
 {
-    public class Whist : Game<WhistPlayer>
+    public class Whist : Game<WhistPlayer, WhistInfo>
     {
         protected int round = 1;
         protected List<WhistPlayer> activePlayers;
