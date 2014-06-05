@@ -88,14 +88,14 @@ namespace CardGames.Whist
                 i--; // Make it the correct index (start at 0 as apposed to 1)
 
                 // Test if i is too large or less than 0
-                if (i > (valids.Count) || i < 0)
+                if (i >= (valids.Count) || i < 0)
                 {
                     PrintInputError();
                     continue;
                 }
 
                 // This will return only if the input is valid
-                Console.WriteLine("You Laid: " + valids.ElementAt(i).ToShortString());
+                Console.WriteLine("You Laid: " + valids.ElementAt(i));
 
                 if (args.FirstSuitLaid == Suit.Null) // If the first suit hasn't been set, set it to the selected cards suit
                     args.FirstSuitLaid = valids.ElementAt(i).Suit;

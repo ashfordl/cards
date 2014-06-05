@@ -294,7 +294,7 @@ namespace CardsLibrary
 
         public override string ToString()
         {
-            return String.Format("%s of %s", this.Value.ToString(), this.Suit.ToString());
+            return String.Format("{0} of {1}", this.Value.ToString(), this.Suit.ToString());
         }
         #endregion
     }
