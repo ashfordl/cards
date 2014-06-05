@@ -224,25 +224,6 @@ namespace CardsLibrary
         {
             string str = "";
 
-            switch (Suit)
-            {
-                case Suit.Clubs:
-                    str += 'C';
-                    break;
-                case Suit.Diamonds:
-                    str += 'D';
-                    break;
-                case Suit.Spades:
-                    str += 'S';
-                    break;
-                case Suit.Hearts:
-                    str += 'H';
-                    break;
-                case Suit.Null:
-                    str += '-';
-                    break;
-            }
-
             switch (Value)
             {
                 case Value.Ace :
@@ -285,6 +266,25 @@ namespace CardsLibrary
                     str += 'K';
                     break;
                 case Value.Null:
+                    str += '-';
+                    break;
+            }
+
+            switch (Suit)
+            {
+                case Suit.Clubs:
+                    str += 'C';
+                    break;
+                case Suit.Diamonds:
+                    str += 'D';
+                    break;
+                case Suit.Spades:
+                    str += 'S';
+                    break;
+                case Suit.Hearts:
+                    str += 'H';
+                    break;
+                case Suit.Null:
                     str += '-';
                     break;
             }
