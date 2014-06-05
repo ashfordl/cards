@@ -29,6 +29,8 @@ namespace ConsoleTesting
             CardGames.Whist.WhistInfo GameInfo = new CardGames.Whist.WhistInfo(new List<Card>(), Suit.Clubs, Suit.Null);
 
             Players[0].MakeMove(GameInfo);
+            Console.WriteLine();
+            Console.WriteLine();
             Players[1].MakeMove(GameInfo);
         }
     }

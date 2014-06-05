@@ -34,7 +34,7 @@ namespace CardGames.Whist
             PrintHand(valids);
 
             // Retrieves a card which is returned as the move made
-            return RetrieveInput(valids);
+            return RetrieveInput(valids, args);
         }
 
         protected void PrintGameInfo(WhistInfo args)
@@ -54,7 +54,7 @@ namespace CardGames.Whist
             foreach (Card c in this.Hand) // Iterate through every card
             {
                 if (valids.Contains(c))
-                    Console.Write("({0})-", valids.IndexOf(c));  // If card can be played, display input number
+                    Console.Write("({0})-", valids.IndexOf(c) + 1);  // If card can be played, display input number
                 Console.Write(c.ToShortString() + ' ');     // Display the card
             }               
    
@@ -66,7 +66,7 @@ namespace CardGames.Whist
             Console.WriteLine("Error: Your input was invalid. Please try again.");
         }
 
-        protected Card RetrieveInput(List<Card> valids)
+        protected Card RetrieveInput(List<Card> valids, WhistInfo args)
         {
             do
             {
@@ -85,14 +85,21 @@ namespace CardGames.Whist
                     continue;
                 }
 
+                i--; // Make it the correct index (start at 0 as apposed to 1)
+
                 // Test if i is too large or less than 0
-                if (i > (valids.Count - 1) || i < 0)
+                if (i > (valids.Count) || i < 0)
                 {
                     PrintInputError();
                     continue;
                 }
 
                 // This will return only if the input is valid
+                Console.WriteLine("You Laid: " + valids.ElementAt(i).ToShortString());
+
+                if (args.FirstSuitLaid == Suit.Null) // If the first suit hasn't been set, set it to the selected cards suit
+                    args.FirstSuitLaid = valids.ElementAt(i).Suit;
+
                 return valids.ElementAt(i);
             } while (true);
         }
