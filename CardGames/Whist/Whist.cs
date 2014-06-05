@@ -7,7 +7,7 @@ using CardsLibrary;
 
 namespace CardGames.Whist
 {
-    public class Whist : Game
+    public class Whist : Game<WhistPlayer>
     {
         protected int round = 1;
         protected List<WhistPlayer> activePlayers;
@@ -26,12 +26,12 @@ namespace CardGames.Whist
             while(activePlayers.Count > 1)
             {
                 List<Card> cards = new List<Card>();
-
+                
                 Suit trumps = Suit.Null;
                 Suit first = Suit.Null;
 
-                List<Player<WhistInfo>> plays = OrderPlayers();
-                foreach(Player<WhistInfo> player in plays)
+                List<WhistPlayer> plays = OrderPlayers();
+                foreach (WhistPlayer player in plays)
                 {
                     WhistInfo roundInfo = new WhistInfo(cards, trumps, first);
                     Card card = player.MakeMove(roundInfo);

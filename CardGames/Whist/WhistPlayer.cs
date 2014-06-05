@@ -14,7 +14,7 @@ namespace CardGames.Whist
             // Can the hand follow suit
             bool followSuit = Hand.Any(c => c.Suit == args.FirstSuitLaid);
 
-            if(followSuit)
+            if(followSuit && args.FirstSuitLaid != Suit.Null)
             {
                 // If the hand can follow suit, return only cards of the correct suit
                 return Hand.Where(c => c.Suit == args.FirstSuitLaid).ToList();

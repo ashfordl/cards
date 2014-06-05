@@ -15,7 +15,7 @@ namespace CardsLibrary
         {
             get
             {
-                if (Value != null && Value != Value.Null && Suit != null && Suit != Suit.Null)
+                if (Value != Value.Null && Suit != Suit.Null)
                 {
                     return true;
                 }

@@ -11,9 +11,33 @@ namespace CardGames.Whist
     {
         public List<Card> LaidCards { get; set; }
 
-        public Suit Trumps { get; set; } // SuitOrder
+        private Suit _trumps;
+        public Suit Trumps 
+        {   
+            get
+            {
+                return _trumps;
+            }
+            set
+            {
+                _trumps = value;
+                SuitOrder.SetTrumps(Trumps);
+            }
+        }
 
-        public Suit FirstSuitLaid { get; set; } // SuitOrder
+        private Suit _firstsuitlaid;
+        public Suit FirstSuitLaid
+        {
+            get
+            {
+                return _firstsuitlaid;
+            }
+            set
+            {
+                FirstSuitLaid = value;
+                SuitOrder.SetPlayed(FirstSuitLaid);
+            }
+        }
 
         public WhistInfo(List<Card> laid, Suit trumps, Suit first)
         {

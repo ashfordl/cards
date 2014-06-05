@@ -7,12 +7,12 @@ using CardsLibrary;
 
 namespace CardGames
 {
-    public abstract class Game
+    public abstract class Game<TPlayer> where TPlayer : Player<GameInfo>
     {
         public int MaxPlayers { get; protected set; }
-        protected List<Player<GameInfo>> players { get; set; }
+        protected virtual List<TPlayer> players { get; set; }
 
-        public void AddPlayer(Player<GameInfo> p)
+        public void AddPlayer(TPlayer p)
         {
             if (MaxPlayers <= 0)
                 players.Add(p);

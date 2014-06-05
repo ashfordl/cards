@@ -18,6 +18,11 @@ namespace CardGames.Whist
         {
             this.Hand = cards;
         }
+
+        public ConsolePlayer(Card[] cards)
+        {
+            this.Hand = cards.ToList();
+        }
         
         public override Card MakeMove(WhistInfo args)
         {
