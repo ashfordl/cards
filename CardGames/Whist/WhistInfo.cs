@@ -34,7 +34,7 @@ namespace CardGames.Whist
             }
             set
             {
-                FirstSuitLaid = value;
+                _firstsuitlaid = value;
                 SuitOrder.SetPlayed(FirstSuitLaid);
             }
         }

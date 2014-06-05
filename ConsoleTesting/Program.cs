@@ -18,6 +18,8 @@ namespace ConsoleTesting
             List<CardGames.Whist.ConsolePlayer> Players = new List<CardGames.Whist.ConsolePlayer>();
 
             Card[][] tempPlayers = new Card[2][];
+            tempPlayers[0] = new Card[7];
+            tempPlayers[1] = new Card[7];
 
             CardFactory.Deal(ref Deck, ref tempPlayers, 7);
 
