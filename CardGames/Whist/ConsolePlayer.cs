@@ -39,12 +39,12 @@ namespace CardGames.Whist
 
         protected void PrintGameInfo(WhistInfo args)
         {
-            Console.WriteLine("Trumps are %s", args.Trumps);
-            Console.WriteLine("Suit laid is %s", args.FirstSuitLaid);
+            Console.WriteLine("Trumps are {0}", args.Trumps);
+            Console.WriteLine("Suit laid is {0}", args.FirstSuitLaid);
 
             Console.Write("Cards laid: ");
             foreach(Card laid in args.LaidCards)
-                Console.Write(laid+"\t");
+                Console.Write(laid+"  ");
             Console.WriteLine();
         }
 
@@ -54,7 +54,7 @@ namespace CardGames.Whist
             foreach (Card c in this.Hand) // Iterate through every card
             {
                 if (valids.Contains(c))
-                    Console.Write("(%i) ", valids.IndexOf(c));  // If card can be played, display input number
+                    Console.Write("({0})-", valids.IndexOf(c));  // If card can be played, display input number
                 Console.Write(c.ToShortString() + ' ');     // Display the card
             }               
    
