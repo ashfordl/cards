@@ -1,17 +1,75 @@
-﻿using System;
+﻿// Card.cs
+// <copyright file="Card.cs"> This code is protected under the MIT License. </copyright>
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CardsLibrary
 {
+    /// <summary>
+    /// This is the class that contains all the data
+    /// and methods associated with a card within the game.
+    /// </summary>
+    /// <remarks> Fully functioning with operator overloads. </remarks>
     public class Card
     {
-        #region Properties
-        public Value Value { get; set; } //The face value of the card i.e. ace, seven, king etc.
-        public Suit Suit { get; set; } //The suit value of the card i.e. Spades etc.
+        #region Constructors
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Card" /> class. 
+        /// </summary>
+        /// <remarks> Initializes the card as a null card. </remarks>
+        public Card()
+        {
+            this.Value = CardsLibrary.Value.Null;
+            this.Suit = CardsLibrary.Suit.Null;
+        }
 
-        public bool IsValid //If it is a valid card so has a suit value and a face value
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Card" /> class. 
+        /// </summary>
+        /// <param name="val"> The is the value of the card. This is of type Value in Value.cs. </param>
+        /// <param name="suit"> The is the suit of the card. This is of type Suit in Suit.cs. </param>
+        /// <remarks> The card will be created with the specified suit and value. </remarks>
+        public Card(Value val, Suit suit)
+        {
+            this.Value = val;
+            this.Suit = suit;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Card" /> class. 
+        /// </summary>
+        /// <param name="val"> This is the value of the card. It is a integer and get explicitly turned into a Value from Value.cs. </param>
+        /// <param name="suit"> This is the suit of the card. It is a integer and get explicitly turned into a Suit from Suit.cs.</param>
+        /// <remarks> The card will be created with the specified suit and value. </remarks>
+        public Card(int val, int suit)
+        {
+            // Converts the integers into the correct value and suit
+            CardsLibrary.Value cVal = (CardsLibrary.Value)val;
+            CardsLibrary.Suit cSuit = (CardsLibrary.Suit)suit;
+
+            // Creates the card with the correct value and suit
+            this.Value = cVal;
+            this.Suit = cSuit;
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Gets or sets the Value property. </summary>
+        /// <value> The face value of the card i.e. Ace, Two, Three etc. </value>
+        public Value Value { get; set; } 
+
+        /// <summary>
+        /// Gets or sets the Suit property. </summary>
+        /// <value> The suit value of the card i.e. Clubs, Spades etc. </value>
+        public Suit Suit { get; set; }
+
+        /// <summary>
+        /// Gets a value indicating whether the card is a valid card.
+        /// </summary>
+        /// <value> True if the card has a Suit and Value that are not null. </value>
+        public bool IsValid
         {
             get
             {
@@ -19,31 +77,54 @@ namespace CardsLibrary
                 {
                     return true;
                 }
+
                 return false;
             }
         }
 
-        public bool isRed //If the card is a red card
+        /// <summary>
+        /// Gets a value indicating whether the card is red.
+        /// </summary>
+        /// <value> True if the card is a Heart or Diamonds. </value>
+        public bool IsRed
         {
             get
             {
                 if (Suit == Suit.Hearts || Suit == Suit.Diamonds)
+                {
                     return true;
-                else return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        public bool isBlack //If the card is a blakc card
+        /// <summary>
+        /// Gets a value indicating whether the card is black.
+        /// </summary>
+        /// <value> True if the card is a Club or a Spade. </value>
+        public bool IsBlack
         {
             get
             {
                 if (Suit == Suit.Clubs || Suit == Suit.Spades)
+                {
                     return true;
-                else return false;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        public int SuitVal //Returns the value of the suit of the card according to the suit order
+        /// <summary>
+        /// Gets the value of this cards suit order.
+        /// </summary>
+        /// <value> An integer that is equal to the suit's current ordering value according to the SuitOrder in Settings.cs. </value>
+        public int SuitVal 
         {
             get
             {
@@ -61,124 +142,155 @@ namespace CardsLibrary
                         return Settings.NullOrder;
                     default:
                         return 5;
-
                 }
-
             }
-        }
-        #endregion
-
-        #region Constructors
-        public Card() //Creates a null card
-        {
-            this.Value = CardsLibrary.Value.Null;
-            this.Suit = CardsLibrary.Suit.Null;
-        }
-
-        public Card(Value val, Suit suit) //Creates a card with the specified suit and value
-        {
-            this.Value = val;
-            this.Suit = suit;
-        }
-
-        public Card(int val, int suit) //Creates a card with the specified suit and value for integers
-        {
-            //Converts the integers into the correct value and suit
-            CardsLibrary.Value Val = (CardsLibrary.Value)val;
-            CardsLibrary.Suit Suit = (CardsLibrary.Suit)suit;
-            //Creates the card with the correct value and suit
-            this.Value = Val;
-            this.Suit = Suit;
         }
         #endregion
 
         #region Comparison
-
-        public bool GreaterThan(Card c) //Returns true if the card this meathod is run on is greater. If they are equal it will say the card it is run on is greater still
+        /// <summary>
+        /// Compares a card to another given in a parameter to see which is the greater card.
+        /// </summary>
+        /// <param name="c"> The card to be compared against. Is of type Card. </param>
+        /// <returns> Returns true if the card the method is being run on is greater than the card in the parameter. </returns>
+        public bool GreaterThan(Card c) 
         {
-            //Return that this card is lower if they are equal
+            // Return that this card is lower if they are equal
             if (this == c)
+            {
                 return false;
+            }
 
-            //If they have different suits
+            // If they have different suits
             if (this.SuitVal != c.SuitVal)
             {
-                //If this cards suit is greater, return true
+                // If this cards suit is greater, return true
                 if (this.SuitVal > c.SuitVal)
+                {
                     return true;
-                //If the other cards suit is greater, return false
+                }
                 else
+                {
                     return false;
+                }
             }
 
-            //If the suit values are the same and ace is high
+            // If the suit values are the same and ace is high
             if (Settings.AceHigh)
             {
-                //If this card is an ace and card c is not
+                // If this card is an ace and card c is not
                 if (this.Value == Value.Ace && c.Value != Value.Ace)
+                {
                     return true;
-                //If card c is an ace and this is not
+                }
+
+                // If card c is an ace and this is not
                 if (this.Value != Value.Ace && c.Value == Value.Ace)
+                {
                     return false;
-                //If they are both aces, return false that its lower
+                }
+
+                // If they are both aces, return false that its lower
                 if (this.Value == Value.Ace && c.Value == Value.Ace)
+                {
                     return false;
+                }
             }
 
-            //Which has the better number value is returned
+            // Which has the better number value is returned
             if ((int)this.Value > (int)c.Value)
+            {
                 return true;
+            }
             else if ((int)this.Value < (int)c.Value)
+            {
                 return false;
-            else //If the cards have an equal suit value (but not the same suit) and a equal face value
+            }
+            else 
+            {
                 return false;
+            }
         }
 
+        /// <summary>
+        /// Compares a list of cards to see which is best.
+        /// </summary>
+        /// <param name="cards"> This is a list of cards that will be compared to see which is best. </param>
+        /// <returns> Returns the greatest card. </returns>
         public static Card HighestCardFromArray(IEnumerable<Card> cards)
         {
             Card highest = cards.First();
 
             // Compares current highest against all cards in the collection
             foreach (Card c in cards)
+            {
                 if (c > highest)
+                {
                     highest = c;
+                }
+            }
 
             return highest;
         }
 
-        public bool LessThan(Card c) //Returns true if the card this meathod is run on is lower. If they are equal it will say the card it is run on is greater still
+        /// <summary>
+        /// Compares to see which card is lowest.
+        /// </summary>
+        /// <param name="c"> The card to be compared against. </param>
+        /// <returns> Returns true if the card that the method is being run on is the lower card. </returns>
+        public bool LessThan(Card c)
         {
             return (this.GreaterThan(c) || this.Equals(c)) ? false : true;
         }
 
+        /// <summary>
+        /// Compares to see which card is the worst from a list of cards.
+        /// </summary>
+        /// <param name="cards"> The list of cards to be compared. </param>
+        /// <returns> Returns the worst card from the list. </returns>
         public static Card LowestCardFromArray(IEnumerable<Card> cards)
         {
             Card lowest = cards.First();
 
             // Compares current lowest against all cards in the collection
             foreach (Card c in cards)
+            {
                 if (c <= lowest)
+                {
                     lowest = c;
+                }
+            }
 
             return lowest;
         }
 
+        /// <summary>
+        /// Compares to see if two cards are equal.
+        /// </summary>
+        /// <param name="obj"> A boxed up card that will be compared to the current card. </param>
+        /// <returns> Returns true if the cards are equal. </returns>
         public override bool Equals(object obj)
         {
             // If the obj is not a card return false
             if (!(obj is Card))
+            {
                 return false;
+            }
 
             // obj must be a Card
             Card c = obj as Card;
 
             // If either suit is null, compare values
             if (this.Suit == Suit.Null || c.Suit == Suit.Null)
-                return (this.Value == c.Value);
+            {
+                return this.Value == c.Value;
+            }
 
             // If either value is null, compare suits
             if (this.Value == Value.Null || c.Value == Value.Null)
-                return (this.Suit == c.Suit);
+            {
+                return this.Suit == c.Suit;
+            }
 
             // Neither suit nor either value is null, so compare both suit and value
             return (this.Value == c.Value) && (this.Suit == c.Suit);
@@ -186,47 +298,95 @@ namespace CardsLibrary
         #endregion
 
         #region Operator_Overloads
-        
+        /// <summary>
+        /// Checks if two cards are equal.
+        /// </summary>
+        /// <param name="c1"> The first card. </param>
+        /// <param name="c2"> The second card. </param>
+        /// <returns> Returns true if the first card is equal to the second. </returns>
         public static bool operator ==(Card c1, Card c2)
         {
             return c1.Equals(c2);
         }
 
+        /// <summary>
+        /// Checks if two cards are not equal.
+        /// </summary>
+        /// <param name="c1"> The first card. </param>
+        /// <param name="c2"> The second card. </param>
+        /// <returns> Returns true if the first card is not equal to the second. </returns>
         public static bool operator !=(Card c1, Card c2)
         {
             return !c1.Equals(c2);
         }
 
+        /// <summary>
+        /// Checks if one card is less than the second.
+        /// </summary>
+        /// <param name="c1"> The first card. </param>
+        /// <param name="c2"> The second card. </param>
+        /// <returns> Returns true if the first card is less then the second. </returns>
         public static bool operator <(Card c1, Card c2)
         {
             return c1.LessThan(c2);
         }
 
+        /// <summary>
+        /// Checks if one card is greater than the second.
+        /// </summary>
+        /// <param name="c1"> The first card. </param>
+        /// <param name="c2"> The second card. </param>
+        /// <returns> Returns true if the first card is greater then the second. </returns>
         public static bool operator >(Card c1, Card c2)
         {
             return c1.GreaterThan(c2);
         }
 
+        /// <summary>
+        /// Checks if one card is less than or equal to the second.
+        /// </summary>
+        /// <param name="c1"> The first card. </param>
+        /// <param name="c2"> The second card. </param>
+        /// <returns> Returns true if the first card is less than or equal to the second. </returns>
         public static bool operator <=(Card c1, Card c2)
         {
             return c1.LessThan(c2) || c1 == c2;
         }
 
+        /// <summary>
+        /// Checks if one card is greater than or equal to the second.
+        /// </summary>
+        /// <param name="c1"> The first card. </param>
+        /// <param name="c2"> The second card. </param>
+        /// <returns> Returns true if the first card is greater than or equal to the second. </returns>
         public static bool operator >=(Card c1, Card c2)
         {
             return c1.GreaterThan(c2) || c1 == c2;
         }
 
+        /// <summary>
+        /// Gets the hashCode of the card.
+        /// </summary>
+        /// <returns> Returns the Suit to the power of the value. </returns>
+        public override int GetHashCode()
+        {
+            return (int)Math.Pow((int)this.Suit, (int)this.Value);
+        }
+
         #endregion
 
         #region Utilities
+        /// <summary>
+        /// Turns the card into a short string.
+        /// </summary>
+        /// <returns> Returns a string of the cards shorthand representation. </returns>
         public string ToShortString()
         {
-            string str = "";
+            string str = null;
 
             switch (Value)
             {
-                case Value.Ace :
+                case Value.Ace:
                     str += 'A';
                     break;
                 case Value.Two:
@@ -292,9 +452,13 @@ namespace CardsLibrary
             return str;
         }
 
+        /// <summary>
+        /// Turns the card into a string.
+        /// </summary>
+        /// <returns> Returns the string that represents the Card. This will be "'Value' of 'Suit'". </returns>
         public override string ToString()
         {
-            return String.Format("{0} of {1}", this.Value.ToString(), this.Suit.ToString());
+            return string.Format("{0} of {1}", this.Value.ToString(), this.Suit.ToString());
         }
         #endregion
     }
