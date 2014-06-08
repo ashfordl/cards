@@ -39,7 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions.cs" />
+    <Compile Include="TooManyPlayersException.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="Player.cs" />
