@@ -13,7 +13,6 @@ namespace CardsLibrary
     /// <remarks> Fully functioning with operator overloads. </remarks>
     public class Card
     {
-        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="Card" /> class. 
         /// </summary>
@@ -52,9 +51,7 @@ namespace CardsLibrary
             this.Value = cVal;
             this.Suit = cSuit;
         }
-        #endregion
 
-        #region Properties
         /// <summary>
         /// Gets or sets the Value property. </summary>
         /// <value> The face value of the card i.e. Ace, Two, Three etc. </value>
@@ -145,103 +142,6 @@ namespace CardsLibrary
                 }
             }
         }
-        #endregion
-
-        #region Comparison
-        /// <summary>
-        /// Compares a card to another given in a parameter to see which is the greater card.
-        /// </summary>
-        /// <param name="c"> The card to be compared against. Is of type Card. </param>
-        /// <returns> Returns true if the card the method is being run on is greater than the card in the parameter. </returns>
-        public bool GreaterThan(Card c) 
-        {
-            // Return that this card is lower if they are equal
-            if (this == c)
-            {
-                return false;
-            }
-
-            // If they have different suits
-            if (this.SuitVal != c.SuitVal)
-            {
-                // If this cards suit is greater, return true
-                if (this.SuitVal > c.SuitVal)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            // If the suit values are the same and ace is high
-            if (Settings.AceHigh)
-            {
-                // If this card is an ace and card c is not
-                if (this.Value == Value.Ace && c.Value != Value.Ace)
-                {
-                    return true;
-                }
-
-                // If card c is an ace and this is not
-                if (this.Value != Value.Ace && c.Value == Value.Ace)
-                {
-                    return false;
-                }
-
-                // If they are both aces, return false that its lower
-                if (this.Value == Value.Ace && c.Value == Value.Ace)
-                {
-                    return false;
-                }
-            }
-
-            // Which has the better number value is returned
-            if ((int)this.Value > (int)c.Value)
-            {
-                return true;
-            }
-            else if ((int)this.Value < (int)c.Value)
-            {
-                return false;
-            }
-            else 
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Compares a list of cards to see which is best.
-        /// </summary>
-        /// <param name="cards"> This is a list of cards that will be compared to see which is best. </param>
-        /// <returns> Returns the greatest card. </returns>
-        public static Card HighestCardFromArray(IEnumerable<Card> cards)
-        {
-            Card highest = cards.First();
-
-            // Compares current highest against all cards in the collection
-            foreach (Card c in cards)
-            {
-                if (c > highest)
-                {
-                    highest = c;
-                }
-            }
-
-            return highest;
-        }
-
-        /// <summary>
-        /// Compares to see which card is lowest.
-        /// </summary>
-        /// <param name="c"> The card to be compared against. </param>
-        /// <returns> Returns true if the card that the method is being run on is the lower card. </returns>
-        public bool LessThan(Card c)
-        {
-            return (this.GreaterThan(c) || this.Equals(c)) ? false : true;
-        }
 
         /// <summary>
         /// Compares to see which card is the worst from a list of cards.
@@ -265,39 +165,26 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// Compares to see if two cards are equal.
+        /// Compares a list of cards to see which is best.
         /// </summary>
-        /// <param name="obj"> A boxed up card that will be compared to the current card. </param>
-        /// <returns> Returns true if the cards are equal. </returns>
-        public override bool Equals(object obj)
+        /// <param name="cards"> This is a list of cards that will be compared to see which is best. </param>
+        /// <returns> Returns the greatest card. </returns>
+        public static Card HighestCardFromArray(IEnumerable<Card> cards)
         {
-            // If the obj is not a card return false
-            if (!(obj is Card))
+            Card highest = cards.First();
+
+            // Compares current highest against all cards in the collection
+            foreach (Card c in cards)
             {
-                return false;
+                if (c > highest)
+                {
+                    highest = c;
+                }
             }
 
-            // obj must be a Card
-            Card c = obj as Card;
-
-            // If either suit is null, compare values
-            if (this.Suit == Suit.Null || c.Suit == Suit.Null)
-            {
-                return this.Value == c.Value;
-            }
-
-            // If either value is null, compare suits
-            if (this.Value == Value.Null || c.Value == Value.Null)
-            {
-                return this.Suit == c.Suit;
-            }
-
-            // Neither suit nor either value is null, so compare both suit and value
-            return (this.Value == c.Value) && (this.Suit == c.Suit);
+            return highest;
         }
-        #endregion
 
-        #region Operator_Overloads
         /// <summary>
         /// Checks if two cards are equal.
         /// </summary>
@@ -373,9 +260,6 @@ namespace CardsLibrary
             return (int)Math.Pow((int)this.Suit, (int)this.Value);
         }
 
-        #endregion
-
-        #region Utilities
         /// <summary>
         /// Turns the card into a short string.
         /// </summary>
@@ -448,7 +332,7 @@ namespace CardsLibrary
                     str += '-';
                     break;
             }
-            
+
             return str;
         }
 
@@ -460,6 +344,111 @@ namespace CardsLibrary
         {
             return string.Format("{0} of {1}", this.Value.ToString(), this.Suit.ToString());
         }
-        #endregion
+
+        /// <summary>
+        /// Compares a card to another given in a parameter to see which is the greater card.
+        /// </summary>
+        /// <param name="c"> The card to be compared against. Is of type Card. </param>
+        /// <returns> Returns true if the card the method is being run on is greater than the card in the parameter. </returns>
+        public bool GreaterThan(Card c) 
+        {
+            // Return that this card is lower if they are equal
+            if (this == c)
+            {
+                return false;
+            }
+
+            // If they have different suits
+            if (this.SuitVal != c.SuitVal)
+            {
+                // If this cards suit is greater, return true
+                if (this.SuitVal > c.SuitVal)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+            // If the suit values are the same and ace is high
+            if (Settings.AceHigh)
+            {
+                // If this card is an ace and card c is not
+                if (this.Value == Value.Ace && c.Value != Value.Ace)
+                {
+                    return true;
+                }
+
+                // If card c is an ace and this is not
+                if (this.Value != Value.Ace && c.Value == Value.Ace)
+                {
+                    return false;
+                }
+
+                // If they are both aces, return false that its lower
+                if (this.Value == Value.Ace && c.Value == Value.Ace)
+                {
+                    return false;
+                }
+            }
+
+            // Which has the better number value is returned
+            if ((int)this.Value > (int)c.Value)
+            {
+                return true;
+            }
+            else if ((int)this.Value < (int)c.Value)
+            {
+                return false;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Compares to see which card is lowest.
+        /// </summary>
+        /// <param name="c"> The card to be compared against. </param>
+        /// <returns> Returns true if the card that the method is being run on is the lower card. </returns>
+        public bool LessThan(Card c)
+        {
+            return (this.GreaterThan(c) || this.Equals(c)) ? false : true;
+        }
+
+        /// <summary>
+        /// Compares to see if two cards are equal.
+        /// </summary>
+        /// <param name="obj"> A boxed up card that will be compared to the current card. </param>
+        /// <returns> Returns true if the cards are equal. </returns>
+        public override bool Equals(object obj)
+        {
+            // If the obj is not a card return false
+            if (!(obj is Card))
+            {
+                return false;
+            }
+
+            // obj must be a Card
+            Card c = obj as Card;
+
+            // If either suit is null, compare values
+            if (this.Suit == Suit.Null || c.Suit == Suit.Null)
+            {
+                return this.Value == c.Value;
+            }
+
+            // If either value is null, compare suits
+            if (this.Value == Value.Null || c.Value == Value.Null)
+            {
+                return this.Suit == c.Suit;
+            }
+
+            // Neither suit nor either value is null, so compare both suit and value
+            return (this.Value == c.Value) && (this.Suit == c.Suit);
+        }
     }
 }
