@@ -7,6 +7,7 @@ namespace CardGames
     /// <summary>
     /// An exception raised when TooManyPlayers are added to a game.
     /// </summary>
+    [Serializable]
     public class TooManyPlayersException : Exception
     {
         /// <summary>
