@@ -1,49 +1,57 @@
-﻿using System;
+﻿// WhistInfo.cs
+// <copyright file="WhistInfo.cs"> This code is protected under the MIT License. </copyright>
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CardsLibrary;
 
 namespace CardGames.Whist
 {
+    /// <summary>
+    /// An extension of <see cref="GameInfo"/> that provides extra properties for <see cref="Whist"/>.
+    /// </summary>
     public class WhistInfo : GameInfo
     {
-        public List<Card> LaidCards { get; set; }
+        /// <summary>
+        /// The internal value of Trumps.
+        /// </summary>
+        private Suit trumps;
 
-        private Suit _trumps;
+        /// <summary>
+        /// The internal value of FirstSuitLaid.
+        /// </summary>
+        private Suit firstSuitLaid;
+
+        /// <summary>
+        /// Gets or sets the value of trumps.
+        /// </summary>
         public Suit Trumps 
         {   
             get
             {
-                return _trumps;
+                return this.trumps;
             }
+
             set
             {
-                _trumps = value;
-                SuitOrder.SetTrumps(Trumps);
+                this.trumps = value;
+                SuitOrder.SetTrumps(value);
             }
         }
-
-        private Suit _firstsuitlaid;
+        
+        /// <summary>
+        /// Gets or sets the value of the first suit laid.
+        /// </summary>
         public Suit FirstSuitLaid
         {
             get
             {
-                return _firstsuitlaid;
+                return this.firstSuitLaid;
             }
+
             set
             {
-                _firstsuitlaid = value;
-                SuitOrder.SetPlayed(FirstSuitLaid);
+                this.firstSuitLaid = value;
+                SuitOrder.SetPlayed(value);
             }
-        }
-
-        public WhistInfo(List<Card> laid, Suit trumps, Suit first)
-        {
-            this.LaidCards = laid;
-            this.Trumps = trumps;
-            this.FirstSuitLaid = first;
         }
     }
 }
