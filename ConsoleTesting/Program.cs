@@ -26,7 +26,10 @@ namespace ConsoleTesting
             players.Add(new CardGames.Whist.ConsolePlayer(tempPlayers[0]));
             players.Add(new CardGames.Whist.ConsolePlayer(tempPlayers[1]));
 
-            CardGames.Whist.WhistInfo gameInfo = new CardGames.Whist.WhistInfo(new List<Card>(), Suit.Clubs, Suit.Null);
+            CardGames.Whist.WhistInfo gameInfo = new CardGames.Whist.WhistInfo();
+            gameInfo.CardsInPlay = new List<Card>();
+            gameInfo.Trumps = Suit.Clubs;
+            gameInfo.FirstSuitLaid = Suit.Null;
 
             players[0].MakeMove(gameInfo);
             Console.WriteLine();
