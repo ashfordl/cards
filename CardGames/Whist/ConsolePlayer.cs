@@ -57,7 +57,7 @@ namespace CardGames.Whist
             Console.WriteLine("Suit laid is {0}", args.FirstSuitLaid);
 
             Console.Write("Cards laid: ");
-            foreach (Card laid in args.LaidCards)
+            foreach (Card laid in args.CardsInPlay)
             {
                 Console.Write(laid + "  ");
             }
