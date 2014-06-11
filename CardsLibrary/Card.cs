@@ -58,7 +58,7 @@ namespace CardsLibrary
         public Suit Suit { get; set; }
 
         /// <summary>
-        /// Gets whether the card is valid or not.
+        /// Gets a value indicating whether the card is valid or not.
         /// </summary>
         public bool IsValid
         {
@@ -74,7 +74,7 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// Gets whether the card is red.
+        /// Gets a value indicating whether the card is red.
         /// </summary>
         public bool IsRed
         {
@@ -92,7 +92,7 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// Gets whether the card is black.
+        /// Gets a value indicating whether the card is black.
         /// </summary>
         public bool IsBlack
         {

@@ -15,20 +15,9 @@ namespace CardGames.Whist
         /// </summary>
         public Whist()
         {
-            this.MaxPlayers = 7;
+            this.MaxPlayers = 52;
             this.Players = new List<WhistPlayer>();
-            this.ActivePlayers = new List<WhistPlayer>(this.Players);
         }
-
-        /// <summary>
-        /// Gets or sets the current round.
-        /// </summary>
-        protected int Round { get; set; }
-
-        /// <summary>
-        /// Gets or sets the current active players.
-        /// </summary>
-        protected List<WhistPlayer> ActivePlayers { get; set; }
 
         /// <summary>
         /// Gets or sets all players in the game.
@@ -40,36 +29,14 @@ namespace CardGames.Whist
         /// </summary>
         public override void Start()
         {
-            // Each iteration is a round
-            while (this.ActivePlayers.Count > 1)
-            {
-                List<Card> cards = new List<Card>();
-                
-                Suit trumps = Suit.Null;
-                Suit first = Suit.Null;
-
-                List<WhistPlayer> plays = this.OrderPlayers();
-                foreach (WhistPlayer player in plays)
-                {
-                    WhistInfo roundInfo = new WhistInfo();
-                    roundInfo.FirstSuitLaid = first;
-                    roundInfo.Trumps = trumps;
-                    roundInfo.RoundNumber = this.Round;
-                    //// Init other whistinfo stuff
-
-                    Card card = player.MakeMove(roundInfo);
-                    cards.Add(card);
-                }
-
-                this.Round++;
-            }
+            
         }
 
         /// <summary>
         /// Orders the players for dealing and play order.
         /// </summary>
         /// <returns> An ordered list of players. </returns>
-        protected List<WhistPlayer> OrderPlayers()
+        /*protected List<WhistPlayer> OrderPlayers()
         {
             if (this.Round == 1)
             {
@@ -93,6 +60,6 @@ namespace CardGames.Whist
                 }
             } 
             while (true);
-        }
+        }*/
     }
 }
