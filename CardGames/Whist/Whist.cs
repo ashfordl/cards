@@ -36,7 +36,7 @@ namespace CardGames.Whist
 
             Deal(cards: this.CardsInHand);
 
-            Suit trumps = (Suit)new Random().Next(3);
+            Suit trumps = (Suit)new Random().Next(3) + 1; // Add one so it won't be Suit.Null
 
             for (int i = 0; i < this.CardsInHand; i++)
             {
