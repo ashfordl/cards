@@ -13,7 +13,7 @@ namespace CardsLibraryTest
     public class CardsLibraryTest
     {
         /// <summary>
-        /// This test will test the creating cards methods.
+        /// Tests the creating cards methods.
         /// </summary>
         [TestMethod]
         public void CreateCardTest() 
@@ -41,7 +41,7 @@ namespace CardsLibraryTest
         }
         
         /// <summary>
-        /// This test will test the creating deck method.
+        /// Tests the creating deck method.
         /// </summary>
         [TestMethod]
         public void CreateDeckTest()  
@@ -116,7 +116,7 @@ namespace CardsLibraryTest
         }
 
         /// <summary>
-        /// This test will test the shuffling deck method.
+        /// Tests the shuffling deck method.
         /// </summary>
         [TestMethod]
         public void ShuffleTest()  
@@ -137,7 +137,7 @@ namespace CardsLibraryTest
         }
 
         /// <summary>
-        /// This test will test the dealing method.
+        /// Tests the dealing method.
         /// </summary>
         [TestMethod]
         public void DealingTest() 
@@ -162,7 +162,7 @@ namespace CardsLibraryTest
         }
 
         /// <summary>
-        /// This test will test the removing of all cards method.
+        /// Tests the removing of all cards method.
         /// </summary>
         [TestMethod]
         public void ResetCardsTest() 
@@ -191,7 +191,7 @@ namespace CardsLibraryTest
         }
 
         /// <summary>
-        /// This test will test the best card comparison method.
+        /// Tests the best card comparison method.
         /// </summary>
         [TestMethod]
         public void BestCardTest() 
@@ -316,7 +316,7 @@ namespace CardsLibraryTest
         }
 
         /// <summary>
-        /// This test will test the worst card comparison method.
+        /// Tests the worst card comparison method.
         /// </summary>
         [TestMethod]
         public void WorstCardTest() 
@@ -441,7 +441,7 @@ namespace CardsLibraryTest
         }
 
         /// <summary>
-        /// This test will test the equal comparison method.
+        /// Tests the equal comparison method.
         /// </summary>
         [TestMethod]
         public void EqualsTest() 
