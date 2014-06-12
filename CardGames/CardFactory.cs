@@ -87,52 +87,5 @@ namespace CardsLibrary
 
             return shuffledDeck; // Return the shuffled deck
         }
-
-        /// <summary>
-        /// Removes all the cards in the game from play
-        /// </summary>
-        /// <param name="deck"> The deck that will be cleared. This is a "ref" so that it is removed from the actual variable not just in the loop. </param>
-        /// <param name="players"> The players that will have their hand cleared. This is a "ref" so that it is removed from the actual variable not just in the loop. </param>
-        public static void RemoveAllCards(ref List<Card> deck, ref List<Player<GameInfo>> players)
-        {
-            // Clear cards in the deck
-            deck.Clear();
-
-            // Remove all cards in the players hands
-            foreach (Player<GameInfo> play in players)
-            {
-                play.Hand.Clear();
-            }
-        }
-
-        /// <summary>
-        /// Collects all the cards into the deck.
-        /// </summary>
-        /// <param name="deck"> The deck. </param>
-        /// <param name="players"> The players. </param>
-        /// <param name="info"> The game info. </param>
-        public static void CollectAllCards(ref List<Card> deck, ref List<Player<GameInfo>> players, ref GameInfo info)
-        {
-            // Put all cards from the players hand into the deck
-            foreach (Player<GameInfo> play in players)
-            {
-                foreach (Card c in play.Hand)
-                {
-                    deck.Add(c);
-                }
-            }
-
-            // Remove all the cards from the players
-            List<Card> emptyDeck = new List<Card>();
-            RemoveAllCards(ref emptyDeck, ref players);
-
-            // Put all cards in play into the deck
-            foreach (Card c in info.CardsInPlay)
-            {
-                deck.Add(c);
-            }
-
-            info.CardsInPlay.Clear();
-        }
     }
 }
