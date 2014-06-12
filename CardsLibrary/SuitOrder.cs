@@ -10,13 +10,12 @@
 namespace CardsLibrary
 {
     /// <summary>
-    /// A static class that will set the value of the suit
-    /// within the Settings class.
+    /// Sets the suit order of all the suits in game.
     /// </summary>
     public static class SuitOrder
     {
         /// <summary>
-        /// This resets all the suit values to 2 (not played and not a trump).
+        /// This resets all the suit values to not played and not a trump.
         /// </summary>
         public static void Reset() 
         {
@@ -28,9 +27,9 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// This sets the specified suit to the value 1 (trumps).
+        /// This sets the specified suit to trumps.
         /// </summary>
-        /// <param name="s"> This is of type "Suit" and is the suit that will be changed to trump value. </param>
+        /// <param name="s"> The suit that will be the trump. </param>
         public static void SetTrumps(Suit s) 
         {
             if (s == Suit.Clubs) 
@@ -56,9 +55,9 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// This sets the specified suit to value 2 (played).
+        /// This sets the specified suit to played.
         /// </summary>
-        /// <param name="s"> This is of type "Suit" and is the suit that will be changed to played value. </param>
+        /// <param name="s"> The suit that will be the played suit. </param>
         public static void SetPlayed(Suit s) 
         {
             if (s == Suit.Clubs) 
@@ -84,9 +83,9 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// This sets the specified suit to value 3 (above not played or trumps, but below played).
+        /// This sets the specified suit to above not played or trumps, but below played.
         /// </summary>
-        /// <param name="s"> This is of type "Suit" and is the suit that will be changed to third value. </param>
+        /// <param name="s"> The suit that will be the suit for this. </param>
         /// <remarks> This is a method to make the game bias toward a suit so will not commonly be used. </remarks>
         public static void SetThird(Suit s)
         {
@@ -113,9 +112,9 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// This sets the specified suit to value 5 (Null).
+        /// This sets the specified suit to Null.
         /// </summary>
-        /// <param name="s"> This is of type "Suit" and is the suit that will be changed to Null value. </param>
+        /// <param name="s"> The suit that will be null. </param>
         public static void SetNull(Suit s) 
         {
             if (s == Suit.Clubs) 

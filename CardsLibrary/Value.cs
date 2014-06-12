@@ -73,7 +73,7 @@ namespace CardsLibrary
         King = 13,
 
         /// <summary>
-        /// The Joker card is called (needs suit to be of Joker as well):
+        /// The Null card is called:
         /// </summary>
         Null = 0
     }

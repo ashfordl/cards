@@ -7,16 +7,16 @@ using System.Linq;
 namespace CardsLibrary
 {
     /// <summary>
-    /// The card factory, so where the deck is created, shuffled and dealt from.
+    /// Where the deck is created, shuffled and dealt from.
     /// </summary>
     public static class CardFactory
     {
         /// <summary>
-        /// Creates and returns a deck.
+        /// Creates a deck.
         /// </summary>
-        /// <returns> Returns a deck in the form of a List of Cards </returns>
-        /// <param name="shuffle"> If this is true it will shuffle the deck. </param>
-        /// <param name="jokers"> If this is true it will add Jokers to the deck. </param>
+        /// <returns> Returns a deck. </returns>
+        /// <param name="shuffle"> Whether to shuffle the deck. </param>
+        /// <param name="jokers"> Whether to add jokers. </param>
         public static List<Card> PopulateDeck(bool shuffle = false, bool jokers = false)
         {
             List<Card> deck = new List<Card>(); // Creates an instance of the deck
@@ -50,7 +50,7 @@ namespace CardsLibrary
         /// <summary>
         /// Shuffles the deck randomly.
         /// </summary>
-        /// <returns> The deck that is shuffled in the form of a List of Card. </returns>
+        /// <returns> Returns the deck after shuffling. </returns>
         /// <param name="deck"> The deck that will be shuffled. </param>
         public static List<Card> Shuffle(List<Card> deck)
         {
@@ -87,12 +87,12 @@ namespace CardsLibrary
         }
 
         /// <summary>
-        /// Deal away the deck to the correct amount of players with the correct amount of cards.
+        /// Deal the deck to players.
         /// </summary>
-        /// <returns> The hands in an array of an array of cards. </returns>
-        /// <param name="deck"> The deck to be dealt. Has the "ref" so that it will change the deck once it removes cards. </param>
+        /// <returns> Returns the players cards. </returns>
+        /// <param name="deck"> The deck to be dealt from. </param>
         /// <param name="playersToDeal"> The amount of players to be dealt to. </param>
-        /// <param name="cardsToDeal"> The amount of cards to deal as an integer. </param>
+        /// <param name="cardsToDeal"> The amount of cards to deal. </param>
         public static Card[][] Deal(ref List<Card> deck, int playersToDeal, int cardsToDeal)
         {
             Card[][] players = new Card[playersToDeal][];

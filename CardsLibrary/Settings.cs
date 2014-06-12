@@ -3,10 +3,8 @@
 namespace CardsLibrary
 {
     /// <summary>
-    /// A static class with all the data to do with the card games settings.
+    /// All the game settings.
     /// </summary>
-    /// <remarks> This includes if Ace is high, and the values of the suit, 
-    /// i.e. if they are trumps, or the played suit etc. </remarks>
     public static class Settings
     {
         /// <summary>

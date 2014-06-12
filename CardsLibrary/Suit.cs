@@ -28,7 +28,7 @@ namespace CardsLibrary
         Hearts = 4,
 
         /// <summary>
-        /// The Joker suit is called (needs the value to be of Joker as well):
+        /// The Joker suit is called:
         /// </summary>
         Null = 0
     }
