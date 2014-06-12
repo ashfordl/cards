@@ -13,27 +13,27 @@ namespace CardsLibrary
         public static bool AceHigh { get; set; }
 
         /// <summary>
-        /// Gets or sets the order value of the suit "Clubs".
+        /// Gets or sets the order value of Clubs.
         /// </summary>
         public static int ClubsOrder { get; set; }
 
         /// <summary>
-        /// Gets or sets the order value of the suit "Diamonds".
+        /// Gets or sets the order value of Diamonds.
         /// </summary>
         public static int DiamondsOrder { get; set; }
 
         /// <summary>
-        /// Gets or sets the order value of the suit "Spades".
+        /// Gets or sets the order value of Spades.
         /// </summary>
         public static int SpadesOrder { get; set; }
 
         /// <summary>
-        /// Gets or sets the order value of the suit "Hearts".
+        /// Gets or sets the order value of Hearts.
         /// </summary>
         public static int HeartsOrder { get; set; }
 
         /// <summary>
-        /// Gets or sets the order value of the suit "Null".
+        /// Gets or sets the order value of suit Null.
         /// </summary>
         public static int NullOrder { get; set; }
     }
