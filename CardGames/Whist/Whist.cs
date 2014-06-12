@@ -11,8 +11,6 @@ namespace CardGames.Whist
     /// </summary>
     public class Whist : Game<WhistPlayer, WhistInfo>
     {
-        public int CardsInHand { get; set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Whist" /> class.
         /// </summary>
@@ -28,13 +26,18 @@ namespace CardGames.Whist
         public override List<WhistPlayer> Players { get; protected set; }
 
         /// <summary>
+        /// Gets or sets how many cards are in the current hand.
+        /// </summary>
+        public int CardsInHand { get; set; }
+
+        /// <summary>
         /// Begins the game.
         /// </summary>
         public override void Start()
         {
             this.CardsInHand = 7;
 
-            Deal(cards: this.CardsInHand);
+            this.Deal(cards: this.CardsInHand);
 
             Suit trumps = (Suit)new Random().Next(3) + 1; // Add one so it won't be Suit.Null
 
