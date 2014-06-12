@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CardFactory.cs" />
     <Compile Include="TooManyPlayersException.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
