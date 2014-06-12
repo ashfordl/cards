@@ -49,6 +49,8 @@ namespace CardGames.Whist
 
                 foreach (WhistPlayer play in this.Players)
                 {
+                    Console.WriteLine("Player " + this.Players.IndexOf(play));
+
                     // Create a new instance of WhistInfo
                     WhistInfo info = new WhistInfo();
                     info.CardsInPlay = laid;
