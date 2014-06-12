@@ -40,6 +40,7 @@ namespace CardGames.Whist
             this.Deal(cards: this.CardsInHand);
 
             Suit trumps = (Suit)new Random().Next(3) + 1; // Add one so it won't be Suit.Null
+            bool aceHigh = true;
 
             for (int i = 0; i < this.CardsInHand; i++)
             {
@@ -53,6 +54,7 @@ namespace CardGames.Whist
                     info.FirstSuitLaid = first;
                     info.RoundNumber = 0;
                     info.Trumps = trumps;
+                    info.AceHigh = aceHigh;
 
                     Card c = play.MakeMove(info);
                     play.Hand.Remove(c);
