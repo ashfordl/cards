@@ -46,13 +46,13 @@ namespace CardGames
         /// </summary>
         public abstract void Start();
 
-
         /// <summary>
         /// Deals the pack to the players.
         /// </summary>
         /// <param name="shuffle"> Whether to shuffle the deck or not. </param>
         /// <param name="cards"> The number of cards to deal. </param>
-        /// /// <remarks> Will ensure that all players have the same number of cards. </remarks>
+        /// <param name="allCard"> Whether all the cards are getting dealt. </param>
+        /// <remarks> Will ensure that all players have the same number of cards. </remarks>
         public void Deal(bool shuffle = true, int cards = 0, bool allCard = false)
         {
             // Create a deck

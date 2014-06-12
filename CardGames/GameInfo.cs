@@ -11,13 +11,35 @@ namespace CardGames
     public class GameInfo
     {
         /// <summary>
-        /// Gets or sets the current round number
+        /// The internal value of AceHigh.
+        /// </summary>
+        private bool aceHigh;
+
+        /// <summary>
+        /// Gets or sets the current round number.
         /// </summary>
         public int RoundNumber { get; set; }
         
         /// <summary>
-        /// Gets or sets the current cards in play
+        /// Gets or sets the current cards in play.
         /// </summary>
         public List<Card> CardsInPlay { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether ace is high.
+        /// </summary>
+        public bool AceHigh
+        {
+            get
+            {
+                return this.aceHigh;
+            }
+
+            set
+            {
+                this.aceHigh = value;
+                Settings.AceHigh = value;
+            }
+        }
     }
 }
