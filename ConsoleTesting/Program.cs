@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using CardsLibrary;
+using CardGames.Whist;
 
 namespace ConsoleTesting
 {
@@ -17,24 +18,16 @@ namespace ConsoleTesting
         /// <param name="args"> Any arguments/commands that the program is run/compiled with. </param>
         public static void Main(string[] args)
         {
-            List<Card> deck = CardFactory.PopulateDeck(true);
+            Whist whist = new Whist();
+            ConsolePlayer p1 = new ConsolePlayer();
+            ConsolePlayer p2 = new ConsolePlayer();
 
-            List<CardGames.Whist.ConsolePlayer> players = new List<CardGames.Whist.ConsolePlayer>();
+            whist.AddPlayer(p1);
+            whist.AddPlayer(p2);
 
-            Card[][] tempPlayers = CardFactory.Deal(ref deck, 2, 7);
+            whist.Start();
 
-            players.Add(new CardGames.Whist.ConsolePlayer(tempPlayers[0]));
-            players.Add(new CardGames.Whist.ConsolePlayer(tempPlayers[1]));
-
-            CardGames.Whist.WhistInfo gameInfo = new CardGames.Whist.WhistInfo();
-            gameInfo.CardsInPlay = new List<Card>();
-            gameInfo.Trumps = Suit.Clubs;
-            gameInfo.FirstSuitLaid = Suit.Null;
-
-            players[0].MakeMove(gameInfo);
-            Console.WriteLine();
-            Console.WriteLine();
-            players[1].MakeMove(gameInfo);
+            Console.ReadKey();
         }
     }
 }

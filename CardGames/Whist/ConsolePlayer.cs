@@ -134,13 +134,7 @@ namespace CardGames.Whist
                 }
 
                 // This will return only if the input is valid
-                Console.WriteLine("You Laid: " + valids.ElementAt(i));
-
-                // If the first suit hasn't been set, set it to the selected cards suit
-                if (args.FirstSuitLaid == Suit.Null)    
-                {
-                    args.FirstSuitLaid = valids.ElementAt(i).Suit;
-                }
+                Console.WriteLine("You Laid: " + valids.ElementAt(i) + "\n");
 
                 return valids.ElementAt(i);
             } 

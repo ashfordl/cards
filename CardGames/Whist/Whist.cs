@@ -1,5 +1,6 @@
 ﻿// Whist.cs
 // <copyright file="Whist.cs"> This code is protected under the MIT License. </copyright>
+using System;
 using System.Collections.Generic;
 using CardsLibrary;
 
@@ -10,6 +11,8 @@ namespace CardGames.Whist
     /// </summary>
     public class Whist : Game<WhistPlayer, WhistInfo>
     {
+        public int CardsInHand { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Whist" /> class.
         /// </summary>
@@ -29,7 +32,36 @@ namespace CardGames.Whist
         /// </summary>
         public override void Start()
         {
-            
+            this.CardsInHand = 7;
+
+            Deal(cards: this.CardsInHand);
+
+            Suit trumps = (Suit)new Random().Next(3);
+
+            for (int i = 0; i < this.CardsInHand; i++)
+            {
+                List<Card> laid = new List<Card>();
+                Suit first = Suit.Null;
+
+                foreach (WhistPlayer play in this.Players)
+                {
+                    WhistInfo info = new WhistInfo();
+                    info.CardsInPlay = laid;
+                    info.FirstSuitLaid = first;
+                    info.RoundNumber = 0;
+                    info.Trumps = trumps;
+
+                    Card c = play.MakeMove(info);
+                    laid.Add(c);
+                    if (first == Suit.Null)
+                    {
+                        first = c.Suit;
+                    }
+                }
+
+                WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
+                Console.WriteLine(this.Players.IndexOf(winner) + "\n");
+            }
         }
 
         /// <summary>

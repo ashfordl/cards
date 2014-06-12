@@ -53,7 +53,7 @@ namespace CardGames
         /// <param name="shuffle"> Whether to shuffle the deck or not. </param>
         /// <param name="cards"> The number of cards to deal. </param>
         /// /// <remarks> Will ensure that all players have the same number of cards. </remarks>
-        public void Deal(bool shuffle = true, int cards = 0)
+        public void Deal(bool shuffle = true, int cards = 0, bool allCard = false)
         {
             // Create a deck
             List<Card> deck = CardFactory.PopulateDeck(shuffle);
