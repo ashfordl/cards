@@ -83,6 +83,16 @@ namespace CardGames
                 player.Hand = deck.GetRange(0, cardsToDeal);
                 deck.RemoveRange(0, cardsToDeal);
             }
+
+            // If all cards need to be delt, deal the remainder of them to players
+            if (allCard)
+            {
+                for (int i = 0; i < deck.Count; i++)
+                {
+                    this.Players[i].Hand.Add(deck[i]);
+                    deck.RemoveAt(0);
+                }
+            }
         }
     }
 }
