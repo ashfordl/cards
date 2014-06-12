@@ -18,6 +18,8 @@ namespace CardGames.Whist
         {
             this.MaxPlayers = 52;
             this.Players = new List<WhistPlayer>();
+
+            this.CardsInHand = 7;
         }
 
         /// <summary>
@@ -26,7 +28,7 @@ namespace CardGames.Whist
         public override List<WhistPlayer> Players { get; protected set; }
 
         /// <summary>
-        /// Gets or sets how many cards are in the current hand.
+        /// Gets or sets how many cards should be in each player's hand.
         /// </summary>
         public int CardsInHand { get; set; }
 
@@ -35,11 +37,9 @@ namespace CardGames.Whist
         /// </summary>
         public override void Start()
         {
-            this.CardsInHand = 7;
-
             this.Deal(cards: this.CardsInHand);
 
-            Suit trumps = (Suit)new Random().Next(3) + 1; // Add one so it won't be Suit.Null
+            Suit trumps = (Suit)new Random().Next(3) + 1; // Add one so it can't be Suit.Null
             bool aceHigh = true;
 
             for (int i = 0; i < this.CardsInHand; i++)
@@ -49,6 +49,7 @@ namespace CardGames.Whist
 
                 foreach (WhistPlayer play in this.Players)
                 {
+                    // Create a new instance of WhistInfo
                     WhistInfo info = new WhistInfo();
                     info.CardsInPlay = laid;
                     info.FirstSuitLaid = first;
@@ -56,16 +57,21 @@ namespace CardGames.Whist
                     info.Trumps = trumps;
                     info.AceHigh = aceHigh;
 
+                    // Make the move, and remove the card from their hand
                     Card c = play.MakeMove(info);
                     play.Hand.Remove(c);
                     laid.Add(c);
+                    
+                    // Update the first laid card, if necessary
                     if (first == Suit.Null)
                     {
                         first = c.Suit;
                     }
                 }
 
+                // Detect winner
                 WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
+                // TODO: Re-order players in order to allow them to play first
                 Console.WriteLine(this.Players.IndexOf(winner) + "\n");
             }
         }
