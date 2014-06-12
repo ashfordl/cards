@@ -37,7 +37,7 @@ namespace CardGames
             }
             else
             {
-                throw new TooManyPlayersException("Max Players " + this.MaxPlayers);
+                throw new TooManyPlayersException(String.Format("Max Players {0}, limit 52.", this.MaxPlayers));
             }
         }
 
@@ -51,8 +51,7 @@ namespace CardGames
         /// </summary>
         /// <param name="shuffle"> Whether to shuffle the deck or not. </param>
         /// <param name="cards"> The number of cards to deal. </param>
-        /// <param name="allCard"> Whether all the cards are getting dealt. </param>
-        /// <remarks> Will ensure that all players have the same number of cards. </remarks>
+        /// <param name="allCard"> Whether all the cards are getting dealt. This will ignore the cards parameter. </param>
         public void Deal(bool shuffle = true, int cards = 0, bool allCard = false)
         {
             // Create a deck
@@ -62,7 +61,7 @@ namespace CardGames
             int cardsToDeal = (int)Math.Floor((double)(52 / this.Players.Count));
 
             // If the method has been called with a specified number of cards to deal
-            if (cards != 0)
+            if (cards != 0 && !allCard)
             {
                 // Validate parameter
                 if (cards < 1 || cards > cardsToDeal)
@@ -76,22 +75,27 @@ namespace CardGames
                     cardsToDeal = cards;
                 }
             }
-
-            // For each player, assign the hand
-            foreach (TPlayer player in this.Players)
-            {
-                player.Hand = deck.GetRange(0, cardsToDeal);
-                deck.RemoveRange(0, cardsToDeal);
+            
+            // If some cards should be left over, do so, else deal them all
+            if (!allCard) 
+            { 
+                // For each player, deal their hand
+                foreach (TPlayer player in this.Players)
+                {
+                    player.Hand = deck.GetRange(0, cardsToDeal);
+                    deck.RemoveRange(0, cardsToDeal);
+                }
             }
-
-            // If all cards need to be delt, deal the remainder of them to players
-            if (allCard)
+            else
             {
+                // Deal all cards
                 for (int i = 0; i < deck.Count; i++)
                 {
-                    this.Players[i].Hand.Add(deck[i]);
-                    deck.RemoveAt(0);
+                    this.Players[i % this.Players.Count].Hand.Add(deck[i]);
                 }
+
+                // Clear the deck 
+                deck.RemoveRange(0, deck.Count);
             }
         }
     }
