@@ -52,6 +52,7 @@ namespace CardGames.Whist
                     info.Trumps = trumps;
 
                     Card c = play.MakeMove(info);
+                    play.Hand.Remove(c);
                     laid.Add(c);
                     if (first == Suit.Null)
                     {
