@@ -2,6 +2,9 @@
 // <copyright file="CardsLibraryTest.cs"> This code is protected under the MIT License. </copyright>
 using System.Collections.Generic;
 using System.Linq;
+using CardGames;
+using CardGames.Whist;
+using CardsLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CardsLibraryTest
@@ -22,12 +25,12 @@ namespace CardsLibraryTest
             int val = 1;
             int suit = 1;
 
-            var expectedS = CardsLibrary.Suit.Clubs;
-            var expectedV = CardsLibrary.Value.Ace;
+            var expectedS = Suit.Clubs;
+            var expectedV = Value.Ace;
 
             // act
-            CardsLibrary.Card c = new CardsLibrary.Card((CardsLibrary.Value)val, (CardsLibrary.Suit)suit);
-            CardsLibrary.Card d = new CardsLibrary.Card(val, suit);
+            Card c = new Card((Value)val, (Suit)suit);
+            Card d = new Card(val, suit);
             var actualS1 = c.Suit;
             var actualV1 = c.Value;
             var actualS2 = d.Suit;
@@ -47,22 +50,22 @@ namespace CardsLibraryTest
         public void CreateDeckTest()  
         {
             // arrange
-            List<CardsLibrary.Card> deck = new List<CardsLibrary.Card>();
+            List<Card> deck = new List<Card>();
 
             // V = Value, S = Suit
-            var expectedSH = CardsLibrary.Suit.Hearts;    // H = Hearts
-            var expectedVH = CardsLibrary.Value.King;
-            var expectedSS = CardsLibrary.Suit.Spades;    // S = Spades
-            var expectedVS = CardsLibrary.Value.King;
-            var expectedSD = CardsLibrary.Suit.Diamonds;  // D = Diamonds
-            var expectedVD = CardsLibrary.Value.King;
-            var expectedSC = CardsLibrary.Suit.Clubs;     // C = Clubs
-            var expectedVC = CardsLibrary.Value.King;
+            var expectedSH = Suit.Hearts;    // H = Hearts
+            var expectedVH = Value.King;
+            var expectedSS = Suit.Spades;    // S = Spades
+            var expectedVS = Value.King;
+            var expectedSD = Suit.Diamonds;  // D = Diamonds
+            var expectedVD = Value.King;
+            var expectedSC = Suit.Clubs;     // C = Clubs
+            var expectedVC = Value.King;
 
-            var expectedJK = new CardsLibrary.Card(CardsLibrary.Value.Null, CardsLibrary.Suit.Null);
+            var expectedJK = new Card(Value.Null, Suit.Null);
 
             // act
-            deck = CardsLibrary.CardFactory.PopulateDeck();
+            deck = CardFactory.PopulateDeck();
             var actualSH = deck[51].Suit;  // H = Hearts
             var actualVH = deck[51].Value;
             var actualSS = deck[38].Suit;  // S = Spades
@@ -86,7 +89,7 @@ namespace CardsLibraryTest
             Assert.AreEqual(expectedVC, actualVC);
 
             // act
-            deck = CardsLibrary.CardFactory.PopulateDeck(false, true); // Re populates, with jokers
+            deck = CardFactory.PopulateDeck(false, true); // Re populates, with jokers
             actualSH = deck[51].Suit;  // H = Hearts
             actualVH = deck[51].Value;
             actualSS = deck[38].Suit;  // S = Spades
@@ -122,15 +125,15 @@ namespace CardsLibraryTest
         public void ShuffleTest()  
         {
             // arrange
-            List<CardsLibrary.Card> deck = new List<CardsLibrary.Card>();
-            deck = CardsLibrary.CardFactory.PopulateDeck();
+            List<Card> deck = new List<Card>();
+            deck = CardFactory.PopulateDeck();
 
-            CardsLibrary.Card notWanted = deck[0];
+            Card notWanted = deck[0];
 
             // act
-            deck = CardsLibrary.CardFactory.Shuffle(deck);
+            deck = CardFactory.Shuffle(deck);
 
-            CardsLibrary.Card actual = deck[0];
+            Card actual = deck[0];
 
             // assert
             Assert.AreNotEqual(notWanted, actual);
@@ -143,51 +146,19 @@ namespace CardsLibraryTest
         public void DealingTest() 
         {
             // arrange
-            CardsLibrary.Card[][] players = new CardsLibrary.Card[5][];
-            for (int i = 0; i < players.Length; i++)
+            Whist game = new Whist();
+            for (int i = 0; i < 5; i++)
             {
-                players[i] = new CardsLibrary.Card[7];
+                game.AddPlayer(new ConsolePlayer());
             }
 
-            List<CardsLibrary.Card> deck = new List<CardsLibrary.Card>(); // Deck not shuffled so we can track what order the card will go to players
-            CardsLibrary.CardFactory.PopulateDeck();
-
-            var expected = new CardsLibrary.Card(CardsLibrary.Value.Nine, CardsLibrary.Suit.Spades);  // The last Players Last Card
+            var expected = new Card(Value.Nine, Suit.Spades);  // The last Players Last Card
 
             // act
-            players = CardsLibrary.CardFactory.Deal(ref deck, 5, 7);
+            game.Deal(false, 7); // The deck is not shuffled so we can track where the cards go
 
             // assert
-            Assert.AreEqual(expected, players[4][6]);
-        }
-
-        /// <summary>
-        /// Tests the removing of all cards method.
-        /// </summary>
-        [TestMethod]
-        public void ResetCardsTest() 
-        {
-            // arrange
-            CardsLibrary.Card[][] players = new CardsLibrary.Card[5][];
-            for (int i = 0; i < players.Length; i++)
-            {
-                players[i] = new CardsLibrary.Card[7];
-            }
-
-            List<CardsLibrary.Card> deck = new List<CardsLibrary.Card>();
-            deck = CardsLibrary.CardFactory.PopulateDeck();
-
-            CardsLibrary.Card expected1 = null;   // The value of any card in the player array
-            int expected2 = 0;                    // The count of cards in the Deck
-
-            players = CardsLibrary.CardFactory.Deal(ref deck, 5, 7);
-
-            // act
-            CardsLibrary.CardFactory.RemoveAllCards(ref deck, ref players);
-
-            // assert
-            Assert.AreEqual(expected1, players[4][6]);
-            Assert.AreEqual(expected2, deck.Count());
+            Assert.AreEqual(expected, game.Players[4].Hand[6]);
         }
 
         /// <summary>
@@ -197,119 +168,119 @@ namespace CardsLibraryTest
         public void BestCardTest() 
         {
             // arrange
-            List<CardsLibrary.Card> cardsList = new List<CardsLibrary.Card>();
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Ace, CardsLibrary.Suit.Spades));
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Ace, CardsLibrary.Suit.Diamonds));
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.King, CardsLibrary.Suit.Diamonds));
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Seven, CardsLibrary.Suit.Clubs));
-            CardsLibrary.Card[] cards = cardsList.ToArray();
+            List<Card> cardsList = new List<Card>();
+            cardsList.Add(new Card(Value.Ace, Suit.Spades));
+            cardsList.Add(new Card(Value.Ace, Suit.Diamonds));
+            cardsList.Add(new Card(Value.King, Suit.Diamonds));
+            cardsList.Add(new Card(Value.Seven, Suit.Clubs));
+            Card[] cards = cardsList.ToArray();
 
             // arrange 1
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            Settings.AceHigh = false;
 
             // act
-            CardsLibrary.Card actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            Card actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[2], actual);
             
             // arrange 2
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[0], actual);
 
             // arrange 3
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Spades);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Spades);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[0], actual);
 
             // arrange 4
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Spades);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Spades);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[0], actual);
 
             // arrange 5
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Diamonds);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[2], actual);
 
             // arrange 6
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Diamonds);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[1], actual);
 
             // arrange 7
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Clubs);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Clubs);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[3], actual);
 
             // arrange 8
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Clubs);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Clubs);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[3], actual);
 
             // arrange 9
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Hearts);
-            CardsLibrary.SuitOrder.SetPlayed(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Hearts);
+            SuitOrder.SetPlayed(Suit.Diamonds);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[2], actual);
 
             // arrange 10
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Hearts);
-            CardsLibrary.SuitOrder.SetPlayed(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Hearts);
+            SuitOrder.SetPlayed(Suit.Diamonds);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.HighestCardFromArray(cards);
+            actual = Card.HighestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[1], actual);
@@ -322,119 +293,119 @@ namespace CardsLibraryTest
         public void WorstCardTest() 
         {
             // arrange
-            List<CardsLibrary.Card> cardsList = new List<CardsLibrary.Card>();
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Ace, CardsLibrary.Suit.Spades));
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Ace, CardsLibrary.Suit.Diamonds));
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.King, CardsLibrary.Suit.Diamonds));
-            cardsList.Add(new CardsLibrary.Card(CardsLibrary.Value.Seven, CardsLibrary.Suit.Clubs));
-            CardsLibrary.Card[] cards = cardsList.ToArray();
+            List<Card> cardsList = new List<Card>();
+            cardsList.Add(new Card(Value.Ace, Suit.Spades));
+            cardsList.Add(new Card(Value.Ace, Suit.Diamonds));
+            cardsList.Add(new Card(Value.King, Suit.Diamonds));
+            cardsList.Add(new Card(Value.Seven, Suit.Clubs));
+            Card[] cards = cardsList.ToArray();
 
             // arrange 1
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            Settings.AceHigh = false;
 
             // act
-            CardsLibrary.Card actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            Card actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[1], actual);
 
             // arrange 2
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[3], actual);
 
             // arrange 3
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Spades);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Spades);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[1], actual);
 
             // arrange 4
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Spades);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Spades);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[3], actual);
 
             // arrange 5
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Diamonds);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[0], actual);
 
             // arrange 6
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Diamonds);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[3], actual);
 
             // arrange 7
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Clubs);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Clubs);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[1], actual);
 
             // arrange 8
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Clubs);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Clubs);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[2], actual);
 
             // arrange 9
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Hearts);
-            CardsLibrary.SuitOrder.SetPlayed(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = false;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Hearts);
+            SuitOrder.SetPlayed(Suit.Diamonds);
+            Settings.AceHigh = false;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[0], actual);
 
             // arrange 10
-            CardsLibrary.SuitOrder.Reset();
-            CardsLibrary.SuitOrder.SetTrumps(CardsLibrary.Suit.Hearts);
-            CardsLibrary.SuitOrder.SetPlayed(CardsLibrary.Suit.Diamonds);
-            CardsLibrary.Settings.AceHigh = true;
+            SuitOrder.Reset();
+            SuitOrder.SetTrumps(Suit.Hearts);
+            SuitOrder.SetPlayed(Suit.Diamonds);
+            Settings.AceHigh = true;
 
             // act
-            actual = CardsLibrary.Card.LowestCardFromArray(cards);
+            actual = Card.LowestCardFromArray(cards);
 
             // assert
             Assert.AreEqual(cardsList[3], actual);
@@ -447,9 +418,9 @@ namespace CardsLibraryTest
         public void EqualsTest() 
         {
             // arrange
-            CardsLibrary.Card c = new CardsLibrary.Card(1, 1);
-            CardsLibrary.Card cCopy = c;
-            CardsLibrary.Card d = new CardsLibrary.Card(1, 2);
+            Card c = new Card(1, 1);
+            Card cCopy = c;
+            Card d = new Card(1, 2);
 
             bool expectedOne = true;    // This is for 1, 3 and 6
             bool expectedTwo = false;   // This is for 2, 4 and 5
