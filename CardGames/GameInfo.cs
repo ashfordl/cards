@@ -26,7 +26,7 @@ namespace CardGames
         public List<Card> CardsInPlay { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether ace is high.
+        /// Gets or sets a value indicating whether aces are high.
         /// </summary>
         public bool AceHigh
         {
