@@ -2,7 +2,6 @@
 // <copyright file="CardsLibraryTest.cs"> This code is protected under the MIT License. </copyright>
 using System.Collections.Generic;
 using System.Linq;
-using CardGames;
 using CardGames.Whist;
 using CardsLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

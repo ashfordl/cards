@@ -42,6 +42,7 @@
     <Compile Include="Card.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="CardFactory.cs" />
     <Compile Include="Suit.cs" />
     <Compile Include="Value.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
