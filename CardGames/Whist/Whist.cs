@@ -25,7 +25,7 @@ namespace CardGames.Whist
         /// <summary>
         /// Gets or sets all players in the game.
         /// </summary>
-        protected override List<WhistPlayer> Players { get; set; }
+        public override List<WhistPlayer> Players { get; protected set; }
 
         /// <summary>
         /// Begins the game.

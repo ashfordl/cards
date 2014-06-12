@@ -23,7 +23,7 @@ namespace CardGames
         /// <summary>
         /// Gets or sets the list of players in the game.
         /// </summary>
-        protected virtual List<TPlayer> Players { get; set; }
+        public virtual List<TPlayer> Players { get; protected set; }
 
         /// <summary>
         /// Adds a player to the players list.
