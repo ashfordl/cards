@@ -49,7 +49,7 @@ namespace CardGames.Whist
 
                 foreach (WhistPlayer play in this.Players)
                 {
-                    Console.WriteLine("Player " + this.Players.IndexOf(play));
+                    Console.WriteLine("Player " + this.Players[this.Players.IndexOf(play)].ID);
 
                     // Create a new instance of WhistInfo
                     WhistInfo info = new WhistInfo();
@@ -73,8 +73,19 @@ namespace CardGames.Whist
 
                 // Detect winner
                 WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
-                // TODO: Re-order players in order to allow them to play first
-                Console.WriteLine(this.Players.IndexOf(winner) + "\n");
+
+                Console.WriteLine("Player " + this.Players[this.Players.IndexOf(winner)].ID + " won the hand!\n");
+
+                // Re-orders the players so the winner is the first player
+                while (this.Players.IndexOf(winner) != 0)
+                {
+                    for (int j = this.Players.Count - 1; j >= 0; j--)
+                    {
+                        WhistPlayer tempPlayer = this.Players[this.Players.Count - 1];
+                        this.Players[this.Players.Count - 1] = this.Players[j];
+                        this.Players[j] = tempPlayer;
+                    }
+                }
             }
         }
 

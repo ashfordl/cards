@@ -34,10 +34,11 @@ namespace CardGames
             if ((this.MaxPlayers <= 0 || this.Players.Count + 1 <= this.MaxPlayers) && this.Players.Count <= 52)
             {
                 this.Players.Add(p);
+                this.Players[this.Players.Count - 1].ID = this.Players.Count - 1;
             }
             else
             {
-                throw new TooManyPlayersException(String.Format("Max Players {0}, limit 52.", this.MaxPlayers));
+                throw new TooManyPlayersException(string.Format("Max Players {0}, limit 52.", this.MaxPlayers));
             }
         }
 

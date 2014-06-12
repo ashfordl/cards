@@ -12,6 +12,11 @@ namespace CardGames
     public abstract class Player<I> where I : GameInfo
     {
         /// <summary>
+        /// Gets or sets the player's ID number.
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
         /// Gets or sets the player's hand of cards.
         /// </summary>
         public List<Card> Hand { get; set; }
