@@ -74,19 +74,18 @@ namespace CardGames.Whist
                 // Detect winner
                 WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
 
-                Console.WriteLine("Player " + this.Players[this.Players.IndexOf(winner)].ID + " won the hand!\n");
+                Console.WriteLine("Player " + winner.ID + " won the hand!\n");
+                // Console.WriteLine("Player " + this.Players[this.Players.IndexOf(winner)].ID + " won the hand!\n");
 
-                // Re-orders the players so the winner is the first player
-                while (this.Players.IndexOf(winner) != 0)
-                {
-                    for (int j = this.Players.Count - 1; j >= 0; j--)
-                    {
-                        WhistPlayer tempPlayer = this.Players[this.Players.Count - 1];
-                        this.Players[this.Players.Count - 1] = this.Players[j];
-                        this.Players[j] = tempPlayer;
-                    }
-                }
+                OrderPlayers(this.Players.IndexOf(winner));
             }
+        }
+
+        protected void OrderPlayers(int winnerIndex)
+        {
+            List<WhistPlayer> prevPlayers = this.Players.GetRange(0, winnerIndex);
+            this.Players.RemoveRange(0, winnerIndex);
+            this.Players.AddRange(prevPlayers);
         }
 
         /// <summary>
