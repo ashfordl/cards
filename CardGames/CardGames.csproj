@@ -47,6 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Whist\Knockout\KnockoutWhist.cs" />
     <Compile Include="Whist\GermanWhist\GermanWhistConsolePlayer.cs" />
     <Compile Include="Whist\GermanWhist\GermanWhist.cs" />
     <Compile Include="Whist\GermanWhist\GermanWhistInfo.cs" />

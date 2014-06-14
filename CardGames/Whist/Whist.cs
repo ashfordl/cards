@@ -23,11 +23,6 @@ namespace CardGames.Whist
         }
 
         /// <summary>
-        /// Gets or sets all players in the game.
-        /// </summary>
-        public override List<WhistPlayer> Players { get; protected set; }
-
-        /// <summary>
         /// Gets or sets how many cards should be in each player's hand.
         /// </summary>
         public int CardsInHand { get; set; }
