@@ -75,47 +75,21 @@ namespace CardGames.Whist
                 WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
 
                 Console.WriteLine("Player " + winner.ID + " won the hand!\n");
-                // Console.WriteLine("Player " + this.Players[this.Players.IndexOf(winner)].ID + " won the hand!\n");
+                //// Console.WriteLine("Player " + this.Players[this.Players.IndexOf(winner)].ID + " won the hand!\n");
 
-                OrderPlayers(this.Players.IndexOf(winner));
+                this.OrderPlayers(this.Players.IndexOf(winner));
             }
         }
 
+        /// <summary>
+        /// Re-orders the Players for the next trick.
+        /// </summary>
+        /// <param name="winnerIndex"> The winner of the last trick. </param>
         protected void OrderPlayers(int winnerIndex)
         {
             List<WhistPlayer> prevPlayers = this.Players.GetRange(0, winnerIndex);
             this.Players.RemoveRange(0, winnerIndex);
             this.Players.AddRange(prevPlayers);
         }
-
-        /// <summary>
-        /// Orders the players for dealing and play order.
-        /// </summary>
-        /// <returns> An ordered list of players. </returns>
-        /*protected List<WhistPlayer> OrderPlayers()
-        {
-            if (this.Round == 1)
-            {
-                return this.ActivePlayers;
-            }
-
-            int playerOffset = this.Round % this.Players.Count;
-            do
-            {
-                if (this.ActivePlayers.Contains(this.Players[playerOffset]))
-                {
-                    int firstInd = this.ActivePlayers.IndexOf(this.Players[playerOffset]);
-                    List<WhistPlayer> ordered = this.ActivePlayers.GetRange(firstInd, this.ActivePlayers.Count - firstInd);
-                    ordered.AddRange(this.ActivePlayers.GetRange(0, firstInd));
-                    return ordered;
-                }
-                else
-                {
-                    playerOffset++;
-                    continue;
-                }
-            } 
-            while (true);
-        }*/
     }
 }
