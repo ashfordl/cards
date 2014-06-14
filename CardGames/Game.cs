@@ -23,7 +23,7 @@ namespace CardGames
         /// <summary>
         /// Gets or sets the list of players in the game.
         /// </summary>
-        public virtual List<TPlayer> Players { get; protected set; }
+        public List<TPlayer> Players { get; protected set; }
 
         /// <summary>
         /// Adds a player to the players list.
@@ -39,6 +39,19 @@ namespace CardGames
             else
             {
                 throw new TooManyPlayersException(string.Format("Max Players {0}, limit 52.", this.MaxPlayers));
+            }
+        }
+
+        /// <summary>
+        /// Adds a collection of players to the players list.
+        /// </summary>
+        /// <param name="p"> The collection of players to be added. </param>
+        /// <remarks> If too many players are added, as many as possible will be added before an exception is raised. </remarks>
+        public void AddPlayer(IEnumerable<TPlayer> p)
+        {
+            foreach(TPlayer player in p)
+            {
+                this.AddPlayer(player);
             }
         }
 
