@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using CardGames.Whist;
+using CardGames.Whist.GermanWhist;
 using CardsLibrary;
 
 namespace ConsoleTesting
@@ -18,14 +19,10 @@ namespace ConsoleTesting
         /// <param name="args"> Any arguments/commands that the program is run/compiled with. </param>
         public static void Main(string[] args)
         {
-            Whist whist = new Whist();
-            ConsolePlayer p1 = new ConsolePlayer();
-            ConsolePlayer p2 = new ConsolePlayer();
-            ConsolePlayer p3 = new ConsolePlayer();
+            GermanWhist whist = new GermanWhist();
 
-            whist.AddPlayer(p1);
-            whist.AddPlayer(p2);
-            whist.AddPlayer(p3);
+            whist.AddPlayer(new GermanWhistConsolePlayer());
+            whist.AddPlayer(new GermanWhistConsolePlayer());
 
             whist.Start();
 

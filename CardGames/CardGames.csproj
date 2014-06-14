@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TooFewPlayersException.cs" />
     <Compile Include="TooManyPlayersException.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
@@ -46,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Whist\GermanWhist\GermanWhistConsolePlayer.cs" />
+    <Compile Include="Whist\GermanWhist\GermanWhist.cs" />
+    <Compile Include="Whist\GermanWhist\GermanWhistInfo.cs" />
+    <Compile Include="Whist\GermanWhist\GermanWhistPlayer.cs" />
     <Compile Include="Whist\WhistInfo.cs" />
     <Compile Include="Whist\Whist.cs" />
     <Compile Include="Whist\ConsolePlayer.cs" />
