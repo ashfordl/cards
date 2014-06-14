@@ -2,8 +2,6 @@
 // <copyright file="Program.cs"> This code is protected under the MIT License. </copyright>
 using System;
 using System.Collections.Generic;
-using CardGames.Whist;
-using CardGames.Whist.GermanWhist;
 using CardsLibrary;
 
 namespace ConsoleTesting
@@ -19,14 +17,10 @@ namespace ConsoleTesting
         /// <param name="args"> Any arguments/commands that the program is run/compiled with. </param>
         public static void Main(string[] args)
         {
-            GermanWhist whist = new GermanWhist();
+            GermanWhistTest germanWhist = new GermanWhistTest();
+            WhistTest whist = new WhistTest();
 
-            whist.AddPlayer(new GermanWhistConsolePlayer());
-            whist.AddPlayer(new GermanWhistConsolePlayer());
-
-            whist.Start();
-
-            Console.ReadKey();
+            germanWhist.Run();
         }
     }
 }

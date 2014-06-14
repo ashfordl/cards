@@ -21,7 +21,7 @@ namespace CardGames.Whist.GermanWhist
             // If there are not two players, throw a TooFewPlayersException
             if (Players.Count < 2)
             {
-                throw new TooFewPlayersException(string.Format("Has to have 2 players."));
+                throw new TooFewPlayersException("Has to have 2 players.");
             }
 
             // Initialize all the game info
