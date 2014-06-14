@@ -74,6 +74,9 @@ namespace CardGames.Whist
                 // Detect winner
                 WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
 
+                // Increment the player's score
+                winner.Score += 1;
+
                 Console.WriteLine("Player " + winner.ID + " won the hand!\n");
 
                 this.OrderPlayers(this.Players.IndexOf(winner));
