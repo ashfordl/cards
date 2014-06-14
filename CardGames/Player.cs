@@ -22,6 +22,11 @@ namespace CardGames
         public List<Card> Hand { get; set; }
 
         /// <summary>
+        /// Gets or sets the player's score.
+        /// </summary>
+        public int Score { get; set; }
+
+        /// <summary>
         /// Makes the appropriate move using the given arguments.
         /// </summary>
         /// <param name="args"> The information required to make the move. </param>

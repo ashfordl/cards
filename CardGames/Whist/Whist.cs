@@ -75,7 +75,6 @@ namespace CardGames.Whist
                 WhistPlayer winner = this.Players[laid.IndexOf(Card.HighestCardFromArray(laid))];
 
                 Console.WriteLine("Player " + winner.ID + " won the hand!\n");
-                //// Console.WriteLine("Player " + this.Players[this.Players.IndexOf(winner)].ID + " won the hand!\n");
 
                 this.OrderPlayers(this.Players.IndexOf(winner));
             }
