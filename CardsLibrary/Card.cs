@@ -328,6 +328,82 @@ namespace CardsLibrary
         }
 
         /// <summary>
+        /// Represents the card as a unicode string.
+        /// </summary>
+        /// <returns> A concise string to represent the card. </returns>
+        public string ToUnicodeString()
+        {
+            string str = null;
+
+            switch (Value)
+            {
+                case Value.Ace:
+                    str += 'A';
+                    break;
+                case Value.Two:
+                    str += '2';
+                    break;
+                case Value.Three:
+                    str += '3';
+                    break;
+                case Value.Four:
+                    str += '4';
+                    break;
+                case Value.Five:
+                    str += '5';
+                    break;
+                case Value.Six:
+                    str += '6';
+                    break;
+                case Value.Seven:
+                    str += '7';
+                    break;
+                case Value.Eight:
+                    str += '8';
+                    break;
+                case Value.Nine:
+                    str += '9';
+                    break;
+                case Value.Ten:
+                    str += '0';
+                    break;
+                case Value.Jack:
+                    str += 'J';
+                    break;
+                case Value.Queen:
+                    str += 'Q';
+                    break;
+                case Value.King:
+                    str += 'K';
+                    break;
+                case Value.Null:
+                    str += '-';
+                    break;
+            }
+
+            switch (Suit)
+            {
+                case Suit.Clubs:
+                    str += '♥';
+                    break;
+                case Suit.Diamonds:
+                    str += '♦';
+                    break;
+                case Suit.Spades:
+                    str += '♣';
+                    break;
+                case Suit.Hearts:
+                    str += '♠';
+                    break;
+                case Suit.Null:
+                    str += '-';
+                    break;
+            }
+
+            return str;
+        }
+
+        /// <summary>
         /// Represents the card as a string.
         /// </summary>
         /// <returns> A string to represent the card. </returns>

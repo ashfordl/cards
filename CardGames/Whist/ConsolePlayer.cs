@@ -59,7 +59,7 @@ namespace CardGames.Whist
             Console.Write("Cards laid: ");
             foreach (Card laid in args.CardsInPlay)
             {
-                Console.Write(laid + "  ");
+                Console.Write(laid.ToUnicodeString() + "  ");
             }
 
             Console.WriteLine();
@@ -83,7 +83,7 @@ namespace CardGames.Whist
                 }
 
                 // Display the card
-                Console.Write(c.ToShortString() + ' ');     
+                Console.Write(c.ToUnicodeString() + ' ');     
             }
 
             // Reset to new line
