@@ -8,7 +8,7 @@ using CardsLibrary;
 namespace CardGames.Whist.GermanWhist
 {
     /// <summary>
-    /// A <see cref="WhistPlayer"/> implementation using the console for input.
+    /// A <see cref="GermanWhistPlayer"/> implementation using the console for input.
     /// </summary>
     public class GermanWhistConsolePlayer : GermanWhistPlayer
     {

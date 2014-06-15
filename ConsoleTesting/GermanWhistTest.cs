@@ -18,7 +18,7 @@ namespace ConsoleTesting
             GermanWhist whist = new GermanWhist();
 
             whist.AddPlayer(new GermanWhistConsolePlayer());
-            whist.AddPlayer(new GermanWhistConsolePlayer());
+            whist.AddPlayer(new GermanWhistConsoleAi());
 
             whist.Start();
 

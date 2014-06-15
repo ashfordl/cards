@@ -5,7 +5,7 @@ using CardsLibrary;
 namespace CardGames.Whist.GermanWhist
 {
     /// <summary>
-    /// An extension of <see cref="GameInfo"/> that provides extra properties for <see cref="Whist"/>.
+    /// An extension of <see cref="GameInfo"/> that provides extra properties for <see cref="GermanWhist"/>.
     /// </summary>
     public class GermanWhistInfo : WhistInfo
     {

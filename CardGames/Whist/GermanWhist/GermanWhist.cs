@@ -73,7 +73,7 @@ namespace CardGames.Whist.GermanWhist
         /// <summary>
         /// Initialize the info for the game.
         /// </summary>
-        /// <returns> Returns the game info. </returns>
+        /// <returns> The game info. </returns>
         protected GermanWhistInfo InitializeInfo()
         {
             GermanWhistInfo info = new GermanWhistInfo();
@@ -95,6 +95,9 @@ namespace CardGames.Whist.GermanWhist
             // Plays 13 rounds
             for (int i = 0; i < 13; i++, info.RoundNumber++)
             {
+                // Reset the suit order
+                SuitOrder.Reset();
+
                 // Sets the card being played for to the top card in the deck
                 info.ToPlayFor = this.Deck[0];
 
@@ -108,6 +111,8 @@ namespace CardGames.Whist.GermanWhist
 
                 // Decide who won the card and give players their new cards
                 int winnerIndex = this.DecideCardWinner(info);
+
+                Console.ReadKey(true);
 
                 // Reset variables that need to be reset
                 info.CardsInPlay.Clear();
@@ -132,6 +137,9 @@ namespace CardGames.Whist.GermanWhist
             // Play 13 rounds
             for (int i = 0; i < 13; i++, info.RoundNumber++)
             {
+                // Reset the suit order
+                SuitOrder.Reset();
+
                 // Make each player play a card
                 foreach (GermanWhistPlayer play in this.Players)
                 {
@@ -142,6 +150,8 @@ namespace CardGames.Whist.GermanWhist
 
                 // Decide who won the trick
                 int winnerIndex = this.DecideTrickWinner(info);
+
+                Console.ReadKey(true);
 
                 // Reset info
                 info.CardsInPlay.Clear();
@@ -202,6 +212,10 @@ namespace CardGames.Whist.GermanWhist
                 winnerIndex = 1;
             }
 
+            // Display who got what cards
+            Console.WriteLine("Player {0} got the {1}.", this.Players[winnerIndex].ID, info.ToPlayFor.ToString());
+            Console.WriteLine("Player {0} got the {1}.", this.Players[(winnerIndex + 1) % 2].ID, this.Deck[1].ToString());
+
             // Add the top card to the winner's hand
             this.Players[winnerIndex].Hand.Add(this.Deck[0]);
 
@@ -210,9 +224,6 @@ namespace CardGames.Whist.GermanWhist
 
             // Remove both the cards just given away from the deck
             this.Deck.RemoveRange(0, 2);
-
-            // Display who got the card that was being played for
-            Console.WriteLine("Player {0} got the {1}.", this.Players[winnerIndex].ID, info.ToPlayFor.ToString());
 
             return winnerIndex;
         }
@@ -274,7 +285,7 @@ namespace CardGames.Whist.GermanWhist
             }
 
             // Display who won
-            Console.WriteLine("Player {0} won the game with {1} tricks to {2} tricks!", winner.ID, loser.ID);
+            Console.WriteLine("Player {0} won the game with {1} tricks to {2} tricks!", winner.ID, winner.Score, loser.Score);
         }
     }
 }
