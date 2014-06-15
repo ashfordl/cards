@@ -49,7 +49,7 @@ namespace CardGames
         /// <remarks> If too many players are added, as many as possible will be added before an exception is raised. </remarks>
         public void AddPlayer(IEnumerable<TPlayer> p)
         {
-            foreach(TPlayer player in p)
+            foreach (TPlayer player in p)
             {
                 this.AddPlayer(player);
             }

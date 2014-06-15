@@ -6,16 +6,28 @@ using CardsLibrary;
 
 namespace CardGames.Whist.GermanWhist
 {
+    /// <summary>
+    /// An implementation of german whist.
+    /// </summary>
     public class GermanWhist : Game<GermanWhistPlayer, GermanWhistInfo>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GermanWhist" /> class.
+        /// </summary>
         public GermanWhist()
         {
             this.MaxPlayers = 2;
             this.Players = new List<GermanWhistPlayer>();
         }
 
+        /// <summary>
+        /// Gets or sets the deck of cards for the game.
+        /// </summary>
         public List<Card> Deck { get; protected set; }
 
+        /// <summary>
+        /// Start the game.
+        /// </summary>
         public override void Start()
         {
             // If there are not two players, throw a TooFewPlayersException
@@ -38,6 +50,9 @@ namespace CardGames.Whist.GermanWhist
             this.DecideWinner();
         }
 
+        /// <summary>
+        /// Initialize the game's properties.
+        /// </summary>
         protected void Initialize()
         {
             this.Deal(cards: 13);
@@ -55,6 +70,10 @@ namespace CardGames.Whist.GermanWhist
             }
         }
 
+        /// <summary>
+        /// Initialize the info for the game.
+        /// </summary>
+        /// <returns> Returns the game info. </returns>
         protected GermanWhistInfo InitializeInfo()
         {
             GermanWhistInfo info = new GermanWhistInfo();
@@ -67,6 +86,10 @@ namespace CardGames.Whist.GermanWhist
             return info;
         }
 
+        /// <summary>
+        /// Plays the first phase of play for the game.
+        /// </summary>
+        /// <param name="info"> The current game info. </param>
         protected void PlayPhaseOne(GermanWhistInfo info)
         {
             // Plays 13 rounds
@@ -97,6 +120,10 @@ namespace CardGames.Whist.GermanWhist
             info.ToPlayFor = new Card(Value.Null, Suit.Null);
         }
 
+        /// <summary>
+        /// Plays the second phase of play for the game.
+        /// </summary>
+        /// <param name="info"> The current game info. </param>
         protected void PlayPhaseTwo(GermanWhistInfo info)
         {
             // Play 13 rounds
@@ -120,6 +147,11 @@ namespace CardGames.Whist.GermanWhist
             Console.WriteLine("\n\n");
         }
 
+        /// <summary>
+        /// Makes a player play a card.
+        /// </summary>
+        /// <param name="info"> The current game info. </param>
+        /// <param name="player"> The player which is being made to make a move. </param>
         protected void MakePlayerMove(GermanWhistInfo info, GermanWhistPlayer player)
         {
             Console.Clear();
@@ -142,6 +174,10 @@ namespace CardGames.Whist.GermanWhist
             Console.ReadKey(true);
         }
 
+        /// <summary>
+        /// Decides the winner of the card being played for and act accordingly.
+        /// </summary>
+        /// <param name="info"> The current game info. </param>
         protected void DecideCardWinner(GermanWhistInfo info)
         {
             // See who won
@@ -168,6 +204,9 @@ namespace CardGames.Whist.GermanWhist
             Console.WriteLine("Player {0} got the {1}.", this.Players[winnerIndex].ID, info.ToPlayFor.ToString());
         }
 
+        /// <summary>
+        /// Orders the players.
+        /// </summary>
         protected void OrderPlayer()
         {
             // Make a temporary player equal to the first player
@@ -180,6 +219,10 @@ namespace CardGames.Whist.GermanWhist
             this.Players[1] = tempPlayer;
         }
 
+        /// <summary>
+        /// Decides the winner of the trick and acts accordingly.
+        /// </summary>
+        /// <param name="info"> The current game info. </param>
         protected void DecideTrickWinner(GermanWhistInfo info)
         {
             if (info.CardsInPlay[0] >= info.CardsInPlay[1])
@@ -194,6 +237,9 @@ namespace CardGames.Whist.GermanWhist
             }
         }
 
+        /// <summary>
+        /// Decides the winner of the game.
+        /// </summary>
         protected void DecideWinner()
         {            
             GermanWhistPlayer winner; 

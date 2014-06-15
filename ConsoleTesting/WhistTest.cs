@@ -7,7 +7,7 @@ namespace ConsoleTesting
     /// <summary>
     /// The whist test class
     /// </summary>
-    class WhistTest
+    public class WhistTest
     {
         /// <summary>
         /// Run the test
