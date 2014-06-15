@@ -39,6 +39,7 @@ namespace CardGames.Whist
 
             for (int i = 0; i < this.CardsInHand; i++)
             {
+                SuitOrder.Reset();
                 List<Card> laid = new List<Card>();
                 Suit first = Suit.Null;
 
@@ -53,7 +54,7 @@ namespace CardGames.Whist
                     info.RoundNumber = 0;
                     info.Trumps = trumps;
                     info.AceHigh = aceHigh;
-
+                    
                     // Make the move, and remove the card from their hand
                     Card c = play.MakeMove(info);
                     play.Hand.Remove(c);
