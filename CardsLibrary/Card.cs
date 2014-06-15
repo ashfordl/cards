@@ -384,16 +384,16 @@ namespace CardsLibrary
             switch (Suit)
             {
                 case Suit.Clubs:
-                    str += '♥';
+                    str += '♣';
                     break;
                 case Suit.Diamonds:
                     str += '♦';
                     break;
                 case Suit.Spades:
-                    str += '♣';
+                    str += '♠';
                     break;
                 case Suit.Hearts:
-                    str += '♠';
+                    str += '♥';
                     break;
                 case Suit.Null:
                     str += '-';
