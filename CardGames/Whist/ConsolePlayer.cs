@@ -36,6 +36,9 @@ namespace CardGames.Whist
         /// <returns> The card chosen. </returns>
         public override Card MakeMove(WhistInfo args)
         {
+            // Order the hand
+            this.OrderCards();
+
             // Prints relevant info, eg trumps and first suit laid
             this.PrintGameInfo(args);
 

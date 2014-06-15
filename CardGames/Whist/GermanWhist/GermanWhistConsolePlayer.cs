@@ -36,6 +36,9 @@ namespace CardGames.Whist.GermanWhist
         /// <returns> The card chosen. </returns>
         public override Card MakeMove(GermanWhistInfo args)
         {
+            // Order the hand
+            this.OrderCards();
+
             // Prints relevant info, eg trumps and cards already played 
             this.PrintGameInfo(args);
             
