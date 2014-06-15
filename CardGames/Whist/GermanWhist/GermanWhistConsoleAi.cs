@@ -47,7 +47,7 @@ namespace CardGames.Whist.GermanWhist
             this.PrintHand(valids);
 
             // If its worth winning the trick of its playing for tricks
-            if (this.WorthWinning(args) || args.ToPlayFor == new Card(Value.Nine, Suit.Null))
+            if (this.WorthWinning(args) || args.ToPlayFor == new Card(Value.Null, Suit.Null))
             {
                 // Gets card better than ones played
                 List<Card> betterCards = this.GetCards(args, valids);
@@ -64,7 +64,7 @@ namespace CardGames.Whist.GermanWhist
                         // Remove that card so that it won't be picked again
                         betterCards.Remove(cardToPlay);
                     } 
-                    while (cardToPlay > args.ToPlayFor); // Until the card is less than the card being played for
+                    while (cardToPlay > args.ToPlayFor && args.ToPlayFor != new Card(Value.Null, Suit.Null)); // Until the card is less than the card being played for and if there is a card being played for
                 }
                 else
                 {
