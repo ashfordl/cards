@@ -107,14 +107,17 @@ namespace CardGames.Whist.GermanWhist
                 Console.Write("\n\n");
 
                 // Decide who won the card and give players their new cards
-                this.DecideCardWinner(info);
+                int winnerIndex = this.DecideCardWinner(info);
 
                 // Reset variables that need to be reset
                 info.CardsInPlay.Clear();
                 info.FirstSuitLaid = Suit.Null;
 
-                // Swap the players so the next person starts
-                this.OrderPlayer();
+                // Swap the players if the second player won
+                if (winnerIndex == 1)
+                {
+                    this.OrderPlayer();
+                }
             }
 
             info.ToPlayFor = new Card(Value.Null, Suit.Null);
@@ -138,10 +141,17 @@ namespace CardGames.Whist.GermanWhist
                 Console.Write("\n\n");
 
                 // Decide who won the trick
-                this.DecideTrickWinner(info);
+                int winnerIndex = this.DecideTrickWinner(info);
 
-                // Swap the players so the next person starts
-                this.OrderPlayer();
+                // Reset info
+                info.CardsInPlay.Clear();
+                info.FirstSuitLaid = Suit.Null;
+
+                // Swap the players if the second player won
+                if (winnerIndex == 1)
+                {
+                    this.OrderPlayer();
+                }
             }
 
             Console.WriteLine("\n\n");
@@ -178,7 +188,8 @@ namespace CardGames.Whist.GermanWhist
         /// Decides the winner of the card being played for and act accordingly.
         /// </summary>
         /// <param name="info"> The current game info. </param>
-        protected void DecideCardWinner(GermanWhistInfo info)
+        /// <returns> The index of the winner. </returns>
+        protected int DecideCardWinner(GermanWhistInfo info)
         {
             // See who won
             int winnerIndex;
@@ -202,6 +213,8 @@ namespace CardGames.Whist.GermanWhist
 
             // Display who got the card that was being played for
             Console.WriteLine("Player {0} got the {1}.", this.Players[winnerIndex].ID, info.ToPlayFor.ToString());
+
+            return winnerIndex;
         }
 
         /// <summary>
@@ -223,17 +236,20 @@ namespace CardGames.Whist.GermanWhist
         /// Decides the winner of the trick and acts accordingly.
         /// </summary>
         /// <param name="info"> The current game info. </param>
-        protected void DecideTrickWinner(GermanWhistInfo info)
+        /// <returns> The index of the winner. </returns>
+        protected int DecideTrickWinner(GermanWhistInfo info)
         {
             if (info.CardsInPlay[0] >= info.CardsInPlay[1])
             {
                 this.Players[0].Score++;
                 Console.WriteLine("Player {0} won the trick!", this.Players[0].ID);
+                return 0;
             }
             else
             {
                 this.Players[1].Score++;
                 Console.WriteLine("Player {0} won the trick!", this.Players[1].ID);
+                return 1;
             }
         }
 
