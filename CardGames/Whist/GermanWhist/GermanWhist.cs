@@ -97,6 +97,7 @@ namespace CardGames.Whist.GermanWhist
             {
                 // Reset the suit order
                 SuitOrder.Reset();
+                SuitOrder.SetTrumps(info.Trumps);
 
                 // Sets the card being played for to the top card in the deck
                 info.ToPlayFor = this.Deck[0];
@@ -139,6 +140,7 @@ namespace CardGames.Whist.GermanWhist
             {
                 // Reset the suit order
                 SuitOrder.Reset();
+                SuitOrder.SetTrumps(info.Trumps);
 
                 // Make each player play a card
                 foreach (GermanWhistPlayer play in this.Players)

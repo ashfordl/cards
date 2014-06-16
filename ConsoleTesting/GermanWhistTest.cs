@@ -13,12 +13,19 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
-        public void Run()
+        public void Run(bool ai = false)
         {
             GermanWhist whist = new GermanWhist();
 
             whist.AddPlayer(new GermanWhistConsolePlayer());
-            whist.AddPlayer(new GermanWhistConsoleAi());
+            if (ai)
+            {
+                whist.AddPlayer(new GermanWhistConsoleAi());
+            }
+            else
+            {
+                whist.AddPlayer(new GermanWhistConsolePlayer());
+            }
 
             whist.Start();
 

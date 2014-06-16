@@ -20,7 +20,7 @@ namespace ConsoleTesting
             GermanWhistTest germanWhist = new GermanWhistTest();
             WhistTest whist = new WhistTest();
 
-            germanWhist.Run();
+            germanWhist.Run(true);
         }
     }
 }

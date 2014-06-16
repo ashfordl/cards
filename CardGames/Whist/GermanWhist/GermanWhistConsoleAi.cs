@@ -58,13 +58,21 @@ namespace CardGames.Whist.GermanWhist
                 {
                     do
                     {
+                        // Will play from the 3rd best card and below if its a trump with a value of less than 4 being played for
+                        if (args.ToPlayFor.SuitVal == 5 && (int)args.ToPlayFor.Value <= 4)
+                        {
+                            for (int i = 0; i < 3; i++)
+                            {
+                                betterCards.Remove(Card.HighestCardFromArray(betterCards));
+                            }
+                        }
                         // Pick the highest card from the list
                         cardToPlay = Card.HighestCardFromArray(betterCards);
 
                         // Remove that card so that it won't be picked again
                         betterCards.Remove(cardToPlay);
                     } 
-                    while (cardToPlay > args.ToPlayFor && args.ToPlayFor != new Card(Value.Null, Suit.Null)); // Until the card is less than the card being played for and if there is a card being played for
+                    while (cardToPlay >= args.ToPlayFor && args.ToPlayFor != new Card(Value.Null, Suit.Null)); // Until the card is less than the card being played for and if there is a card being played for
                 }
                 else
                 {
