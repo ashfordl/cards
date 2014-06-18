@@ -31,6 +31,7 @@ namespace ConsoleTesting
         public void RunWithAi()
         {
             Console.WriteLine("Es gibt kein AI");
+            Console.WriteLine("There is no AI")
         }
     }
 }
