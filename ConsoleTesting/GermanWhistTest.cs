@@ -8,28 +8,31 @@ namespace ConsoleTesting
     /// <summary>
     /// The german whist test class
     /// </summary>
-    public class GermanWhistTest
+    public class GermanWhistTest : IGameTest
     {
         /// <summary>
         /// Runs the test
         /// </summary>
-        public void Run(bool ai = false)
+        public void RunWithAi()
         {
             GermanWhist whist = new GermanWhist();
 
             whist.AddPlayer(new GermanWhistConsolePlayer());
-            if (ai)
-            {
-                whist.AddPlayer(new GermanWhistConsoleAi());
-            }
-            else
-            {
-                whist.AddPlayer(new GermanWhistConsolePlayer());
-            }
+            whist.AddPlayer(new GermanWhistConsoleAi());
+            
+            Console.WriteLine("up");
 
             whist.Start();
+        }
 
-            Console.ReadKey();
+        public void RunTest()
+        {
+            GermanWhist whist = new GermanWhist();
+
+            whist.AddPlayer(new GermanWhistConsolePlayer());
+            whist.AddPlayer(new GermanWhistConsolePlayer());
+
+            whist.Start();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿// WhistTest.cs
 // <copyright file="WhistTest.cs"> This code is protected under the MIT License. </copyright>
+using System;
 using CardGames.Whist;
 
 namespace ConsoleTesting
@@ -7,12 +8,12 @@ namespace ConsoleTesting
     /// <summary>
     /// The whist test class
     /// </summary>
-    public class WhistTest
+    public class WhistTest : IGameTest
     {
         /// <summary>
         /// Run the test
         /// </summary>
-        public void Run()
+        public void RunTest()
         {
             Whist whist = new Whist();
 
@@ -25,6 +26,11 @@ namespace ConsoleTesting
             whist.AddPlayer(p3);
 
             whist.Start();
+        }
+
+        public void RunWithAi()
+        {
+            Console.WriteLine("Es gibt kein AI");
         }
     }
 }

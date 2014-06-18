@@ -47,7 +47,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Whist\Knockout\KnockoutWhist.cs" />
     <Compile Include="Whist\GermanWhist\GermanWhistConsoleAi.cs" />
     <Compile Include="Whist\GermanWhist\GermanWhistConsolePlayer.cs" />
     <Compile Include="Whist\GermanWhist\GermanWhist.cs" />
@@ -63,6 +62,9 @@
       <Project>{a282ad7c-5fd5-45bb-ab7b-fdafce499abe}</Project>
       <Name>CardsLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Whist\Knockout\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -17,10 +17,12 @@ namespace ConsoleTesting
         /// <param name="args"> Any arguments/commands that the program is run/compiled with. </param>
         public static void Main(string[] args)
         {
-            GermanWhistTest germanWhist = new GermanWhistTest();
-            WhistTest whist = new WhistTest();
+            IGameTest gameTest = new GermanWhistTest();
 
-            germanWhist.Run(true);
+            gameTest.RunWithAi();
+
+            Console.WriteLine("Press enter to continue");
+            Console.ReadLine();
         }
     }
 }
