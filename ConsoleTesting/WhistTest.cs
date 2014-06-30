@@ -11,7 +11,7 @@ namespace ConsoleTesting
     public class WhistTest : IGameTest
     {
         /// <summary>
-        /// Run the test
+        /// Runs the test
         /// </summary>
         public void RunTest()
         {
@@ -28,6 +28,9 @@ namespace ConsoleTesting
             whist.Start();
         }
 
+        /// <summary>
+        /// Runs the test with AI players
+        /// </summary>
         public void RunWithAi()
         {
             Console.WriteLine("Es gibt kein AI");

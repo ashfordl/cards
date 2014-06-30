@@ -13,24 +13,27 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
-        public void RunWithAi()
-        {
-            GermanWhist whist = new GermanWhist();
-
-            whist.AddPlayer(new GermanWhistConsolePlayer());
-            whist.AddPlayer(new GermanWhistConsoleAi());
-            
-            Console.WriteLine("up");
-
-            whist.Start();
-        }
-
         public void RunTest()
         {
             GermanWhist whist = new GermanWhist();
 
             whist.AddPlayer(new GermanWhistConsolePlayer());
             whist.AddPlayer(new GermanWhistConsolePlayer());
+
+            whist.Start();
+        }
+
+        /// <summary>
+        /// Runs the test with AI players
+        /// </summary>
+        public void RunWithAi()
+        {
+            GermanWhist whist = new GermanWhist();
+
+            whist.AddPlayer(new GermanWhistConsolePlayer());
+            whist.AddPlayer(new GermanWhistConsoleAi());
+
+            Console.WriteLine("up");
 
             whist.Start();
         }
