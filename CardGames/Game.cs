@@ -25,6 +25,12 @@ namespace CardGames
         /// </summary>
         public List<TPlayer> Players { get; protected set; }
 
+
+        /// <summary>
+        /// Gets the winner of the game.
+        /// </summary>
+        public TPlayer Winner { get; protected set; }
+
         /// <summary>
         /// Adds a player to the players list.
         /// </summary>
