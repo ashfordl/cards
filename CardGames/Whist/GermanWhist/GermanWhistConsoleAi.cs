@@ -66,6 +66,7 @@ namespace CardGames.Whist.GermanWhist
                                 betterCards.Remove(Card.HighestCardFromArray(betterCards));
                             }
                         }
+
                         // Pick the highest card from the list
                         cardToPlay = Card.HighestCardFromArray(betterCards);
 
