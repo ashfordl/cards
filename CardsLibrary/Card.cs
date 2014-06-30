@@ -248,7 +248,10 @@ namespace CardsLibrary
         /// <returns> The hash code of the card. </returns>
         public override int GetHashCode()
         {
-            return (int)Math.Pow((int)this.Suit, (int)this.Value);
+            int r = 1;
+            r = r * 31 + (int)this.Value;
+            r = r * 31 + (int)this.Suit;
+            return r;
         }
 
         /// <summary>
