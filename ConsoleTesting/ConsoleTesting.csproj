@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="GermanWhistTest.cs" />
     <Compile Include="IGameTest.cs" />
+    <Compile Include="KnockoutWhistTest.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
