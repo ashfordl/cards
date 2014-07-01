@@ -249,8 +249,8 @@ namespace CardsLibrary
         public override int GetHashCode()
         {
             int r = 1;
-            r = r * 31 + (int)this.Value;
-            r = r * 31 + (int)this.Suit;
+            r = (r * 31) + (int)this.Value;
+            r = (r * 31) + (int)this.Suit;
             return r;
         }
 
