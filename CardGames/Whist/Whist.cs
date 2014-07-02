@@ -59,7 +59,11 @@ namespace CardGames.Whist
                     Card c = play.MakeMove(info);
                     play.Hand.Remove(c);
                     laid.Add(c);
-                    
+
+                    Console.Clear();
+                    Console.Read();
+                    Console.Clear();
+
                     // Update the first laid card, if necessary
                     if (first == Suit.Null)
                     {

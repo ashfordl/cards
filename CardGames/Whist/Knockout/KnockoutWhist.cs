@@ -81,7 +81,7 @@ namespace CardGames.Whist.Knockout
                 this.Players.Remove(loser);
                 this.CardsInHand--;
 
-                Console.WriteLine("Player {0} has been eliminated", loser.Score);
+                Console.WriteLine("Player {0} has been eliminated", loser.ID);
             }
             while (this.Players.Count > 1);
 
@@ -95,25 +95,12 @@ namespace CardGames.Whist.Knockout
         /// <returns> A list of all players with the same lowest score</returns>
         protected List<WhistPlayer> DetectLoser(IEnumerable<WhistPlayer> players)
         {
-            int worstScore = 0;
             List<WhistPlayer> losers = new List<WhistPlayer>();
             
             foreach (WhistPlayer compare in players)
             {
-                if (losers.Count == 0)
+                if (compare.Score == 0)
                 {
-                    losers.Add(compare);
-                    worstScore = compare.Score;
-                }
-                else if (compare.Score == worstScore)
-                {
-                    losers.Add(compare);
-                }
-                else if (compare.Score < worstScore)
-                {
-                    losers.Clear();
-
-                    worstScore = compare.Score;
                     losers.Add(compare);
                 }
             }
