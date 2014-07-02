@@ -42,9 +42,8 @@ namespace CardGames.Whist.GermanWhist
             // Prints relevant info, eg trumps and cards already played 
             this.PrintGameInfo(args);
 
-            // First evaluates the cards that can be played, then prints the hand with these as selectable
+            // Evaluates the cards that can be played
             List<Card> valids = DetectValidCards(args);
-            this.PrintHand(valids);
 
             // If its worth winning the trick of its playing for tricks
             if (this.WorthWinning(args) || args.ToPlayFor == new Card(Value.Null, Suit.Null))
@@ -147,12 +146,9 @@ namespace CardGames.Whist.GermanWhist
         /// <param name="valids"> The playable cards. </param>
         /// <returns> The card played. </returns>
         public Card DisplayInput(Card card, List<Card> valids)
-        {            
-            // Show what number was pressed
-            Console.WriteLine(valids.IndexOf(card) + 1);
-            
+        {                        
             // Say what was laid
-            Console.WriteLine("You laid: " + card.ToString() + "\n");
+            Console.WriteLine("The opponent laid: " + card.ToString() + "\n");
             return card;
         }
     }
