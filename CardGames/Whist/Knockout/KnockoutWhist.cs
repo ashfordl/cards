@@ -92,25 +92,12 @@ namespace CardGames.Whist.Knockout
         /// <returns> A list of all players with the same lowest score</returns>
         protected List<WhistPlayer> DetectLosers(IEnumerable<WhistPlayer> players)
         {
-            int worstScore = 0;
             List<WhistPlayer> losers = new List<WhistPlayer>();
             
             foreach (WhistPlayer compare in players)
             {
-                if (losers.Count == 0)
+                if (compare.Score == 0)
                 {
-                    losers.Add(compare);
-                    worstScore = compare.Score;
-                }
-                else if (compare.Score == worstScore)
-                {
-                    losers.Add(compare);
-                }
-                else if (compare.Score < worstScore)
-                {
-                    losers.Clear();
-
-                    worstScore = compare.Score;
                     losers.Add(compare);
                 }
             }
