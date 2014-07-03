@@ -46,20 +46,19 @@ namespace CardGames.Whist.Knockout
                 hand.Start();
 
                 // Detect all losers
-                List<WhistPlayer> losers = this.DetectLoser(hand.Players);
-                WhistPlayer loser;
+                List<WhistPlayer> losers = this.DetectLosers(hand.Players);
 
                 if (losers.Count == 1)
                 {
                     // If there is a clear loser, remove him
-                    loser = losers[0];
+                    RemoveLoser(losers[0]);
                 }
-                else 
+                else if (losers.Count > 1)
                 {
                     // Else pick one at random
                     Random rand = new Random();
                     int index = rand.Next(losers.Count);
-                    loser = losers[index];
+                    RemoveLoser(losers[index]);
                 }
                 
                 // Check for winners
@@ -77,14 +76,12 @@ namespace CardGames.Whist.Knockout
                 }
 
                 // Else continue with the next round
-                // Remove the loser and decrement the number of cards
-                this.Players.Remove(loser);
+                // Decrement the number of cards
                 this.CardsInHand--;
-
-                Console.WriteLine("Player {0} has been eliminated", loser.Score);
             }
             while (this.Players.Count > 1);
 
+            // Assign the winner
             this.Winner = winner;
         }
 
@@ -93,7 +90,7 @@ namespace CardGames.Whist.Knockout
         /// </summary>
         /// <param name="players"> The players to test between </param>
         /// <returns> A list of all players with the same lowest score</returns>
-        protected List<WhistPlayer> DetectLoser(IEnumerable<WhistPlayer> players)
+        protected List<WhistPlayer> DetectLosers(IEnumerable<WhistPlayer> players)
         {
             int worstScore = 0;
             List<WhistPlayer> losers = new List<WhistPlayer>();
@@ -119,6 +116,16 @@ namespace CardGames.Whist.Knockout
             }
 
             return losers;
+        }
+
+        /// <summary>
+        /// Removes the loser from the list of players
+        /// </summary>
+        /// <param name="loser"> The player to remove </param>
+        protected void RemoveLoser(WhistPlayer loser)
+        {
+            this.Players.Remove(loser);
+            Console.WriteLine("Player {0} has been eliminated", loser.Score);
         }
     }
 }
