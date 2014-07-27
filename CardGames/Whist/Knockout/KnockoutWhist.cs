@@ -51,14 +51,14 @@ namespace CardGames.Whist.Knockout
                 if (losers.Count == 1)
                 {
                     // If there is a clear loser, remove him
-                    RemoveLoser(losers[0]);
+                    this.RemoveLoser(losers[0]);
                 }
                 else if (losers.Count > 1)
                 {
                     // Else pick one at random
                     Random rand = new Random();
                     int index = rand.Next(losers.Count);
-                    RemoveLoser(losers[index]);
+                    this.RemoveLoser(losers[index]);
                 }
                 
                 // Check for winners
