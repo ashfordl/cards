@@ -16,11 +16,11 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
-        void RunTest();
+        void RunTest(int players);
 
         /// <summary>
         /// Runs the test with AI players
         /// </summary>
-        void RunWithAi();
+        void RunWithAi(int players, int ais);
     }
 }

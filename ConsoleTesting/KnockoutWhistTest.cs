@@ -1,6 +1,7 @@
 ﻿// KnockoutWhistTest.cs
 // <copyright file="KnockoutWhistTest.cs"> This code is protected under the MIT License. </copyright>
 using System;
+using System.Collections.Generic;
 using CardGames.Whist;
 using CardGames.Whist.Knockout;
 
@@ -14,17 +15,16 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
-        public void RunTest()
+        public void RunTest(int players)
         {
             KnockoutWhist whist = new KnockoutWhist();
+            List<WhistPlayer> whistPlayers = new List<WhistPlayer>();
 
-            ConsolePlayer p1 = new ConsolePlayer();
-            ConsolePlayer p2 = new ConsolePlayer();
-            ConsolePlayer p3 = new ConsolePlayer();
-
-            whist.AddPlayer(p1);
-            whist.AddPlayer(p2);
-            whist.AddPlayer(p3);
+            for (int i = 0; i < players; i++)
+            {
+                whistPlayers.Add(new ConsolePlayer());
+                whist.AddPlayer(whistPlayers[i]);
+            }
 
             whist.Start();
         }
@@ -32,9 +32,8 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test with AI players
         /// </summary>
-        public void RunWithAi()
+        public void RunWithAi(int players, int ais)
         {
-            Console.WriteLine("Es gibt kein AI");
             Console.WriteLine("There is no AI");
         }
     }
