@@ -14,6 +14,7 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
+        /// <param name="players"> The amount of players in the game. </param>
         public void RunTest(int players = 2)
         {
             GermanWhist whist = new GermanWhist();
@@ -31,6 +32,8 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test with AI players
         /// </summary>
+        /// <param name="players"> The amount of players in the game. </param>
+        /// <param name="ais"> The amount of ai's in the game. </param>
         public void RunWithAi(int players = 1, int ais = 1)
         {
             GermanWhist whist = new GermanWhist();
@@ -41,6 +44,7 @@ namespace ConsoleTesting
                 whistPlayers.Add(new GermanWhistConsolePlayer());
                 whist.AddPlayer(whistPlayers[i]);
             }
+
             for (int i = players; i < ais + players; i++)
             {
                 whistPlayers.Add(new GermanWhistConsoleAi());

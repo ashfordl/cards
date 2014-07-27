@@ -16,11 +16,14 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
+        /// <param name="players"> The amount of players in the game. </param>
         void RunTest(int players);
 
         /// <summary>
         /// Runs the test with AI players
         /// </summary>
+        /// <param name="players"> The amount of players in the game. </param>
+        /// <param name="ais"> The amount of ai's in the game. </param>
         void RunWithAi(int players, int ais);
     }
 }

@@ -15,6 +15,7 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test
         /// </summary>
+        /// <param name="players"> The amount of players in the game. </param>
         public void RunTest(int players)
         {
             KnockoutWhist whist = new KnockoutWhist();
@@ -32,6 +33,8 @@ namespace ConsoleTesting
         /// <summary>
         /// Runs the test with AI players
         /// </summary>
+        /// <param name="players"> The amount of players in the game. </param>
+        /// <param name="ais"> The amount of ai's in the game. </param>
         public void RunWithAi(int players, int ais)
         {
             Console.WriteLine("There is no AI");
