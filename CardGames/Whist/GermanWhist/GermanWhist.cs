@@ -105,10 +105,15 @@ namespace CardGames.Whist.GermanWhist
                 // Make each player play a card
                 foreach (GermanWhistPlayer play in this.Players)
                 {
+                    Console.Clear();
+                    Console.WriteLine("Player {0}'s turn", play.ID);
+                    Console.ReadKey(true);
+                    Console.Clear();
+
                     this.MakePlayerMove(info, play);
                 }
 
-                Console.Write("\n\n");
+                Console.Clear();
 
                 // Decide who won the card and give players their new cards
                 int winnerIndex = this.DecideCardWinner(info);
@@ -145,10 +150,15 @@ namespace CardGames.Whist.GermanWhist
                 // Make each player play a card
                 foreach (GermanWhistPlayer play in this.Players)
                 {
+                    Console.Clear();
+                    Console.WriteLine("Player {0}'s turn", play.ID);
+                    Console.ReadKey(true);
+                    Console.Clear();
+
                     this.MakePlayerMove(info, play);
                 }
 
-                Console.Write("\n\n");
+                Console.Clear();
 
                 // Decide who won the trick
                 int winnerIndex = this.DecideTrickWinner(info);
