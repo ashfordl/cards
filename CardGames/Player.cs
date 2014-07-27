@@ -34,7 +34,7 @@ namespace CardGames
         public abstract Card MakeMove(I args);
 
         /// <summary>
-        /// Orders the hand from low to high.
+        /// Orders the hand.
         /// </summary>
         protected abstract void OrderCards();
     }
