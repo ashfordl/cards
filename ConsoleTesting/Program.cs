@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using CardsLibrary;
+using CardGames.Shed;
 using CardGames.Whist;
 using CardGames.Whist.Knockout;
 
@@ -41,6 +42,7 @@ namespace ConsoleTesting
             Console.WriteLine("A single Round of Whist (1)");
             Console.WriteLine("Knockout Whist (2)");
             Console.WriteLine("German Whist (3)");
+            Console.WriteLine("Shed (4)");
 
             do
             {
@@ -51,14 +53,14 @@ namespace ConsoleTesting
                 }
                 catch
                 {
-                    Console.Write("\nThat is not a valid input!");
+                    Console.WriteLine("\nThat is not a valid input!");
                     continue;
                 }
 
                 // If the number is not one of the games
-                if (gameType > 3 || gameType < 1)
+                if (gameType > 4 || gameType < 1)
                 {
-                    Console.Write("\nThat is not a valid input!");
+                    Console.WriteLine("\nThat is not a valid input!");
                     continue;
                 }
 
@@ -78,6 +80,9 @@ namespace ConsoleTesting
                     break;
                 case 3:
                     gameTest = new GermanWhistTest();
+                    break;
+                case 4:
+                    gameTest = new ShedTest();
                     break;
                 default:
                     gameTest = new WhistTest(); // Default game is Whist
@@ -102,6 +107,10 @@ namespace ConsoleTesting
             else if (game is GermanWhistTest)
             {
                 Program.RunGermanWhist((GermanWhistTest)game);
+            }
+            else if (game is ShedTest)
+            {
+                Program.RunShed((ShedTest)game);
             }
         }
 
@@ -213,6 +222,47 @@ namespace ConsoleTesting
                 else
                 {
                     Console.WriteLine("That is not a valid input!");
+                }
+            }
+            while (true);
+        }
+
+        /// <summary>
+        /// Run the shed game and select how many players.
+        /// </summary>
+        /// <param name="game"> The game. </param>
+        public static void RunShed(ShedTest game)
+        {
+            Console.WriteLine("How many people are playing?");
+
+            do
+            {
+                // The input from the user
+                int input;
+                try
+                {
+                    input = int.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine("\nThat is not a valid input!");
+                    continue;
+                }
+
+                if (input < 2)
+                {
+                    Console.WriteLine("\nYou must have at least 2 players to play!");
+                }
+                else if (input > new Shed().MaxPlayers)
+                {
+                    Console.WriteLine("\nYou must have {0} or less players!", new Shed().MaxPlayers);
+                }
+                else
+                {
+                    // If the amount of players was accepted, run the game
+                    Console.Clear();
+                    game.RunTest(input);
+                    break;
                 }
             }
             while (true);

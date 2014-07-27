@@ -33,7 +33,7 @@ namespace ConsoleTesting
         /// Runs the test with AI players
         /// </summary>
         /// <param name="players"> The amount of players in the game. </param>
-        /// <param name="ais"> The amount of ai's in the game. </param>
+        /// <param name="ais"> The amount of ais in the game. </param>
         public void RunWithAi(int players = 1, int ais = 1)
         {
             GermanWhist whist = new GermanWhist();
