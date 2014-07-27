@@ -60,7 +60,7 @@ namespace CardsLibrary
         /// <summary>
         /// Gets a value indicating whether the card is valid or not.
         /// </summary>
-        public bool IsValid
+        public bool Valid
         {
             get
             {
@@ -76,7 +76,7 @@ namespace CardsLibrary
         /// <summary>
         /// Gets a value indicating whether the card is red.
         /// </summary>
-        public bool IsRed
+        public bool Red
         {
             get
             {
@@ -94,7 +94,7 @@ namespace CardsLibrary
         /// <summary>
         /// Gets a value indicating whether the card is black.
         /// </summary>
-        public bool IsBlack
+        public bool Black
         {
             get
             {
