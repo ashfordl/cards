@@ -1,8 +1,6 @@
 ﻿// Program.cs
 // <copyright file="Program.cs"> This code is protected under the MIT License. </copyright>
 using System;
-using System.Collections.Generic;
-using CardsLibrary;
 using CardGames.Shed;
 using CardGames.Whist;
 using CardGames.Whist.Knockout;
