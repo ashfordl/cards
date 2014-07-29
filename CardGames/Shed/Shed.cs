@@ -137,8 +137,11 @@ namespace CardGames.Shed
                     lastCard = new Card();
                 }
 
+                // Get a list of all players, except who is playing
                 List<ShedPlayer> playersExcludeCurrent = new List<ShedPlayer>(this.ActivePlayers);
                 playersExcludeCurrent.RemoveAt(currentTurn);
+
+                // Get the players move
                 int cardsPlayed = 1;
                 Card playedCard = this.ActivePlayers[currentTurn].MakeMove(info, playersExcludeCurrent, ref cardsPlayed);
 
@@ -204,43 +207,55 @@ namespace CardGames.Shed
         /// <returns> Whether the played card was valid. </returns>
         public bool ValidMove(ShedInfo info, Card lastCard, Card currentCard)
         {
-            if (lastCard == new Card())
+            if (lastCard == new Card() || currentCard.Value == Value.Two)
             {
-                // If its the first card in the list, its a valid move
+                // If its the first card in the list or the current card is a two, its a valid move
                 return true;
             }
-            else if (info.RuleInPlay == Specials.Two || currentCard.Value == Value.Two)
+
+            switch (info.RuleInPlay)
             {
-                // If the last played card is a two or the new card played is a two, its a valid move
-                return true;
-            }
-            else if (info.RuleInPlay == Specials.Red_three)
-            {
-                if (currentCard.Value == Value.Three && currentCard.Black)
-                {
-                    // If the red three rule is in play and they play a black three, its a valid move
+                case Specials.Two:
+                    // If the last played card is a two or the new card played is a two, its a valid move
                     return true;
-                }
-                else
-                {
-                    // Otherwise remove the red three and return false
-                    info.CardsInPlay.Remove(lastCard);
-                    return false;
-                }
+
+                case Specials.Red_three:
+                    if (currentCard.Value == Value.Three && currentCard.Black)
+                    {
+                        // If the red three rule is in play and they play a black three, its a valid move
+                        return true;
+                    }
+                    else
+                    {
+                        // Otherwise remove the red three and return false
+                        info.CardsInPlay.Remove(lastCard);
+                        return false;
+                    }
+
+                case Specials.Seven:
+                    if ((int)currentCard.Value <= 7 || currentCard.Value == Value.Ten)
+                    {
+                        // If a number less than or equal to seven was played with the seven rule in play (or a ten), its a valid move
+                        return true;
+                    }
+                    else 
+                    {
+                        return false;
+                    }
+
+                default:
+                    if (lastCard.OneUpDownOrEqual(currentCard))
+                    {
+                        // If the played card is one up down or 
+                        return true;
+                    }
+
+                    break;
             }
-            else if (currentCard.Value == Value.Ten)
+
+            // If a ten was played its valid (unless on the red three), its a valid move
+            if (currentCard.Value == Value.Ten)
             {
-                // If a ten was played its valid (unless on the red three), its a valid move
-                return true;
-            }
-            else if (info.RuleInPlay == Specials.Seven && (int)currentCard.Value <= 7)
-            {
-                // If a number less than or equal to seven was played with the seven rule in play, its a valid move
-                return true;
-            }
-            else if (lastCard.OneUpDownOrEqual(currentCard))
-            {
-                // If the played card is one up down or 
                 return true;
             }
 
@@ -277,43 +292,43 @@ namespace CardGames.Shed
 
             foreach (Card c in played)
             {
-                // Specials that don't change the game rules:
-                if (c.Value == Value.Jack)
-                {
-                    // Switch the direction of play
-                    this.ClockwisePlay = !this.ClockwisePlay;
-                }
-                else if (c.Value == Value.Ten)
-                {
-                    // Clear the deck
-                    info.CardsInPlay.Clear();
-                }
-                else if (c.Value == Value.Eight)
-                {
-                    // Skip a player
-                    currentPlayerIndex = this.ChangeTurn(currentPlayerIndex);
-                }
+                switch (c.Value)
+                { 
+                    // Specials that don't change the game rules:
+                    case Value.Jack:
+                        // Switch the direction of play
+                        this.ClockwisePlay = !this.ClockwisePlay;
+                        break;
+                    case Value.Ten:
+                        // Clear the deck
+                        info.CardsInPlay.Clear();
+                        break;
+                    case Value.Eight:
+                        // Skip a player
+                        currentPlayerIndex = this.ChangeTurn(currentPlayerIndex);
+                        break;
 
-                // Specials that do change the game rules:
-                if (c.Value == Value.Seven)
-                {
-                    // State a seven was played
-                    info.RuleInPlay = Specials.Seven;
-                }
-                else if (c.Value == Value.Three && c.Red)
-                {
-                    // State a red three was played
-                    info.RuleInPlay = Specials.Red_three;
-                }
-                else if (c.Value == Value.Two)
-                {
-                    // State a two was played
-                    info.RuleInPlay = Specials.Two;
-                }
-                else
-                {
-                    // State nothing special that changes rules was played
-                    info.RuleInPlay = Specials.None;
+                    // Specials that do change the game rules:
+                    case Value.Seven:
+                        // State a seven was played
+                        info.RuleInPlay = Specials.Seven;
+                        break;
+                    case Value.Three:
+                        if (c.Red)
+                        {
+                            // State a red three was played
+                            info.RuleInPlay = Specials.Red_three;
+                        }
+
+                        break;
+                    case Value.Two:
+                        // State a two was played
+                        info.RuleInPlay = Specials.Two;
+                        break;
+                    default:
+                        // State nothing special that changes rules was played
+                        info.RuleInPlay = Specials.None;
+                        break;
                 }
             }
         }
