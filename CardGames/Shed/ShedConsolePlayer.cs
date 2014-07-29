@@ -30,7 +30,7 @@ namespace CardGames.Shed
 
             // Return the inputted card
             int nullInt = 0;
-            return this.GetInput(args, ref nullInt);
+            return this.GetInput(args, new List<ShedPlayer>(), ref nullInt);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace CardGames.Shed
             this.PrintHand();
 
             // Return the inputted card
-            return this.GetInput(args, ref cardsPlayed);
+            return this.GetInput(args, otherPlayers, ref cardsPlayed);
         }
         
         /// <summary>
@@ -75,7 +75,7 @@ namespace CardGames.Shed
                 {
                     if (p.Hand.Count == 0)
                     {
-                        if (p.Tables.Count == 0)
+                        if (p.Tables.Count != 0)
                         {
                             Console.Write("Player {0} can play their tables which are: ", p.ID);
                             foreach (Card c in p.Tables)
@@ -150,9 +150,10 @@ namespace CardGames.Shed
         /// Gets the input made by the user.
         /// </summary>
         /// <param name="args"> The current game info. </param>
-        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>        
+        /// <param name="otherPlayers"> The other players. </param>
+        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>         
         /// <returns> The (last) card played. </returns>
-        public Card GetInput(ShedInfo args, ref int cardsPlayed)
+        public Card GetInput(ShedInfo args, List<ShedPlayer> otherPlayers, ref int cardsPlayed)
         {
             do
             {
@@ -179,13 +180,13 @@ namespace CardGames.Shed
                     }
 
                     // Return the card(s)
-                    return this.GetHowManyOfValue(cardsAbleToPick, args, ref cardsPlayed);
+                    return this.GetHowManyOfValue(cardsAbleToPick, args, otherPlayers, ref cardsPlayed);
                 }
                 else if (Tables.Count != 0) 
                 {
                     numberPicked--;
 
-                    Card c = this.GetCardSelectedFromTable(this.Tables, (int)numberPicked);
+                    Card c = this.GetCardSelectedFromTable(this.Tables, (int)numberPicked, args, otherPlayers, ref cardsPlayed);
 
                     // Check it was a valid card
                     if (c == new Card(Value.Null, Suit.Null))
@@ -194,14 +195,13 @@ namespace CardGames.Shed
                     }
 
                     // Return the card
-                    cardsPlayed = 1;
                     return c;
                 }
                 else
                 {
                     numberPicked--;
 
-                    Card c = this.GetCardSelectedFromTable(this.Blinds, (int)numberPicked);
+                    Card c = this.GetCardSelectedFromTable(this.Blinds, (int)numberPicked, args, otherPlayers, ref cardsPlayed);
 
                     // Check it was a valid card
                     if (c == new Card(Value.Null, Suit.Null))
@@ -210,7 +210,6 @@ namespace CardGames.Shed
                     }
 
                     // Return the card
-                    cardsPlayed = 1;
                     return c;
                 }
             }
@@ -222,9 +221,10 @@ namespace CardGames.Shed
         /// </summary>
         /// <param name="cardsAbleToPick"> The list of cards able to be played of that value. </param>
         /// <param name="args"> The current game info. </param>
-        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>        
+        /// <param name="otherPlayers"> The other players. </param>
+        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>          
         /// <returns> The (last) card played. </returns>
-        public Card GetHowManyOfValue(IEnumerable<Card> cardsAbleToPick, ShedInfo args, ref int cardsPlayed)
+        public Card GetHowManyOfValue(IEnumerable<Card> cardsAbleToPick, ShedInfo args, List<ShedPlayer> otherPlayers, ref int cardsPlayed)
         {
             if (cardsAbleToPick.Count() == 1) 
             {
@@ -239,7 +239,7 @@ namespace CardGames.Shed
                 // If the cards are threes play the special loop for them
                 if (cards[0].Value == (Value)3)
                 {
-                    return this.GetHowManyThrees(cards, args);
+                    return this.GetHowManyThrees(cards, args, otherPlayers, ref cardsPlayed);
                 }
 
                 Console.WriteLine("How many {0}s do you want to play? You have {1} avalible...", cards[0].Value, cards.Count);
@@ -249,10 +249,10 @@ namespace CardGames.Shed
                 List<Card> selectedCards = this.GetNumberOfCards(cards);
                 cardsPlayed = selectedCards.Count;
 
-                // Go to the beginning of the MakeMove if told to (by a null card)
+                // Go to the beginning of the MakeMove if told to (by a null card list)
                 if (selectedCards.Count == 0)
                 {
-                    return this.MakeMove(args);
+                    return this.MakeMove(args, otherPlayers, ref cardsPlayed);
                 }
 
                 // Display the move
@@ -268,13 +268,15 @@ namespace CardGames.Shed
         /// </summary>
         /// <param name="cards"> The list of cards that can be played. </param>
         /// <param name="args"> The current game info. </param>
+        /// <param name="otherPlayers"> The other players. </param>
+        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>    
         /// <returns> The (last) card played. </returns>
-        public Card GetHowManyThrees(List<Card> cards, ShedInfo args)
+        public Card GetHowManyThrees(List<Card> cards, ShedInfo args, List<ShedPlayer> otherPlayers, ref int cardsPlayed)
         {
             if (!cards.All(c => c.Red) && !cards.All(c => c.Black)) 
             {
                 // If there is a mix of black and red cards ask whether they want to play red or black threes
-                return this.GetDiferentThrees(cards, args);
+                return this.GetDiferentThrees(cards, args, otherPlayers, ref cardsPlayed);
             }
             else 
             {
@@ -290,7 +292,7 @@ namespace CardGames.Shed
                 // Go to the beginning of the MakeMove if told to (by a null card)
                 if (selectedCards == new List<Card>())
                 {
-                    return this.MakeMove(args);
+                    return this.MakeMove(args, otherPlayers, ref cardsPlayed);
                 }
 
                 // Display the move
@@ -306,8 +308,10 @@ namespace CardGames.Shed
         /// </summary>
         /// <param name="cards"> The list of cards that can be played. </param>
         /// <param name="args"> The current game info. </param>
+        /// <param name="otherPlayers"> The other players. </param>
+        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>    
         /// <returns> The (last) card played. </returns>
-        public Card GetDiferentThrees(List<Card> cards, ShedInfo args)
+        public Card GetDiferentThrees(List<Card> cards, ShedInfo args, List<ShedPlayer> otherPlayers, ref int cardsPlayed)
         {
             Console.WriteLine("Black Three(s) or Red ones? B/R");
             
@@ -319,12 +323,12 @@ namespace CardGames.Shed
                 if (input.ToUpper() == "B") 
                 {
                     // If "B" was inputted return the black threes
-                    return this.GetHowManyThrees(cards.Where(c => c.Black).ToList(), args);
+                    return this.GetHowManyThrees(cards.Where(c => c.Black).ToList(), args, otherPlayers, ref cardsPlayed);
                 }
                 else if (input.ToUpper() == "R") 
                 {
                     // If "R" was inputted return the red threes
-                    return this.GetHowManyThrees(cards.Where(c => c.Red).ToList(), args);
+                    return this.GetHowManyThrees(cards.Where(c => c.Red).ToList(), args, otherPlayers, ref cardsPlayed);
                 }
                 else 
                 {
@@ -416,8 +420,11 @@ namespace CardGames.Shed
         /// </summary>
         /// <param name="cards"> The cards from either <see cref="ShedPlayer.Blinds"/> or <see cref="ShedPlayer.Tables"/>. </param>
         /// <param name="index"> The index of the card to be selected. </param>
+        /// <param name="args"> The current game info. </param>
+        /// <param name="otherPlayers"> The other players. </param>
+        /// <param name="cardsPlayed"> The amount of cards played in the move (with ref keyword). </param>    
         /// <returns> The card played. </returns>
-        public Card GetCardSelectedFromTable(List<Card> cards, int index)
+        public Card GetCardSelectedFromTable(List<Card> cards, int index, ShedInfo args, List<ShedPlayer> otherPlayers, ref int cardsPlayed)
         {
             // Return a null card if the number is not valid
             if (index < 0 || index >= cards.Count)
@@ -428,6 +435,38 @@ namespace CardGames.Shed
 
             // The card being returned
             Card returnCard = cards[index];
+
+            List<Card> possibleCardsPlayable = cards.Where(c => c.Value == returnCard.Value).ToList();
+            cardsPlayed = possibleCardsPlayable.Count;
+
+            // If they can play multiple tables
+            if (possibleCardsPlayable.Count > 1 && cards.SequenceEqual(this.Tables))
+            {
+                Console.WriteLine("You can play up to {0} {1}s, how many do you want to play...", possibleCardsPlayable.Count, returnCard.Value);
+                Console.WriteLine("Input 0 to go back and chose another card...");
+
+                // Get how many they want to play
+                List<Card> cardsWantedToBePlayed = this.GetNumberOfCards(possibleCardsPlayable);
+
+                // Go to the beginning of the MakeMove if told to (by a null card list)
+                if (cardsWantedToBePlayed.Count == 0)
+                {
+                    return this.MakeMove(args, otherPlayers, ref cardsPlayed);
+                }
+
+                // State how many were inputted and remove them from the tables
+                cardsPlayed = cardsWantedToBePlayed.Count;
+                foreach (Card c in cardsWantedToBePlayed)
+                {
+                    this.Tables.Remove(c);
+                }
+
+                // Add the return card back in, as it gets removed again after
+                this.Tables.Add(returnCard);
+            }
+
+            // Display the move
+            this.DisplayMove(cardsPlayed, returnCard);
 
             // Removes the card from whatever list it was in (blinds or tables)
             if (cards.SequenceEqual(this.Tables))
