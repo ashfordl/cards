@@ -39,6 +39,12 @@ namespace CardGames.Whist.Knockout
 
             do
             {
+                // Reset player scores
+                foreach (WhistPlayer player in this.Players)
+                {
+                    player.Score = 0;
+                }
+
                 // Play a single hand of Whist
                 Whist hand = new Whist();
                 hand.AddPlayer(this.Players);
