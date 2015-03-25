@@ -51,7 +51,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="ShedTest.cs" />
     <Compile Include="WhistTest.cs" />
   </ItemGroup>
   <ItemGroup>

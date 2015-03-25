@@ -39,7 +39,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Shed\CardHelper.cs" />
     <Compile Include="TooFewPlayersException.cs" />
     <Compile Include="TooManyPlayersException.cs" />
     <Compile Include="Game.cs" />
@@ -58,20 +57,12 @@
     <Compile Include="Whist\Whist.cs" />
     <Compile Include="Whist\ConsolePlayer.cs" />
     <Compile Include="Whist\WhistPlayer.cs" />
-    <Compile Include="Shed\Shed.cs" />
-    <Compile Include="Shed\ShedConsolePlayer.cs" />
-    <Compile Include="Shed\ShedInfo.cs" />
-    <Compile Include="Shed\ShedPlayer.cs" />
-    <Compile Include="Shed\Specials.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CardsLibrary\CardsLibrary.csproj">
       <Project>{a282ad7c-5fd5-45bb-ab7b-fdafce499abe}</Project>
       <Name>CardsLibrary</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Shed\Rules.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
