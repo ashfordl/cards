@@ -2,9 +2,9 @@
 // <copyright file="CardsLibraryTest.cs"> This code is protected under the MIT License. </copyright>
 using System.Collections.Generic;
 using System.Linq;
-using CardGames.Whist;
-using CardsLibrary;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using CardsLibrary;
+using Whist;
 
 namespace CardsLibraryTest
 {
@@ -145,7 +145,7 @@ namespace CardsLibraryTest
         public void DealingTest() 
         {
             // arrange
-            Whist game = new Whist();
+            Whist.Whist game = new Whist.Whist();
             for (int i = 0; i < 5; i++)
             {
                 game.AddPlayer(new ConsolePlayer());

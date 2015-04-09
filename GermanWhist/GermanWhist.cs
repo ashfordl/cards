@@ -2,7 +2,6 @@
 // <copyright file="GermanWhist.cs"> This code is protected under the MIT License. </copyright>
 using System;
 using System.Collections.Generic;
-using CardGames;
 using CardsLibrary;
 
 namespace GermanWhist

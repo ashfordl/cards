@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using CardsLibrary;
 
-namespace CardGames
+namespace CardsLibrary
 {
     /// <summary>
     /// An object to represent game data to pass to player classes. 

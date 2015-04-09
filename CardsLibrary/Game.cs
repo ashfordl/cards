@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using CardsLibrary;
 
-namespace CardGames
+namespace CardsLibrary
 {
     /// <summary>
     /// An abstract super-class of every card game. Any games should sub-class this.

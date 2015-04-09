@@ -2,7 +2,7 @@
 // <copyright file="TooManyPlayersException.cs"> This code is protected under the MIT License. </copyright>
 using System;
 
-namespace CardGames
+namespace CardsLibrary
 {
     /// <summary>
     /// An exception raised when TooManyPlayers are added to a game.

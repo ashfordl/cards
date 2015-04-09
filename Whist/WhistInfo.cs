@@ -1,6 +1,5 @@
 ﻿// WhistInfo.cs
 // <copyright file="WhistInfo.cs"> This code is protected under the MIT License. </copyright>
-using CardGames;
 using CardsLibrary;
 
 namespace Whist
