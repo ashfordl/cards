@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{39FE7877-9F88-4CCA-997C-B698B135333E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{8FB09F7C-8F40-4BE9-8315-DAF22E424874}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CardGames</RootNamespace>
-    <AssemblyName>CardGames</AssemblyName>
+    <RootNamespace>GermanWhist</RootNamespace>
+    <AssemblyName>GermanWhist</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,19 +41,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TooFewPlayersException.cs" />
-    <Compile Include="TooManyPlayersException.cs" />
-    <Compile Include="Game.cs" />
-    <Compile Include="GameInfo.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="GermanWhist.cs" />
+    <Compile Include="GermanWhistConsoleAi.cs" />
+    <Compile Include="GermanWhistConsolePlayer.cs" />
+    <Compile Include="GermanWhistInfo.cs" />
+    <Compile Include="GermanWhistPlayer.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CardGames\CardGames.csproj">
+      <Project>{39fe7877-9f88-4cca-997c-b698b135333e}</Project>
+      <Name>CardGames</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CardsLibrary\CardsLibrary.csproj">
       <Project>{a282ad7c-5fd5-45bb-ab7b-fdafce499abe}</Project>
       <Name>CardsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whist\Whist.csproj">
+      <Project>{24111681-c14d-4f42-8122-10eff3824e88}</Project>
+      <Name>Whist</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

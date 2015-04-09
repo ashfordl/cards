@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AAF7EC14-175C-4CA7-9643-2BCE1CD25D3B}</ProjectGuid>
+    <ProjectGuid>{2E9E4B07-4BF2-46E7-9CDF-41C6E9CE2980}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleTesting</RootNamespace>
-    <AssemblyName>ConsoleTesting</AssemblyName>
+    <RootNamespace>KnockoutWhist</RootNamespace>
+    <AssemblyName>KnockoutWhist</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,9 +31,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>ConsoleTesting.Program</StartupObject>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,14 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GermanWhistTest.cs" />
-    <Compile Include="IGameTest.cs" />
-    <Compile Include="KnockoutWhistTest.cs" />
+    <Compile Include="KnockoutWhist.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="WhistTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -61,9 +55,9 @@
       <Project>{39fe7877-9f88-4cca-997c-b698b135333e}</Project>
       <Name>CardGames</Name>
     </ProjectReference>
-    <ProjectReference Include="..\CardsLibrary\CardsLibrary.csproj">
-      <Project>{a282ad7c-5fd5-45bb-ab7b-fdafce499abe}</Project>
-      <Name>CardsLibrary</Name>
+    <ProjectReference Include="..\Whist\Whist.csproj">
+      <Project>{24111681-c14d-4f42-8122-10eff3824e88}</Project>
+      <Name>Whist</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

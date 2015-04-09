@@ -1,9 +1,9 @@
 ﻿// WhistInfo.cs
 // <copyright file="WhistInfo.cs"> This code is protected under the MIT License. </copyright>
-using System.Collections.Generic;
+using CardGames;
 using CardsLibrary;
 
-namespace CardGames.Whist
+namespace Whist
 {
     /// <summary>
     /// An extension of <see cref="GameInfo"/> that provides extra properties for <see cref="Whist"/>.

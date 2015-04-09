@@ -2,11 +2,10 @@
 // <copyright file="KnockoutWhist.cs"> This code is protected under the MIT License. </copyright>
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using CardGames;
+using Whist;
 
-namespace CardGames.Whist.Knockout
+namespace KnockoutWhist
 {
     /// <summary>
     /// An implementation of knockout whist.
@@ -46,7 +45,7 @@ namespace CardGames.Whist.Knockout
                 }
 
                 // Play a single hand of Whist
-                Whist hand = new Whist();
+                Whist.Whist hand = new Whist.Whist();
                 hand.AddPlayer(this.Players);
                 hand.CardsInHand = this.CardsInHand;
                 hand.Start();
