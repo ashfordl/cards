@@ -56,13 +56,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CardGames\CardGames.csproj">
-      <Project>{39fe7877-9f88-4cca-997c-b698b135333e}</Project>
-      <Name>CardGames</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CardsLibrary\CardsLibrary.csproj">
       <Project>{a282ad7c-5fd5-45bb-ab7b-fdafce499abe}</Project>
       <Name>CardsLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whist\Whist.csproj">
+      <Project>{24111681-c14d-4f42-8122-10eff3824e88}</Project>
+      <Name>Whist</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
