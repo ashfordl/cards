@@ -8,8 +8,10 @@ namespace CardsLibrary
     /// <summary>
     /// An abstract super-class of every player implementation. Any players should sub-class this.
     /// </summary>
-    /// <typeparam name="I"> The implementation of GameInfo to be used. </typeparam>
-    public abstract class Player<I> where I : GameInfo
+    /// <typeparam name="TInfo"> The implementation of GameInfo to be used. </typeparam>
+    /// <typeparam name="TMove"> The class to return when a move has been made. </typeparam>
+    public abstract class Player<TInfo, TMove> 
+        where TInfo : GameInfo
     {
         /// <summary>
         /// Gets or sets the player's ID number.
@@ -30,8 +32,8 @@ namespace CardsLibrary
         /// Makes the appropriate move using the given arguments.
         /// </summary>
         /// <param name="args"> The information required to make the move. </param>
-        /// <returns> The card chosen. </returns>
-        public abstract Card MakeMove(I args);
+        /// <returns> The move made. </returns>
+        public abstract TMove MakeMove(TInfo args);
 
         /// <summary>
         /// Orders the hand.

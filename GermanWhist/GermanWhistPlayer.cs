@@ -9,7 +9,7 @@ namespace GermanWhist
     /// <summary>
     /// An abstract super-class of every <see cref="GermanWhist"/> player.
     /// </summary>
-    public abstract class GermanWhistPlayer : Player<GermanWhistInfo>
+    public abstract class GermanWhistPlayer : Player<GermanWhistInfo, Card>
     {
         /// <summary>
         /// Detects the valid cards that could be played.

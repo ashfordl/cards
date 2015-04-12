@@ -9,7 +9,7 @@ namespace Whist
     /// <summary>
     /// An implementation of a single round of Whist.
     /// </summary>
-    public class Whist : Game<WhistPlayer, WhistInfo>
+    public class Whist : Game<WhistPlayer, WhistInfo, Card>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Whist" /> class.

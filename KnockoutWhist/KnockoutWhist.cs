@@ -10,7 +10,7 @@ namespace KnockoutWhist
     /// <summary>
     /// An implementation of knockout whist.
     /// </summary>
-    public class KnockoutWhist : Game<WhistPlayer, WhistInfo>
+    public class KnockoutWhist : Game<WhistPlayer, WhistInfo, Card>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KnockoutWhist" /> class.
