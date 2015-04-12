@@ -9,6 +9,7 @@ namespace CardsLibrary
     /// An abstract super-class of every player implementation. Any players should sub-class this.
     /// </summary>
     /// <typeparam name="TInfo"> The implementation of GameInfo to be used. </typeparam>
+    /// <typeparam name="TMove"> The class to return when a move has been made. </typeparam>
     public abstract class Player<TInfo, TMove> 
         where TInfo : GameInfo
     {

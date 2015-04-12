@@ -11,6 +11,7 @@ namespace CardsLibrary
     /// </summary>
     /// <typeparam name="TPlayer"> The player super-class for all player classes of the game. </typeparam>
     /// <typeparam name="TInfo"> The info class for the game. </typeparam>
+    /// <typeparam name="TMove"> The class that players will return after making a move. </typeparam>
     public abstract class Game<TPlayer, TInfo, TMove>
         where TPlayer : Player<TInfo, TMove>
         where TInfo : GameInfo
