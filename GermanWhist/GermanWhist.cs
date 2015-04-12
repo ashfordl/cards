@@ -9,7 +9,7 @@ namespace GermanWhist
     /// <summary>
     /// An implementation of german whist.
     /// </summary>
-    public class GermanWhist : Game<GermanWhistPlayer, GermanWhistInfo>
+    public class GermanWhist : Game<GermanWhistPlayer, GermanWhistInfo, Card>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="GermanWhist" /> class.

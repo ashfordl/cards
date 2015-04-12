@@ -9,7 +9,7 @@ namespace Whist
     /// <summary>
     /// An abstract super-class of every <see cref="Whist"/> player.
     /// </summary>
-    public abstract class WhistPlayer : Player<WhistInfo>
+    public abstract class WhistPlayer : Player<WhistInfo, Card>
     {
         /// <summary>
         /// Detects the valid cards that could be played.
