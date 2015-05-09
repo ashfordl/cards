@@ -1,17 +1,14 @@
-﻿// CardCompairer.cs
-// <copyright file="CardCompairer.cs"> This code is protected under the MIT License. </copyright>
-using System;
+﻿// CardComparer.cs
+// <copyright file="CardComparer.cs"> This code is protected under the MIT License. </copyright>
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CardsLibrary
 {
     /// <summary>
-    /// A class used for compairing cards.
+    /// A class used for comparing cards.
     /// </summary>
-    class CardCompairer
+    public class CardComparer
     {
         /// <summary>
         /// Gets or sets the dictionary of cards and their scores.
@@ -25,7 +22,35 @@ namespace CardsLibrary
         /// <returns> The score value of the card. </returns>
         public int GetCardScore(Card c)
         {
+            // Check for the same card
+            foreach (Card key in this.CardScores.Keys)
+            {
+                if (key.Suit == c.Suit && key.Value == c.Value)
+                {
+                    return this.CardScores[key];
+                }
+            }
 
+            // Check for the same value if no score found
+            foreach (Card key in this.CardScores.Keys.Where(card => card.Suit == Suit.Null))
+            {
+                if (key.Value == c.Value)
+                {
+                    return this.CardScores[key];
+                }
+            }
+
+            // Check for the same suit if no score found
+            foreach (Card key in this.CardScores.Keys.Where(card => card.Value == Value.Null))
+            {
+                if (key.Suit == c.Suit)
+                {
+                    return this.CardScores[key];
+                }
+            }
+            
+            // Return a defualt value of 0 if nothing was found
+            return 0;
         }
 
         /// <summary>
