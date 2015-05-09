@@ -124,5 +124,27 @@ namespace CardsLibrary
                 Deck.RemoveRange(0, Deck.Count);
             }
         }
+
+        /// <summary>
+        /// Gives a new card comparer to all cards in the game.
+        /// </summary>
+        /// <param name="comparer"> The new comparer. </param>
+        public void GiveNewComparerToAllCard(CardComparer comparer)
+        {
+            // Assign comparer in the deck
+            foreach (Card c in this.Deck)
+            {
+                c.Comparer = comparer;
+            }
+
+            // Assign comparer in each player's hand
+            foreach (TPlayer p in this.Players)
+            {
+                foreach (Card c in p.Hand)
+                {
+                    c.Comparer = comparer;
+                }
+            }
+        }
     }
 }
