@@ -435,7 +435,8 @@ namespace CardsLibrary
             // obj must be a Card
             Card c = obj as Card;
 
-            return this.Comparer.Equal(this, c);
+            // Return if the values are the same
+            return this.Suit == c.Suit && this.Value == c.Value;
         }
     }
 }
