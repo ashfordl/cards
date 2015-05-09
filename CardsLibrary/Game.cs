@@ -32,6 +32,11 @@ namespace CardsLibrary
         public TPlayer Winner { get; protected set; }
 
         /// <summary>
+        /// Gets or sets the deck.
+        /// </summary>
+        public List<Card> Deck { get; protected set; }
+
+        /// <summary>
         /// Adds a player to the players list.
         /// </summary>
         /// <param name="p"> The player to be added. </param>
@@ -76,7 +81,7 @@ namespace CardsLibrary
         public void Deal(CardComparer comparer, bool shuffle = true, int cards = 0, bool allCard = false)
         {
             // Create a deck
-            List<Card> deck = CardFactory.PopulateDeck(comparer, shuffle);
+            this.Deck = CardFactory.PopulateDeck(comparer, shuffle);
             
             // Calculate how many cards to deal per player
             int cardsToDeal = (int)Math.Floor((double)(52 / this.Players.Count));
