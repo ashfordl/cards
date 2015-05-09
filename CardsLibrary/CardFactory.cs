@@ -18,7 +18,7 @@ namespace CardsLibrary
         /// <returns> Returns a deck. </returns>
         /// <param name="shuffle"> Whether to shuffle the deck. </param>
         /// <param name="jokers"> Whether to add jokers. </param>
-        public static List<Card> PopulateDeck(bool shuffle = false, bool jokers = false)
+        public static List<Card> PopulateDeck(CardComparer comparer, bool shuffle = false, bool jokers = false)
         {
             List<Card> deck = new List<Card>(); // Creates an instance of the deck
             // Goes through each suit
@@ -27,7 +27,7 @@ namespace CardsLibrary
                 // Goes throguh each card for that suit
                 for (int j = 0; j < 13; j++)
                 {
-                    Card c = new Card((Value)j + 1, (Suit)i + 1); // Create the card needed
+                    Card c = new Card((Value)j + 1, (Suit)i + 1, comparer); // Create the card needed
                     deck.Add(c); // Add that card to the deck
                 }
             }
@@ -35,8 +35,8 @@ namespace CardsLibrary
             // If jokers are in the deck, add two of them
             if (jokers)
             {
-                deck.Add(new Card(Value.Null, Suit.Null));
-                deck.Add(new Card(Value.Null, Suit.Null));
+                deck.Add(new Card(Value.Null, Suit.Null, comparer));
+                deck.Add(new Card(Value.Null, Suit.Null, comparer));
             }
 
             // If the deck needs to be shuffled, shuffle it

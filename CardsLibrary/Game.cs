@@ -72,10 +72,10 @@ namespace CardsLibrary
         /// <param name="shuffle"> Whether to shuffle the deck or not. </param>
         /// <param name="cards"> The number of cards to deal. </param>
         /// <param name="allCard"> Whether all the cards are getting dealt. This will ignore the cards parameter. </param>
-        public void Deal(bool shuffle = true, int cards = 0, bool allCard = false)
+        public void Deal(CardComparer comparer, bool shuffle = true, int cards = 0, bool allCard = false)
         {
             // Create a deck
-            List<Card> deck = CardFactory.PopulateDeck(shuffle);
+            List<Card> deck = CardFactory.PopulateDeck(comparer, shuffle);
             
             // Calculate how many cards to deal per player
             int cardsToDeal = (int)Math.Floor((double)(52 / this.Players.Count));
