@@ -18,6 +18,7 @@ namespace CardsLibrary
         {
             this.Value = CardsLibrary.Value.Null;
             this.Suit = CardsLibrary.Suit.Null;
+            this.Comparer = new CardComparer(new Dictionary<Card, int>());
         }
 
         /// <summary>
@@ -25,10 +26,11 @@ namespace CardsLibrary
         /// </summary>
         /// <param name="val"> The value of the card. </param>
         /// <param name="suit"> The suit of the card. </param>
-        public Card(Value val, Suit suit)
+        public Card(Value val, Suit suit, CardComparer comparer)
         {
             this.Value = val;
             this.Suit = suit;
+            this.Comparer = comparer;
         }
 
         /// <summary>
@@ -36,7 +38,7 @@ namespace CardsLibrary
         /// </summary>
         /// <param name="val"> The value of the card, as an integer from <see cref="Value"/>. </param>
         /// <param name="suit"> The suit of the card, as an integer from <see cref="Suit"/>. </param>
-        public Card(int val, int suit)
+        public Card(int val, int suit, CardComparer comparer)
         {
             // Converts the integers into the correct value and suit
             CardsLibrary.Value cVal = (CardsLibrary.Value)val;
@@ -45,6 +47,7 @@ namespace CardsLibrary
             // Creates the card with the correct value and suit
             this.Value = cVal;
             this.Suit = cSuit;
+            this.Comparer = comparer;
         }
 
         /// <summary>
@@ -56,6 +59,11 @@ namespace CardsLibrary
         /// Gets or sets the suit of the card.
         /// </summary>
         public Suit Suit { get; set; }
+
+        /// <summary>
+        /// Gets or sets the card comparer.
+        /// </summary>
+        public CardComparer Comparer { get; set; }
 
         /// <summary>
         /// Gets a value indicating whether the card is valid or not.
@@ -105,31 +113,6 @@ namespace CardsLibrary
                 else
                 {
                     return false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets the suit order of this card.
-        /// </summary>
-        public int SuitVal 
-        {
-            get
-            {
-                switch (Suit)
-                {
-                    case Suit.Clubs:
-                        return Settings.ClubsOrder;
-                    case Suit.Diamonds:
-                        return Settings.DiamondsOrder;
-                    case Suit.Spades:
-                        return Settings.SpadesOrder;
-                    case Suit.Hearts:
-                        return Settings.HeartsOrder;
-                    case Suit.Null:
-                        return Settings.NullOrder;
-                    default:
-                        return 5;
                 }
             }
         }
@@ -422,61 +405,7 @@ namespace CardsLibrary
         /// <returns> Whether the current object is greater than the passed card. </returns>
         public bool GreaterThan(Card c) 
         {
-            // Return that this card is lower if they are equal
-            if (this == c)
-            {
-                return false;
-            }
-
-            // If they have different suits
-            if (this.SuitVal != c.SuitVal)
-            {
-                // If this cards suit is greater, return true
-                if (this.SuitVal > c.SuitVal)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            // If the suit values are the same and ace is high
-            if (Settings.AceHigh)
-            {
-                // If this card is an ace and card c is not
-                if (this.Value == Value.Ace && c.Value != Value.Ace)
-                {
-                    return true;
-                }
-
-                // If card c is an ace and this is not
-                if (this.Value != Value.Ace && c.Value == Value.Ace)
-                {
-                    return false;
-                }
-
-                // If they are both aces, return false that its lower
-                if (this.Value == Value.Ace && c.Value == Value.Ace)
-                {
-                    return false;
-                }
-            }
-
-            // Which has the better number value is returned
-            if ((int)this.Value > (int)c.Value)
-            {
-                return true;
-            }
-            else if ((int)this.Value < (int)c.Value)
-            {
-                return false;
-            }
-            else 
-            {
-                return false;
-            }
+            return this.Comparer.GreaterThan(this, c);
         }
 
         /// <summary>
@@ -486,7 +415,7 @@ namespace CardsLibrary
         /// <returns> Whether the current object is less than the passed card. </returns>
         public bool LessThan(Card c)
         {
-            return (this.GreaterThan(c) || this.Equals(c)) ? false : true;
+            return this.Comparer.LessThan(this, c);
         }
 
         /// <summary>
@@ -505,20 +434,7 @@ namespace CardsLibrary
             // obj must be a Card
             Card c = obj as Card;
 
-            // If either suit is null, compare values
-            if (this.Suit == Suit.Null || c.Suit == Suit.Null)
-            {
-                return this.Value == c.Value;
-            }
-
-            // If either value is null, compare suits
-            if (this.Value == Value.Null || c.Value == Value.Null)
-            {
-                return this.Suit == c.Suit;
-            }
-
-            // Neither suit nor either value is null, so compare both suit and value
-            return (this.Value == c.Value) && (this.Suit == c.Suit);
+            return this.Comparer.Equal(this, c);
         }
     }
 }

@@ -42,6 +42,7 @@
     <Compile Include="Card.cs">
       <ExcludeFromStyleCop>False</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="CardComparer.cs" />
     <Compile Include="CardFactory.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="GameInfo.cs" />
