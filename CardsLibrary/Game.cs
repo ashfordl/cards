@@ -69,6 +69,7 @@ namespace CardsLibrary
         /// <summary>
         /// Deals the pack to the players.
         /// </summary>
+        /// <param name="comparer"> The card comparer to give to all cards. </param> 
         /// <param name="shuffle"> Whether to shuffle the deck or not. </param>
         /// <param name="cards"> The number of cards to deal. </param>
         /// <param name="allCard"> Whether all the cards are getting dealt. This will ignore the cards parameter. </param>

@@ -1,6 +1,5 @@
 ﻿// Card.cs
 // <copyright file="Card.cs"> This code is protected under the MIT License. </copyright>
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,6 +25,7 @@ namespace CardsLibrary
         /// </summary>
         /// <param name="val"> The value of the card. </param>
         /// <param name="suit"> The suit of the card. </param>
+        /// <param name="comparer"> The card comparer. </param>
         public Card(Value val, Suit suit, CardComparer comparer)
         {
             this.Value = val;
@@ -38,6 +38,7 @@ namespace CardsLibrary
         /// </summary>
         /// <param name="val"> The value of the card, as an integer from <see cref="Value"/>. </param>
         /// <param name="suit"> The suit of the card, as an integer from <see cref="Suit"/>. </param>
+        /// <param name="comparer"> The card comparer. </param>
         public Card(int val, int suit, CardComparer comparer)
         {
             // Converts the integers into the correct value and suit

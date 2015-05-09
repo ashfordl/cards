@@ -16,6 +16,7 @@ namespace CardsLibrary
         /// Creates a deck.
         /// </summary>
         /// <returns> Returns a deck. </returns>
+        /// <param name="comparer"> The card comparer to give to all cards. </param> 
         /// <param name="shuffle"> Whether to shuffle the deck. </param>
         /// <param name="jokers"> Whether to add jokers. </param>
         public static List<Card> PopulateDeck(CardComparer comparer, bool shuffle = false, bool jokers = false)
