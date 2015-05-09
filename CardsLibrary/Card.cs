@@ -168,7 +168,7 @@ namespace CardsLibrary
         /// <returns> Whether the two cards are equal. </returns>
         public static bool operator ==(Card c1, Card c2)
         {
-            return c1.Equals(c2);
+            return c1.Comparer.Equal(c1, c2);
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace CardsLibrary
         /// <returns> Whether the two cards are not equal. </returns>
         public static bool operator !=(Card c1, Card c2)
         {
-            return !c1.Equals(c2);
+            return !c1.Comparer.Equal(c1, c2);
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace CardsLibrary
         /// <returns> Whether the first card is less than the second. </returns>
         public static bool operator <(Card c1, Card c2)
         {
-            return c1.LessThan(c2);
+            return c1.Comparer.LessThan(c1, c2);
         }
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace CardsLibrary
         /// <returns> Whether the first card is greater than the second. </returns>
         public static bool operator >(Card c1, Card c2)
         {
-            return c1.GreaterThan(c2);
+            return c1.Comparer.GreaterThan(c1, c2);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace CardsLibrary
         /// <returns> Whether the first card is less than or equal to the second. </returns>
         public static bool operator <=(Card c1, Card c2)
         {
-            return c1.LessThan(c2) || c1 == c2;
+            return c1.Comparer.LessThan(c1, c2) || c1 == c2;
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace CardsLibrary
         /// <returns> Whether the first card is greater than or equal to the second. </returns>
         public static bool operator >=(Card c1, Card c2)
         {
-            return c1.GreaterThan(c2) || c1 == c2;
+            return c1.Comparer.GreaterThan(c1, c2) || c1 == c2;
         }
 
         /// <summary>
@@ -397,26 +397,6 @@ namespace CardsLibrary
         public override string ToString()
         {
             return string.Format("{0} of {1}", this.Value.ToString(), this.Suit.ToString());
-        }
-
-        /// <summary>
-        /// Compares whether the current object is greater than a passed card.
-        /// </summary>
-        /// <param name="c"> The card to be compared against. </param>
-        /// <returns> Whether the current object is greater than the passed card. </returns>
-        public bool GreaterThan(Card c) 
-        {
-            return this.Comparer.GreaterThan(this, c);
-        }
-
-        /// <summary>
-        /// Compares whether the current object is less than a passed card.
-        /// </summary>
-        /// <param name="c"> The card to be compared against. </param>
-        /// <returns> Whether the current object is less than the passed card. </returns>
-        public bool LessThan(Card c)
-        {
-            return this.Comparer.LessThan(this, c);
         }
 
         /// <summary>
