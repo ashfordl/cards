@@ -11,11 +11,6 @@ namespace CardsLibrary
     public class GameInfo
     {
         /// <summary>
-        /// The internal value of AceHigh.
-        /// </summary>
-        private bool aceHigh;
-
-        /// <summary>
         /// Gets or sets the current round number.
         /// </summary>
         public int RoundNumber { get; set; }
@@ -24,22 +19,5 @@ namespace CardsLibrary
         /// Gets or sets the current cards in play.
         /// </summary>
         public List<Card> CardsInPlay { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether aces are high.
-        /// </summary>
-        public bool AceHigh
-        {
-            get
-            {
-                return this.aceHigh;
-            }
-
-            set
-            {
-                this.aceHigh = value;
-                Settings.AceHigh = value;
-            }
-        }
     }
 }
