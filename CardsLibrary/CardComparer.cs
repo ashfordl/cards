@@ -11,6 +11,15 @@ namespace CardsLibrary
     public class CardComparer
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="CardComparer" /> class.
+        /// </summary>
+        /// <param name="cardScores"> The dictionary of card scores to use for comparisons. </param>
+        public CardComparer(Dictionary<Card, int> cardScores)
+        {
+            this.CardScores = cardScores;
+        }
+
+        /// <summary>
         /// Gets or sets the dictionary of cards and their scores.
         /// </summary>
         public Dictionary<Card, int> CardScores { get; set; }
