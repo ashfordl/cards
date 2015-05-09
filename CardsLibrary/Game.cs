@@ -75,12 +75,12 @@ namespace CardsLibrary
         /// Deals the pack to the players.
         /// </summary>
         /// <param name="comparer"> The card comparer to give to all cards. </param> 
-        /// <param name="shuffle"> Whether to shuffle the deck or not. </param>
+        /// <param name="shuffle"> Whether to shuffle the Deck or not. </param>
         /// <param name="cards"> The number of cards to deal. </param>
         /// <param name="allCard"> Whether all the cards are getting dealt. This will ignore the cards parameter. </param>
         public void Deal(CardComparer comparer, bool shuffle = true, int cards = 0, bool allCard = false)
         {
-            // Create a deck
+            // Create a Deck
             this.Deck = CardFactory.PopulateDeck(comparer, shuffle);
             
             // Calculate how many cards to deal per player
@@ -108,20 +108,20 @@ namespace CardsLibrary
                 // For each player, deal their hand
                 foreach (TPlayer player in this.Players)
                 {
-                    player.Hand = deck.GetRange(0, cardsToDeal);
-                    deck.RemoveRange(0, cardsToDeal);
+                    player.Hand = Deck.GetRange(0, cardsToDeal);
+                    Deck.RemoveRange(0, cardsToDeal);
                 }
             }
             else
             {
                 // Deal all cards
-                for (int i = 0; i < deck.Count; i++)
+                for (int i = 0; i < Deck.Count; i++)
                 {
-                    this.Players[i % this.Players.Count].Hand.Add(deck[i]);
+                    this.Players[i % this.Players.Count].Hand.Add(Deck[i]);
                 }
 
-                // Clear the deck 
-                deck.RemoveRange(0, deck.Count);
+                // Clear the Deck 
+                Deck.RemoveRange(0, Deck.Count);
             }
         }
     }
