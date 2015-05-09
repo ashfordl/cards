@@ -108,20 +108,20 @@ namespace CardsLibrary
                 // For each player, deal their hand
                 foreach (TPlayer player in this.Players)
                 {
-                    player.Hand = Deck.GetRange(0, cardsToDeal);
-                    Deck.RemoveRange(0, cardsToDeal);
+                    player.Hand = this.Deck.GetRange(0, cardsToDeal);
+                    this.Deck.RemoveRange(0, cardsToDeal);
                 }
             }
             else
             {
                 // Deal all cards
-                for (int i = 0; i < Deck.Count; i++)
+                for (int i = 0; i < this.Deck.Count; i++)
                 {
-                    this.Players[i % this.Players.Count].Hand.Add(Deck[i]);
+                    this.Players[i % this.Players.Count].Hand.Add(this.Deck[i]);
                 }
 
                 // Clear the Deck 
-                Deck.RemoveRange(0, Deck.Count);
+                this.Deck.RemoveRange(0, this.Deck.Count);
             }
         }
 
@@ -131,7 +131,7 @@ namespace CardsLibrary
         /// <param name="comparer"> The new comparer. </param>
         public void GiveNewComparerToAllCard(CardComparer comparer)
         {
-            // Assign comparer in the deck
+            // Assign comparer in the this.Deck
             foreach (Card c in this.Deck)
             {
                 c.Comparer = comparer;
